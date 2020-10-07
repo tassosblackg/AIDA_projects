@@ -5,6 +5,7 @@
 import pandas as pd
 import matplotlib as mpt
 import numpy as np
+from operator import itemgetter as itemg
 from sklearn import preprocessing as pp
 from sklearn.linear_model import LogisticRegressionCV as lr
 
@@ -19,13 +20,14 @@ df = pd.read_csv('wdbc.data',
 
 # Drop columns, get features
 x = df.drop(labels=['id','Diagnosis'], axis=1)
-x = x.to_numpy()
+X = x.to_numpy()
 # print(x.head())
 # print(type(x))
 # print(x.shape)
 # print(x[:,0])
+# print (X)
 
-# Get Labels aka classes
+#---------------------| Get Labels aka classes |-----------------------------------------
 y = df.Diagnosis #df.iloc[:,1]
 # print(y)
 
@@ -35,4 +37,19 @@ Y=lb.fit_transform(y)
 # print(Y)
 # print(type(Y))
 
-# Calculate Statistics on data
+# ------------------| Calculate Statistics on data |--------------------------------------
+_x = df.drop(labels=['id'],axis=1) # get data with
+#print(m_x.head())
+# row index
+Mindx =  _x[_x.Diagnosis == 'M'].index.tolist()
+Bindx =  _x[_x.Diagnosis == 'B'].index.tolist()
+
+X_m = X[Mindx] # features values of class ' M '
+X_b = X[Bindx] # features values of class ' B '
+# print(X_m.shape, X_b.shape)
+
+# mean of features values/// per column
+mean_X_m, mean_X_b = np.mean(X_m,axis=0), np.mean(X_b,axis=0)
+
+# std of feature values per column
+std_X_m, std_X_b = np.std(X_m,axis=0), np.std(X_b,axis=0)
