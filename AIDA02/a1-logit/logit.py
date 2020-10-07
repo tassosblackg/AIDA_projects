@@ -1,10 +1,12 @@
-# author : @tassosblackg #
+# author : @tassosblackg
+# create Logistic Regression classifier
+# for breast cancer dataset from UCI
 
 import pandas as pd
 import matplotlib as mpt
 import numpy as np
 from sklearn import preprocessing as pp
-from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegressionCV as lr
 
 # read data and load
 df = pd.read_csv('wdbc.data',
@@ -15,16 +17,22 @@ df = pd.read_csv('wdbc.data',
 # df = pd.read_csv('wdbc.data')
 #print(df.head())
 
-#Get Labels aka classes
-y = df.Diagnosis
+# Drop columns, get features
+x = df.drop(labels=['id','Diagnosis'], axis=1)
+x = x.to_numpy()
+# print(x.head())
+# print(type(x))
+# print(x.shape)
+# print(x[:,0])
+
+# Get Labels aka classes
+y = df.Diagnosis #df.iloc[:,1]
 # print(y)
-# convert letters to numbers
+
+# Convert letters to numbers
 lb = pp.LabelBinarizer()
 Y=lb.fit_transform(y)
 # print(Y)
+# print(type(Y))
 
-
-# split to input_d, out_label
-
-
-#drop id_col
+# Calculate Statistics on data
