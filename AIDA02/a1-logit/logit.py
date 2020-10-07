@@ -48,8 +48,14 @@ X_m = X[Mindx] # features values of class ' M '
 X_b = X[Bindx] # features values of class ' B '
 # print(X_m.shape, X_b.shape)
 
-# mean of features values/// per column
+# mean of features values/// per column /per class
 mean_X_m, mean_X_b = np.mean(X_m,axis=0), np.mean(X_b,axis=0)
 
-# std of feature values per column
+# std of feature values per column /per class
 std_X_m, std_X_b = np.std(X_m,axis=0), np.std(X_b,axis=0)
+
+# variance of features values per column /per class
+var_X_m, var_X_b = np.var(X_m,axis=0), np.var(X_b,axis=0)
+
+# median of features values per column /per class
+median_X_m, median_X_b = np.median(X_m,axis=0), np.median(X_b,axis=0)
