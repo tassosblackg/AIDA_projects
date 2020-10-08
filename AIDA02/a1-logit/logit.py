@@ -21,12 +21,14 @@ df = pd.read_csv('wdbc.data',
 
 # Drop columns, get features
 x = df.drop(labels=['id','Diagnosis'], axis=1)
+features_tags = x.columns # features' names by column
 X = x.to_numpy()
 # print(x.head())
 # print(type(x))
 # print(x.shape)
 # print(x[:,0])
 # print (X)
+# print(features_tags)
 
 #---------------------| Get Labels aka classes |-----------------------------------------
 y = df.Diagnosis #df.iloc[:,1]
@@ -94,7 +96,17 @@ print("\n------X_begign high median : -------------------\n")
 print(hmedian_X_b)
 
 
-# ------------------------| Plot histogram | ------------------------------------------------------
-# n, bins, patches =  plt.hist(var_X_m, bins='auto')
-# plt.show()
-# print(n,bins,patches)
+# ------------------------| Plot Bar Diagram for Mean Values | ------------------------------------------------------
+features_indx = np.arange(len(features_tags)) # positive integer xlabel
+bar_width = 0.4
+plt.bar(features_indx, mean_X_m, bar_width, color='red', label='Mallignant')
+plt.bar(features_indx + bar_width, mean_X_b, bar_width, color='green', label='Begign')
+
+plt.yscale('log')
+plt.xlabel('Features')
+plt.ylabel('log(Mean_Value)')
+plt.title('Bar diagram of mean(X_mallignant) ')
+plt.xticks(features_indx + bar_width /2,features_tags,rotation=90)
+plt.legend(loc='best')
+
+plt.show()
