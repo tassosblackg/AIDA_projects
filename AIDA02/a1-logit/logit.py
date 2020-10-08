@@ -3,8 +3,9 @@
 # for breast cancer dataset from UCI
 
 import pandas as pd
-import matplotlib as mpt
+import matplotlib.pyplot as plt
 import numpy as np
+import statistics as stats
 from operator import itemgetter as itemg
 from sklearn import preprocessing as pp
 from sklearn.linear_model import LogisticRegressionCV as lr
@@ -50,12 +51,33 @@ X_b = X[Bindx] # features values of class ' B '
 
 # mean of features values/// per column /per class
 mean_X_m, mean_X_b = np.mean(X_m,axis=0), np.mean(X_b,axis=0)
+print("\n------X_mallignant mean : -------------------\n")
+print(mean_X_m)
+print("\n------X_begign mean : -------------------\n")
+print(mean_X_b)
 
 # std of feature values per column /per class
 std_X_m, std_X_b = np.std(X_m,axis=0), np.std(X_b,axis=0)
+print("\n------X_mallignant standard deviation : -------------------\n")
+print(std_X_m)
+print("\n------X_benign standard deviation : -------------------\n")
+print(std_X_b)
 
 # variance of features values per column /per class
 var_X_m, var_X_b = np.var(X_m,axis=0), np.var(X_b,axis=0)
+print("\n------X_mallignant variance : -------------------\n")
+print(var_X_m)
+print("\n------X_benign variance : -------------------\n")
+print(var_X_b)
 
 # median of features values per column /per class
 median_X_m, median_X_b = np.median(X_m,axis=0), np.median(X_b,axis=0)
+print("\n------X_mallignant median : -------------------\n")
+print(median_X_m)
+print("\n------X_benign median : -------------------\n")
+print(median_X_b)
+
+# ------------------------| Plot histogram | ------------------------------------------------------
+# n, bins, patches =  plt.hist(var_X_m, bins='auto')
+# plt.show()
+# print(n,bins,patches)
