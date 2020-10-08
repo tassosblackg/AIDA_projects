@@ -4,32 +4,31 @@ import sys
 import argparse
 
 
+def mps2data(file):
+    print(str(file))
 
 
-
-
-
-
+def data2mps(file):
+    print(str(file),2)
 
 
 
 #parser menu
-def parserM(args):
-    if(len(args)<2):
-        print("ERROR: Invalid call of script, requieres two inputs..\n")
-        print(" args[0]: '-r' otpion to read .mps file or '-w' to read text file with matrices to convert to .mps\n")
-        print(" args[1]: file_name, e.g. file1.mps, or fileX.txt \n")
-        print(" IMPORTANT: make sure to use file's path too, in case script and files are not in the same dir/ \n")
-        exit()
+def parserM():
 
     parser=argparse.ArgumentParser(prog="handle_mps_files")
-    parser.add_argument('path_to_video',type=str,help='chose one video input file..')
+    parser.add_argument("-r","--read",action="store_true",help='read mps file or LP file to convert')
+    parser.add_argument('input_file',type=str,help='<file_name>')
+
 
     args=parser.parse_args()
-
-
+    print(args)
+    if (args.read):
+        mps2data(args.input_file)
+    else:
+        data2mps(args.input_file)
 
 
 
 if __name__=="__main__":
-    parserM(sys.argv)
+    parserM()
