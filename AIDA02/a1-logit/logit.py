@@ -77,6 +77,23 @@ print(median_X_m)
 print("\n------X_benign median : -------------------\n")
 print(median_X_b)
 
+# low_median of features per column /per class
+lmedian_X_m = [stats.median_low(row) for row in X_m.T ] # take the median_low of features per column after using Transpose to revert col with rows X_m
+lmedian_X_b = [stats.median_low(row) for row in X_b.T ] # take the median_low of features per column after using Transpose to revert col with rows X_b
+print("\n------X_mallignant low median : -------------------\n")
+print(lmedian_X_m)
+print("\n------X_begign low median : -------------------\n")
+print(lmedian_X_b)
+
+# high_median of features per column / per class
+hmedian_X_m = [stats.median_high(row) for row in X_m.T ] # take the median_low of features per column after using Transpose to revert col with rows X_m
+hmedian_X_b = [stats.median_high(row) for row in X_b.T ] # take the median_low of features per column after using Transpose to revert col with rows X_b
+print("\n------X_mallignant high median : -------------------\n")
+print(hmedian_X_m)
+print("\n------X_begign high median : -------------------\n")
+print(hmedian_X_b)
+
+
 # ------------------------| Plot histogram | ------------------------------------------------------
 # n, bins, patches =  plt.hist(var_X_m, bins='auto')
 # plt.show()
