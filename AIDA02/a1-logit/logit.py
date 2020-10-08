@@ -1,6 +1,7 @@
 # author : @tassosblackg
 # create Logistic Regression classifier
 # for breast cancer dataset from UCI
+# IMPORTANT plots are show at the end after Regression calculations
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,7 +9,8 @@ import numpy as np
 import statistics as stats
 from operator import itemgetter as itemg
 from sklearn import preprocessing as pp
-from sklearn.linear_model import LogisticRegressionCV as lr
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression as lr
 
 # read data and load
 df = pd.read_csv('wdbc.data',
@@ -37,7 +39,8 @@ y = df.Diagnosis #df.iloc[:,1]
 # Convert letters to numbers
 lb = pp.LabelBinarizer()
 Y=lb.fit_transform(y)
-# print(Y)
+# print(Y.shape)
+# print(y[0],Y[0])
 # print(type(Y))
 
 # ------------------| Calculate Statistics on data |--------------------------------------
@@ -94,6 +97,21 @@ print("\n------X_mallignant high median : -------------------\n")
 print(hmedian_X_m)
 print("\n------X_begign high median : -------------------\n")
 print(hmedian_X_b)
+
+
+
+# --------------------------------------------------------|Apply Linear Regression  | ------------------------------------------------------------------------------------------------------------------
+X_scal = (X-np.mean(X,axis=0))/np.std(X,axis=0) # z-score, standarization
+
+x_train,x_test,y_train,y_test = train_test_split(X_scal,Y,test_size=0.2,shuffle=True, random_state= 1) # suffle data before spliting them with a random seed 1
+logReg = lr(max_iter=1000).fit(x_train,y_train.ravel())
+
+score = logReg.score(x_test,y_test)
+print("Logistic Regression test_score = ",score)
+
+# Comments without scale with z-score  (max_iter==10k max_test_score =0.94)  ≠ ≠ with z_score (max_iter=1k, max_test_score=0.97) !
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # ------------------------| Plot Bar Diagram for Mean Values | ------------------------------------------------------
