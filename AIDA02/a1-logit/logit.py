@@ -97,16 +97,33 @@ print(hmedian_X_b)
 
 
 # ------------------------| Plot Bar Diagram for Mean Values | ------------------------------------------------------
+
 features_indx = np.arange(len(features_tags)) # positive integer xlabel
 bar_width = 0.4
+plt.figure(1)
+
 plt.bar(features_indx, mean_X_m, bar_width, color='red', label='Mallignant')
 plt.bar(features_indx + bar_width, mean_X_b, bar_width, color='green', label='Begign')
 
 plt.yscale('log')
 plt.xlabel('Features')
 plt.ylabel('log(Mean_Value)')
-plt.title('Bar diagram of mean(X_mallignant) ')
+plt.title('Bar diagram of mean(X_mallignant,begign) ')
 plt.xticks(features_indx + bar_width /2,features_tags,rotation=90)
 plt.legend(loc='best')
+
+# ----------------------| Plot Bar Diagram for Variance Values | ---------------------------------------------------------
+plt.figure(2)
+
+plt.bar(features_indx, var_X_m, bar_width, color='red', label='Mallignant')
+plt.bar(features_indx + bar_width, var_X_b, bar_width, color='green', label='Begign')
+
+plt.yscale('log')
+plt.xlabel('Features')
+plt.ylabel('log(Variance_Value)')
+plt.title('Bar diagram of var(X_mallignant,begign) ')
+plt.xticks(features_indx + bar_width /2,features_tags,rotation=90)
+plt.legend(loc='best')
+
 
 plt.show()
