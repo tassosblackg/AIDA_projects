@@ -11,7 +11,7 @@ def mps2data(file):
     Read a .mps and return matrices with data
     '''
     in_ROWS_section = False
-    Rtypes, Rnames = [],[]
+    Rtypes, Rnames, Cnames, Rindx = [],[],[],[]
 
     with open(file,'r') as f:
         for l in f:
@@ -30,7 +30,8 @@ def mps2data(file):
             elif(l[:7]=='COLUMNS'): # => inside COLUMNS section
                 in_ROWS_section = False # outside the ROWS section
                 in_COLS_section = True  # inside COLUMNS section
-
+                Cnames.append(l[5:13].strip())
+                Rindx.append(l[15:22].strip())
             elif(in_COLS_section and l[:4] != 'RHS'):
                 in_COLS_section = False
     f.close()
