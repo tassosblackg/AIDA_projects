@@ -1,19 +1,41 @@
 # author: @tassosblackg
 #
-import sys
+
 import argparse
+
+A,b,c,E_qin = [],[],[],[],[]
 
 
 def mps2data(file):
-    print(str(file))
+    '''
+    Read a .mps and return matrices with data
+    '''
 
+    with open(file,'r') as f:
+        for l in f:
+            if( (len(l) == 0) or (l[:1] == '*') ):
+                pass
+
+# ------------------  NAME
+            elif(l[:4] == 'NAME'): #field 1
+                problem_name = l[14:22] # field 3
+            elif(l[:4] == 'ROWS'): #field 1
+                in_ROWS_section = True
+                pass
+            elif(in_ROWS_section and l[:7] != 'COLUMNS'): # => inside ROWS section
+                    
+            elif(l[:7]=='COLUMNS'):
+                in_ROWS_section = False # outside the ROWS section
+                in_COLS_section = True  # inside COLUMNS section
+    f.close()
 
 def data2mps(file):
-    print(str(file),2)
+    f = open(file,'r')
+    line = f.readline()
 
 
 
-#parser menu
+# parser menu
 def parserM():
 
     parser=argparse.ArgumentParser(prog="handle_mps_files")
