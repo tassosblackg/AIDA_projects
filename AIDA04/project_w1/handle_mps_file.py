@@ -2,10 +2,10 @@
 # convert to dictioneries
 
 import argparse
+from pysnooper import snoop
+# A,b,c,E_qin = [],[],[],[],[]
 
-A,b,c,E_qin = [],[],[],[],[]
-
-
+@snoop('mps2data_.log')
 def mps2data(file):
     '''
     Read a .mps and return matrices with data
@@ -23,18 +23,30 @@ def mps2data(file):
                 problem_name = l[14:22].strip() # field 3, through away spaces
             elif(l[:4] == 'ROWS'): #field 1
                 in_ROWS_section = True
-                pass
+                # pass
             elif(in_ROWS_section and l[:7] != 'COLUMNS'): # => inside ROWS section
                 Rtypes.append(l[:4].strip()) # Get all types ['N','L','E','G'] per RowName
-                Rnames.append(l[5:13].strip()) # Get RowsNames
+                Rnames.append(l[4:13].strip()) # Get RowsNames
+
             elif(l[:7]=='COLUMNS'): # => inside COLUMNS section
                 in_ROWS_section = False # outside the ROWS section
                 in_COLS_section = True  # inside COLUMNS section
-                Cnames.append(l[5:13].strip())
-                Rindx.append(l[15:22].strip())
+
+            elif(in_COLS_section and l[:7] != 'COLUMNS'):
+                Cnames.append(l[4:13].strip())
+                Rindx.append(l[14:23].strip())
+
             elif(in_COLS_section and l[:4] != 'RHS'):
                 in_COLS_section = False
+
+            elif(l[:4] == 'RHS'):
+                pass
+
+            elif(l[:4]=='ENDATA'):
+                print("EOF reached..\n")
     f.close()
+
+    return (problem_name,Rtypes,Rnames,Cnames, Rindx)
 
 def data2mps(file):
     f = open(file,'r')
@@ -53,7 +65,11 @@ def parserM():
     args=parser.parse_args()
     print(args)
     if (args.read):
-        mps2data(args.input_file)
+        name,Rt,Rn,Cn,Ri = mps2data(args.input_file)
+        print(name)
+        print(Rt,'\n',Rn)
+        print(Cn,'\n',Ri)
+
     else:
         data2mps(args.input_file)
 
