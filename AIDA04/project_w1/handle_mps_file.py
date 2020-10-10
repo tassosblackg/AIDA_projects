@@ -1,5 +1,5 @@
 # author: @tassosblackg
-#
+# convert to dictioneries
 
 import argparse
 
@@ -10,6 +10,8 @@ def mps2data(file):
     '''
     Read a .mps and return matrices with data
     '''
+    in_ROWS_section = False
+    Rtypes, Rnames = [],[]
 
     with open(file,'r') as f:
         for l in f:
@@ -18,15 +20,19 @@ def mps2data(file):
 
 # ------------------  NAME
             elif(l[:4] == 'NAME'): #field 1
-                problem_name = l[14:22] # field 3
+                problem_name = l[14:22].strip() # field 3, through away spaces
             elif(l[:4] == 'ROWS'): #field 1
                 in_ROWS_section = True
                 pass
             elif(in_ROWS_section and l[:7] != 'COLUMNS'): # => inside ROWS section
-                    
-            elif(l[:7]=='COLUMNS'):
+                Rtypes.append(l[:4].strip()) # Get all types ['N','L','E','G'] per RowName
+                Rnames.append(l[5:13].strip()) # Get RowsNames
+            elif(l[:7]=='COLUMNS'): # => inside COLUMNS section
                 in_ROWS_section = False # outside the ROWS section
                 in_COLS_section = True  # inside COLUMNS section
+
+            elif(in_COLS_section and l[:4] != 'RHS'):
+                in_COLS_section = False
     f.close()
 
 def data2mps(file):
