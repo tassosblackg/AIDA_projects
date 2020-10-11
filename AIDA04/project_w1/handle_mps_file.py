@@ -13,10 +13,10 @@ def mps2data(file):
     in_ROWS_section = False
     in_COLS_section = False
     in_RHS_section = False
-    Rtypes, Rnames, Cnames, Rindx = [],[],[],[]
+
     Rows = dict()
     Bounds = dict()
-    A,c,b =[],[],[]
+    A,c,b,E_qin =[],[],[],[]
     with open(file,'r') as f:
         for l in f:
             if( (len(l) == 0) or (l[:1] == '*') ):
@@ -82,21 +82,25 @@ def mps2data(file):
 #------------------ Convert ['E', 'G', 'L'] -> [0,1,-1] ----------------------------------------------------------------------------------
     for key in Rows:
         if (Rows[key] == 'E'):
-            Rows[key] = 0
+            E_qin.append(0)
         elif (Rows[key] == 'G'):
-            Rows[key] = 1
+            E_qin.append(1)
         elif (Rows[key] == 'L'):
-            Rows[key] = -1
+            E_qin.append(-1)
         else:
             print("Error with Rows constraint Type see Row.keys()..\n")
 
 #------------------------------- RHS vector from 1xN to Nx1 format Transpose--------------------------------------------
     min_max = 1
-    return (problem_name,np.array(b).T,np.array(A),np.array(c),min_max, Rows, Bounds)
+    return (problem_name,np.array(b).T,np.array(A),np.array(c),np.array(E_qin),min_max, Rows, Bounds)
 
-    # return (problem_name,Rtypes,Rnames,Cnames, Rindx)
 
 def data2mps(file):
+    '''
+    Reads a .txt file with matrix data
+    & write them to a .mps file format
+    '''
+    
     f = open(file,'r')
     line = f.readline()
 
