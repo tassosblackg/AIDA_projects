@@ -115,11 +115,46 @@ def data2mps(file):
     Reads a .txt file with matrix data
     & write them to a .mps file format
     '''
+    A,b,c,E, BS = [],[],[],[],[]
+    in_A,in_b,in_c,in_BS, in_Eq = [False]*5
 
-    f = open(file,'r')
-    line = f.readline()
+    with open(file,'r') as f:
+        for l in f:
+            tmp_l = l[3:].split()
+            if (l[len(l)-1]==']'): tmp_l.remove(']')
 
+            if (l[:1] == 'A' or in_A):
+                in_A = True
+                A.append(tmp_l)
 
+            elif (l[:1] == 'b' or in_b):
+                in_A = False
+                in_b = True
+                b.append(tmp_l)
+
+            elif (l[:1] == 'c' or in_c):
+                in_b = False
+                in_c = True
+                c.append(tmp_l)
+
+            elif (l[:4] == 'Eqin' or in_Eq):
+                in_c = False
+                in_Eq = True
+                E.append(tmp_l)
+
+            elif (l[:2] == 'BS' or in_BS):
+                in_Eq = False
+                in_BS = True
+                BS.append(tmp_l)
+
+            elif (l[:6] == 'MinMax'):
+                in_BS = False
+                minm = tmp_l[3]
+
+            elif (l[:6] == 'MaxMin'):
+                maxm = tmp_l[3]
+            else :
+                pass
 
 # parser menu
 def parserM():
