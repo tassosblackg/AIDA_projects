@@ -7,7 +7,7 @@ import numpy as np
 from pysnooper import snoop
 
 # @snoop('mps2data_.log')
-def mps2data(file):
+def mps2data(file_name):
     '''
     Read a .mps and return matrices with data
     '''
@@ -19,7 +19,7 @@ def mps2data(file):
     Rows,Bounds = {},{} # dictionaries
     A,c,b,Eq =[],[],[],[] # lists
 
-    with open(file,'r') as f:
+    with open(file_name,'r') as f:
         for l in f:
 
             if( (len(l) == 0) or (l[:1] == '*') ): # if space or comment
@@ -110,7 +110,7 @@ def mps2data(file):
 
 
 @snoop('txt3mps.log')
-def data2mps(file):
+def data2mps(file_name):
     '''
     Reads a .txt file with matrix data
     & write them to a .mps file format
@@ -185,7 +185,30 @@ def data2mps(file):
                     pass
             else:
                 pass
-    return(A,b,c,E,BS)
+    f.close()
+#-------------------------- | Writting Matrices to .mps file \-------------------------------------
+    mps_file_name = file_name[:-3]+'mps' # take txt file & change extension
+    with open(mps_file_name,'w') as f:
+        line = 'NAME'+str(' '*11)+str(mps_file_name[:-4])+':'
+        f.write(line+'\n') # Write first line
+        f.write('ROWS'+'\n') #ROWS
+#----------- Write Type, Row data        
+        for indx, t in enumerate(E):
+            if (t[0] == '-1'):
+                type = 'L'
+            elif (t[0] == '0'):
+                type = 'E'
+            elif(t[0] == '1')
+                type = 'G'
+            else :
+                print("Error: type in E not exists\n")
+
+            line = ' '+type+str(' '*2)+'R'+str(indx)+'\n'
+            f.write(line)
+
+
+    f.close()
+    # return(A,b,c,E,BS)
 # parser menu
 def parserM():
 
