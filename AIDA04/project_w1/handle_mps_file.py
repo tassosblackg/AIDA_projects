@@ -4,7 +4,7 @@
 
 import argparse
 import numpy as np
-# from pysnooper import snoop
+from pysnooper import snoop
 
 # @snoop('mps2data_.log')
 def mps2data(file):
@@ -104,12 +104,12 @@ def mps2data(file):
     min_max = 1
     b_m = np.array(b).reshape(-1,1)
     A_mn = np.array(A)
-    c_n = ,np.array(c)
+    c_n = np.array(c)
     Eqin = np.array(Eq).reshape(-1,1)
     return (problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n)
 
 
-
+@snoop('txt3mps.log')
 def data2mps(file):
     '''
     Reads a .txt file with matrix data
@@ -120,42 +120,72 @@ def data2mps(file):
 
     with open(file,'r') as f:
         for l in f:
-            tmp_l = l[3:].split()
-            if (l[len(l)-1]==']'): tmp_l.remove(']')
+            tmp_l = l[3:].split() # through 3first elements for all except Eqin
+            if tmp_l : # not an empty line
 
-            if (l[:1] == 'A' or in_A):
-                in_A = True
-                A.append(tmp_l)
+#----------------- A
+                if (l[:1] == 'A' ):
+                    in_A = True
+                    A.append(tmp_l)
+                elif(in_A and l[-2]!= ']'):
+                    A.append(tmp_l)
+                elif(in_A and l[-2] == ']'): # end of block
+                    in_A = False
+                    tmp_l[-1] = tmp_l[-1].replace(']','')
+                    A.append(tmp_l)
+#---------------- b
+                elif (l[:1] == 'b'):
+                    in_b = True
+                    b.append(tmp_l)
+                elif(in_b and l[-2]!= ']'):
+                    b.append(tmp_l)
+                elif(in_b and l[-2] == ']'): # end of block
+                    in_b = False
+                    tmp_l[-1] = tmp_l[-1].replace(']','')
+                    b.append(tmp_l)
+#---------------- c
+                elif (l[:1] == 'c'):
+                    in_c = True
+                    c.append(tmp_l)
+                elif(in_c and l[-2]!= ']'):
+                    c.append(tmp_l)
+                elif(in_c and l[-2] == ']'): # end of block
+                    in_c = False
+                    tmp_l[-1] = tmp_l[-1].replace(']','')
+                    c.append(tmp_l)
+#---------------- Eqin
+                elif (l[:4] == 'Eqin'):
+                    in_Eq = True
+                    tmp_l=l[6:].split()
+                    E.append(tmp_l)
+                elif(in_Eq and l[-2]!= ']'):
+                    E.append(tmp_l)
+                elif(in_Eq and l[-2] == ']'): # end of block
+                    in_Eq = False
+                    tmp_l[-1] = tmp_l[-1].replace(']','')
+                    E.append(tmp_l)
+#---------------- BS
+                elif (l[:2] == 'BS' or in_BS):
+                    in_BS = True
+                    BS.append(tmp_l)
+                elif(in_BS and l[-2]!= ']'):
+                    BS.append(tmp_l)
+                elif(in_BS and l[-2] == ']'): # end of block
+                    in_BS = False
+                    tmp_l[-1] = tmp_l[-1].replace(']','')
+                    BS.append(tmp_l)
+#------------------ ProblemType
+                elif (l[:6] == 'MinMax'):
+                    in_BS = False
+                    problem_type = tmp_l[0].split("=")[1] # tmp_l has one string input -> line "MinMax=1" or "MaxMin=-1"
 
-            elif (l[:1] == 'b' or in_b):
-                in_A = False
-                in_b = True
-                b.append(tmp_l)
-
-            elif (l[:1] == 'c' or in_c):
-                in_b = False
-                in_c = True
-                c.append(tmp_l)
-
-            elif (l[:4] == 'Eqin' or in_Eq):
-                in_c = False
-                in_Eq = True
-                E.append(tmp_l)
-
-            elif (l[:2] == 'BS' or in_BS):
-                in_Eq = False
-                in_BS = True
-                BS.append(tmp_l)
-
-            elif (l[:6] == 'MinMax'):
-                in_BS = False
-                minm = tmp_l[3]
-
-            elif (l[:6] == 'MaxMin'):
-                maxm = tmp_l[3]
-            else :
+                elif (l[:6] == 'MaxMin'):
+                    problem_type = tmp_l[0].split("=")[1]
+                else :
+                    pass
+            else:
                 pass
-
+    return(A,b,c,E,BS)
 # parser menu
 def parserM():
 
@@ -168,8 +198,8 @@ def parserM():
     if (args.read):
         problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n = mps2data(args.input_file)
     else:
-        data2mps(args.input_file)
-
+        A,b,c,E,BS = data2mps(args.input_file)
+        print(A,b,c,E,BS)
 # MAIN
 if __name__=="__main__":
     parserM()

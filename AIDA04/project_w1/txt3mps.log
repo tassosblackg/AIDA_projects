@@ -1,0 +1,586 @@
+Source path:... handle_mps_file.py
+Starting var:.. file = 'Lp01.txt'
+19:53:11.010309 call       113 def data2mps(file):
+19:53:11.022137 line       118     A,b,c,E, BS = [],[],[],[],[]
+New var:....... A = []
+New var:....... b = []
+New var:....... c = []
+New var:....... E = []
+New var:....... BS = []
+19:53:11.030779 line       119     in_A,in_b,in_c,in_BS, in_Eq = [False]*5
+New var:....... in_A = False
+New var:....... in_b = False
+New var:....... in_c = False
+New var:....... in_BS = False
+New var:....... in_Eq = False
+19:53:11.032992 line       121     with open(file,'r') as f:
+New var:....... f = <_io.TextIOWrapper name='Lp01.txt' mode='r' encoding='UTF-8'>
+19:53:11.038758 line       122         for l in f:
+New var:....... l = 'A=[\t-2\t2\t7\t9\t-1\t-2\t6\t12\n'
+19:53:11.042545 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+New var:....... tmp_l = ['-2', '2', '7', '9', '-1', '-2', '6', '12']
+19:53:11.043531 line       124             if tmp_l : # not an empty line
+19:53:11.044435 line       127                 if (l[:1] == 'A' ):
+19:53:11.045047 line       128                     in_A = True
+Modified var:.. in_A = True
+19:53:11.045630 line       129                     A.append(tmp_l)
+Modified var:.. A = [['-2', '2', '7', '9', '-1', '-2', '6', '12']]
+19:53:11.047447 line       187                 pass
+19:53:11.048223 line       122         for l in f:
+Modified var:.. l = '\t3\t-3\t5\t1\t1\t-1\t7\t8\n'
+19:53:11.048657 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['-3', '5', '1', '1', '-1', '7', '8']
+19:53:11.049992 line       124             if tmp_l : # not an empty line
+19:53:11.050720 line       127                 if (l[:1] == 'A' ):
+19:53:11.051149 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.052016 line       131                     A.append(tmp_l)
+Modified var:.. A = [['-2', '2', '7', '9', '-1', '-2', '6', '12'], ['-3', '5', '1', '1', '-1', '7', '8']]
+19:53:11.052646 line       187                 pass
+19:53:11.053460 line       122         for l in f:
+Modified var:.. l = '\t9\t8\t-2\t1\t-1\t2\t3\t-6\n'
+19:53:11.053898 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['8', '-2', '1', '-1', '2', '3', '-6']
+19:53:11.054615 line       124             if tmp_l : # not an empty line
+19:53:11.055289 line       127                 if (l[:1] == 'A' ):
+19:53:11.055699 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.056125 line       131                     A.append(tmp_l)
+Modified var:.. A = [['-2', '2', '7', '9', '-1', '-2', '6', '12'], [...7', '8'], ['8', '-2', '1', '-1', '2', '3', '-6']]
+19:53:11.056536 line       187                 pass
+19:53:11.060716 line       122         for l in f:
+Modified var:.. l = '\t1\t2\t-1\t-1\t4\t6\t1\t8\n'
+19:53:11.061515 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['2', '-1', '-1', '4', '6', '1', '8']
+19:53:11.062325 line       124             if tmp_l : # not an empty line
+19:53:11.063059 line       127                 if (l[:1] == 'A' ):
+19:53:11.063505 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.063938 line       131                     A.append(tmp_l)
+Modified var:.. A = [['-2', '2', '7', '9', '-1', '-2', '6', '12'], [...3', '-6'], ['2', '-1', '-1', '4', '6', '1', '8']]
+19:53:11.064355 line       187                 pass
+19:53:11.065058 line       122         for l in f:
+Modified var:.. l = '\t2\t-9\t10\t11\t9\t-1\t-1\t-1\n'
+19:53:11.065468 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['-9', '10', '11', '9', '-1', '-1', '-1']
+19:53:11.066106 line       124             if tmp_l : # not an empty line
+19:53:11.068025 line       127                 if (l[:1] == 'A' ):
+19:53:11.069050 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.069546 line       131                     A.append(tmp_l)
+Modified var:.. A = [['-2', '2', '7', '9', '-1', '-2', '6', '12'], [... '8'], ['-9', '10', '11', '9', '-1', '-1', '-1']]
+19:53:11.070030 line       187                 pass
+19:53:11.070768 line       122         for l in f:
+Modified var:.. l = '\t6\t-9\t18\t1\t-2\t1\t8\t-2]\n'
+19:53:11.071207 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['-9', '18', '1', '-2', '1', '8', '-2]']
+19:53:11.071923 line       124             if tmp_l : # not an empty line
+19:53:11.072688 line       127                 if (l[:1] == 'A' ):
+19:53:11.073265 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.073719 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.074572 line       133                     in_A = False
+Modified var:.. in_A = False
+19:53:11.077460 line       134                     tmp_l[-1] = tmp_l[-1].replace(']','')
+Modified var:.. tmp_l = ['-9', '18', '1', '-2', '1', '8', '-2']
+19:53:11.078853 line       135                     A.append(tmp_l)
+Modified var:.. A = [['-2', '2', '7', '9', '-1', '-2', '6', '12'], [..., '-1'], ['-9', '18', '1', '-2', '1', '8', '-2']]
+19:53:11.079634 line       187                 pass
+19:53:11.080394 line       122         for l in f:
+Modified var:.. l = '\n'
+19:53:11.080846 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = []
+19:53:11.081613 line       124             if tmp_l : # not an empty line
+19:53:11.082327 line       122         for l in f:
+Modified var:.. l = 'b=[90\n'
+19:53:11.082763 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['90']
+19:53:11.083458 line       124             if tmp_l : # not an empty line
+19:53:11.084173 line       127                 if (l[:1] == 'A' ):
+19:53:11.084606 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.085052 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.085488 line       137                 elif (l[:1] == 'b'):
+19:53:11.085901 line       138                     in_b = True
+Modified var:.. in_b = True
+19:53:11.086317 line       139                     b.append(tmp_l)
+Modified var:.. b = [['90']]
+19:53:11.087422 line       187                 pass
+19:53:11.088156 line       122         for l in f:
+Modified var:.. l = '   25\n'
+19:53:11.088599 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['25']
+19:53:11.089338 line       124             if tmp_l : # not an empty line
+19:53:11.090047 line       127                 if (l[:1] == 'A' ):
+19:53:11.090484 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.090913 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.091345 line       137                 elif (l[:1] == 'b'):
+19:53:11.091780 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.092197 line       141                     b.append(tmp_l)
+Modified var:.. b = [['90'], ['25']]
+19:53:11.092624 line       187                 pass
+19:53:11.093355 line       122         for l in f:
+Modified var:.. l = '   10\n'
+19:53:11.093788 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['10']
+19:53:11.094483 line       124             if tmp_l : # not an empty line
+19:53:11.095174 line       127                 if (l[:1] == 'A' ):
+19:53:11.095597 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.096011 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.096418 line       137                 elif (l[:1] == 'b'):
+19:53:11.096825 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.097259 line       141                     b.append(tmp_l)
+Modified var:.. b = [['90'], ['25'], ['10']]
+19:53:11.097666 line       187                 pass
+19:53:11.098342 line       122         for l in f:
+Modified var:.. l = '   100\n'
+19:53:11.098817 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['100']
+19:53:11.099736 line       124             if tmp_l : # not an empty line
+19:53:11.100421 line       127                 if (l[:1] == 'A' ):
+19:53:11.103187 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.103730 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.104201 line       137                 elif (l[:1] == 'b'):
+19:53:11.104651 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.105117 line       141                     b.append(tmp_l)
+Modified var:.. b = [['90'], ['25'], ['10'], ['100']]
+19:53:11.105564 line       187                 pass
+19:53:11.106274 line       122         for l in f:
+Modified var:.. l = '   30\n'
+19:53:11.106702 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['30']
+19:53:11.109371 line       124             if tmp_l : # not an empty line
+19:53:11.110251 line       127                 if (l[:1] == 'A' ):
+19:53:11.110741 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.111689 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.112190 line       137                 elif (l[:1] == 'b'):
+19:53:11.112651 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.113108 line       141                     b.append(tmp_l)
+Modified var:.. b = [['90'], ['25'], ['10'], ['100'], ['30']]
+19:53:11.113544 line       187                 pass
+19:53:11.114272 line       122         for l in f:
+Modified var:.. l = '   10]\n'
+19:53:11.114680 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['10]']
+19:53:11.116336 line       124             if tmp_l : # not an empty line
+19:53:11.118901 line       127                 if (l[:1] == 'A' ):
+19:53:11.119436 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.119883 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.120326 line       137                 elif (l[:1] == 'b'):
+19:53:11.120770 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.121252 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.121680 line       143                     in_b = False
+Modified var:.. in_b = False
+19:53:11.122089 line       144                     tmp_l[-1] = tmp_l[-1].replace(']','')
+Modified var:.. tmp_l = ['10']
+19:53:11.122762 line       145                     b.append(tmp_l)
+Modified var:.. b = [['90'], ['25'], ['10'], ['100'], ['30'], ['10']]
+19:53:11.123410 line       187                 pass
+19:53:11.124082 line       122         for l in f:
+Modified var:.. l = '\t\n'
+19:53:11.124488 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = []
+19:53:11.125199 line       124             if tmp_l : # not an empty line
+19:53:11.125892 line       122         for l in f:
+Modified var:.. l = 'c=[-3\n'
+19:53:11.126328 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['-3']
+19:53:11.127230 line       124             if tmp_l : # not an empty line
+19:53:11.128806 line       127                 if (l[:1] == 'A' ):
+19:53:11.129310 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.129774 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.130204 line       137                 elif (l[:1] == 'b'):
+19:53:11.130641 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.131063 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.131618 line       147                 elif (l[:1] == 'c'):
+19:53:11.132051 line       148                     in_c = True
+Modified var:.. in_c = True
+19:53:11.132491 line       149                     c.append(tmp_l)
+Modified var:.. c = [['-3']]
+19:53:11.133261 line       187                 pass
+19:53:11.133982 line       122         for l in f:
+Modified var:.. l = '   -8\n'
+19:53:11.134400 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['-8']
+19:53:11.135130 line       124             if tmp_l : # not an empty line
+19:53:11.136201 line       127                 if (l[:1] == 'A' ):
+19:53:11.136664 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.137154 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.137601 line       137                 elif (l[:1] == 'b'):
+19:53:11.138029 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.138454 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.138875 line       147                 elif (l[:1] == 'c'):
+19:53:11.139322 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.139735 line       151                     c.append(tmp_l)
+Modified var:.. c = [['-3'], ['-8']]
+19:53:11.140163 line       187                 pass
+19:53:11.141035 line       122         for l in f:
+Modified var:.. l = '   5\n'
+19:53:11.141843 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['5']
+19:53:11.142580 line       124             if tmp_l : # not an empty line
+19:53:11.143306 line       127                 if (l[:1] == 'A' ):
+19:53:11.143729 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.144160 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.144581 line       137                 elif (l[:1] == 'b'):
+19:53:11.145054 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.145475 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.145913 line       147                 elif (l[:1] == 'c'):
+19:53:11.146332 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.146755 line       151                     c.append(tmp_l)
+Modified var:.. c = [['-3'], ['-8'], ['5']]
+19:53:11.147183 line       187                 pass
+19:53:11.149478 line       122         for l in f:
+Modified var:.. l = '   10\n'
+19:53:11.151256 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['10']
+19:53:11.152124 line       124             if tmp_l : # not an empty line
+19:53:11.153287 line       127                 if (l[:1] == 'A' ):
+19:53:11.153836 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.154302 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.155308 line       137                 elif (l[:1] == 'b'):
+19:53:11.158959 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.159411 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.159835 line       147                 elif (l[:1] == 'c'):
+19:53:11.160272 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.160695 line       151                     c.append(tmp_l)
+Modified var:.. c = [['-3'], ['-8'], ['5'], ['10']]
+19:53:11.161169 line       187                 pass
+19:53:11.161866 line       122         for l in f:
+Modified var:.. l = '   -20\n'
+19:53:11.162339 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['-20']
+19:53:11.163035 line       124             if tmp_l : # not an empty line
+19:53:11.163724 line       127                 if (l[:1] == 'A' ):
+19:53:11.164143 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.164574 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.165017 line       137                 elif (l[:1] == 'b'):
+19:53:11.165467 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.165899 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.166312 line       147                 elif (l[:1] == 'c'):
+19:53:11.166735 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.167204 line       151                     c.append(tmp_l)
+Modified var:.. c = [['-3'], ['-8'], ['5'], ['10'], ['-20']]
+19:53:11.167625 line       187                 pass
+19:53:11.168719 line       122         for l in f:
+Modified var:.. l = '   4\n'
+19:53:11.169189 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['4']
+19:53:11.169895 line       124             if tmp_l : # not an empty line
+19:53:11.170580 line       127                 if (l[:1] == 'A' ):
+19:53:11.171003 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.171426 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.172117 line       137                 elif (l[:1] == 'b'):
+19:53:11.172605 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.173062 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.173507 line       147                 elif (l[:1] == 'c'):
+19:53:11.173917 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.174350 line       151                     c.append(tmp_l)
+Modified var:.. c = [['-3'], ['-8'], ['5'], ['10'], ['-20'], ['4']]
+19:53:11.175236 line       187                 pass
+19:53:11.175973 line       122         for l in f:
+Modified var:.. l = '   11\n'
+19:53:11.176407 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['11']
+19:53:11.177137 line       124             if tmp_l : # not an empty line
+19:53:11.177843 line       127                 if (l[:1] == 'A' ):
+19:53:11.178781 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.179254 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.179693 line       137                 elif (l[:1] == 'b'):
+19:53:11.180135 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.180562 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.181020 line       147                 elif (l[:1] == 'c'):
+19:53:11.182333 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.183585 line       151                     c.append(tmp_l)
+Modified var:.. c = [['-3'], ['-8'], ['5'], ['10'], ['-20'], ['4'], ['11']]
+19:53:11.184369 line       187                 pass
+19:53:11.187564 line       122         for l in f:
+Modified var:.. l = '   -25]\n'
+19:53:11.188240 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['-25]']
+19:53:11.195901 line       124             if tmp_l : # not an empty line
+19:53:11.196752 line       127                 if (l[:1] == 'A' ):
+19:53:11.199954 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.200596 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.202305 line       137                 elif (l[:1] == 'b'):
+19:53:11.202871 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.203759 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.204330 line       147                 elif (l[:1] == 'c'):
+19:53:11.204812 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.205322 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.205793 line       153                     in_c = False
+Modified var:.. in_c = False
+19:53:11.206255 line       154                     tmp_l[-1] = tmp_l[-1].replace(']','')
+Modified var:.. tmp_l = ['-25']
+19:53:11.207312 line       155                     c.append(tmp_l)
+Modified var:.. c = [['-3'], ['-8'], ['5'], ['10'], ['-20'], ['4'], ['11'], ['-25']]
+19:53:11.208109 line       187                 pass
+19:53:11.210965 line       122         for l in f:
+Modified var:.. l = '\t\n'
+19:53:11.212166 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = []
+19:53:11.215662 line       124             if tmp_l : # not an empty line
+19:53:11.217068 line       122         for l in f:
+Modified var:.. l = 'Eqin=[-1\n'
+19:53:11.217559 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['n=[-1']
+19:53:11.220122 line       124             if tmp_l : # not an empty line
+19:53:11.220703 line       127                 if (l[:1] == 'A' ):
+19:53:11.221077 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.221418 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.221744 line       137                 elif (l[:1] == 'b'):
+19:53:11.225889 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.227032 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.228109 line       147                 elif (l[:1] == 'c'):
+19:53:11.229314 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.230389 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.231386 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.232385 line       158                     in_Eq = True
+Modified var:.. in_Eq = True
+19:53:11.233373 line       159                     tmp_l=l[6:].split()
+Modified var:.. tmp_l = ['-1']
+19:53:11.235772 line       160                     E.append(tmp_l)
+Modified var:.. E = [['-1']]
+19:53:11.238910 line       187                 pass
+19:53:11.240688 line       122         for l in f:
+Modified var:.. l = '\t  -1\n'
+19:53:11.241699 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+19:53:11.243422 line       124             if tmp_l : # not an empty line
+19:53:11.244359 line       127                 if (l[:1] == 'A' ):
+19:53:11.245336 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.246700 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.247682 line       137                 elif (l[:1] == 'b'):
+19:53:11.248914 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.250681 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.251797 line       147                 elif (l[:1] == 'c'):
+19:53:11.252783 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.254230 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.255287 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.256344 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.257381 line       162                     E.append(tmp_l)
+Modified var:.. E = [['-1'], ['-1']]
+19:53:11.258358 line       187                 pass
+19:53:11.260145 line       122         for l in f:
+Modified var:.. l = '\t  0\n'
+19:53:11.261200 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['0']
+19:53:11.263283 line       124             if tmp_l : # not an empty line
+19:53:11.265016 line       127                 if (l[:1] == 'A' ):
+19:53:11.265998 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.266994 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.267958 line       137                 elif (l[:1] == 'b'):
+19:53:11.268944 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.270476 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.271588 line       147                 elif (l[:1] == 'c'):
+19:53:11.272559 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.273569 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.274677 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.277083 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.278511 line       162                     E.append(tmp_l)
+Modified var:.. E = [['-1'], ['-1'], ['0']]
+19:53:11.279584 line       187                 pass
+19:53:11.281372 line       122         for l in f:
+Modified var:.. l = '\t  1\n'
+19:53:11.282393 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['1']
+19:53:11.284120 line       124             if tmp_l : # not an empty line
+19:53:11.285846 line       127                 if (l[:1] == 'A' ):
+19:53:11.286861 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.287866 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.288831 line       137                 elif (l[:1] == 'b'):
+19:53:11.289872 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.291669 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.292884 line       147                 elif (l[:1] == 'c'):
+19:53:11.293953 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.297582 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.298857 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.299922 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.301126 line       162                     E.append(tmp_l)
+Modified var:.. E = [['-1'], ['-1'], ['0'], ['1']]
+19:53:11.308194 line       187                 pass
+19:53:11.309620 line       122         for l in f:
+19:53:11.310782 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+19:53:11.311895 line       124             if tmp_l : # not an empty line
+19:53:11.313285 line       127                 if (l[:1] == 'A' ):
+19:53:11.314248 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.315695 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.317805 line       137                 elif (l[:1] == 'b'):
+19:53:11.319209 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.320429 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.321456 line       147                 elif (l[:1] == 'c'):
+19:53:11.322399 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.323354 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.324306 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.325327 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.326306 line       162                     E.append(tmp_l)
+Modified var:.. E = [['-1'], ['-1'], ['0'], ['1'], ['1']]
+19:53:11.327286 line       187                 pass
+19:53:11.329028 line       122         for l in f:
+Modified var:.. l = '\t  0]\n'
+19:53:11.330087 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['0]']
+19:53:11.332827 line       124             if tmp_l : # not an empty line
+19:53:11.335072 line       127                 if (l[:1] == 'A' ):
+19:53:11.341454 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.342611 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.343915 line       137                 elif (l[:1] == 'b'):
+19:53:11.345020 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.346053 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.347063 line       147                 elif (l[:1] == 'c'):
+19:53:11.348072 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.349029 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.349972 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.350917 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.352020 line       163                 elif(in_Eq and l[-2] == ']'): # end of block
+19:53:11.353048 line       164                     in_Eq = False
+Modified var:.. in_Eq = False
+19:53:11.354031 line       165                     tmp_l[-1] = tmp_l[-1].replace(']','')
+Modified var:.. tmp_l = ['0']
+19:53:11.356432 line       166                     E.append(tmp_l)
+Modified var:.. E = [['-1'], ['-1'], ['0'], ['1'], ['1'], ['0']]
+19:53:11.358803 line       185                     pass
+19:53:11.360701 line       122         for l in f:
+Modified var:.. l = '\n'
+19:53:11.361704 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = []
+19:53:11.363407 line       124             if tmp_l : # not an empty line
+19:53:11.365136 line       122         for l in f:
+Modified var:.. l = 'MinMax=1\n'
+19:53:11.366083 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['Max=1']
+19:53:11.367741 line       124             if tmp_l : # not an empty line
+19:53:11.369391 line       127                 if (l[:1] == 'A' ):
+19:53:11.370328 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.371235 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.373030 line       137                 elif (l[:1] == 'b'):
+19:53:11.374162 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.375123 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.376142 line       147                 elif (l[:1] == 'c'):
+19:53:11.377112 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.378085 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.379021 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.380074 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.381063 line       163                 elif(in_Eq and l[-2] == ']'): # end of block
+19:53:11.381995 line       168                 elif (l[:2] == 'BS' or in_BS):
+19:53:11.382965 line       171                 elif(in_BS and l[-2]!= ']'):
+19:53:11.384110 line       173                 elif(in_BS and l[-2] == ']'): # end of block
+19:53:11.385220 line       178                 elif (l[:6] == 'MinMax'):
+19:53:11.386279 line       179                     in_BS = False
+19:53:11.387323 line       180                     problem_type = tmp_l[0].split("=")[1] # tmp_l has one string input -> line "MinMax=1" or "MaxMin=-1"
+New var:....... problem_type = '1'
+19:53:11.388331 line       185                     pass
+19:53:11.390044 line       122         for l in f:
+Modified var:.. l = '\n'
+19:53:11.390980 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = []
+19:53:11.393593 line       124             if tmp_l : # not an empty line
+19:53:11.395984 line       122         for l in f:
+Modified var:.. l = 'BS=[x1\tLO\t5\n'
+19:53:11.398144 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['[x1', 'LO', '5']
+19:53:11.399995 line       124             if tmp_l : # not an empty line
+19:53:11.401726 line       127                 if (l[:1] == 'A' ):
+19:53:11.402688 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.403641 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.404591 line       137                 elif (l[:1] == 'b'):
+19:53:11.405618 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.406607 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.407534 line       147                 elif (l[:1] == 'c'):
+19:53:11.412157 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.412773 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.413218 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.413581 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.416236 line       163                 elif(in_Eq and l[-2] == ']'): # end of block
+19:53:11.416742 line       168                 elif (l[:2] == 'BS' or in_BS):
+19:53:11.417155 line       169                     in_BS = True
+Modified var:.. in_BS = True
+19:53:11.417525 line       170                     BS.append(tmp_l)
+Modified var:.. BS = [['[x1', 'LO', '5']]
+19:53:11.418051 line       185                     pass
+19:53:11.418573 line       122         for l in f:
+Modified var:.. l = '\tx3\tUP\t10\n'
+19:53:11.418909 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['UP', '10']
+19:53:11.421425 line       124             if tmp_l : # not an empty line
+19:53:11.422033 line       127                 if (l[:1] == 'A' ):
+19:53:11.422375 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.422703 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.425238 line       137                 elif (l[:1] == 'b'):
+19:53:11.425783 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.426179 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.426540 line       147                 elif (l[:1] == 'c'):
+19:53:11.426889 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.427275 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.429071 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.429489 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.429845 line       163                 elif(in_Eq and l[-2] == ']'): # end of block
+19:53:11.430191 line       168                 elif (l[:2] == 'BS' or in_BS):
+19:53:11.430536 line       169                     in_BS = True
+19:53:11.431306 line       170                     BS.append(tmp_l)
+Modified var:.. BS = [['[x1', 'LO', '5'], ['UP', '10']]
+19:53:11.432452 line       185                     pass
+19:53:11.434071 line       122         for l in f:
+Modified var:.. l = '\tx6\tFX\t20\n'
+19:53:11.435611 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['FX', '20']
+19:53:11.439572 line       124             if tmp_l : # not an empty line
+19:53:11.440186 line       127                 if (l[:1] == 'A' ):
+19:53:11.440575 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.440926 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.442306 line       137                 elif (l[:1] == 'b'):
+19:53:11.442754 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.444380 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.444803 line       147                 elif (l[:1] == 'c'):
+19:53:11.445199 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.445549 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.446566 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.446962 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.448175 line       163                 elif(in_Eq and l[-2] == ']'): # end of block
+19:53:11.448633 line       168                 elif (l[:2] == 'BS' or in_BS):
+19:53:11.449092 line       169                     in_BS = True
+19:53:11.449850 line       170                     BS.append(tmp_l)
+Modified var:.. BS = [['[x1', 'LO', '5'], ['UP', '10'], ['FX', '20']]
+19:53:11.450299 line       185                     pass
+19:53:11.451929 line       122         for l in f:
+Modified var:.. l = '\tx7\tUP\t8\n'
+19:53:11.452755 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['UP', '8']
+19:53:11.454375 line       124             if tmp_l : # not an empty line
+19:53:11.454946 line       127                 if (l[:1] == 'A' ):
+19:53:11.456967 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.457457 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.457837 line       137                 elif (l[:1] == 'b'):
+19:53:11.458210 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.458563 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.459198 line       147                 elif (l[:1] == 'c'):
+19:53:11.459778 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.460250 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.461403 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.462103 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.462532 line       163                 elif(in_Eq and l[-2] == ']'): # end of block
+19:53:11.462874 line       168                 elif (l[:2] == 'BS' or in_BS):
+19:53:11.463197 line       169                     in_BS = True
+19:53:11.463543 line       170                     BS.append(tmp_l)
+Modified var:.. BS = [['[x1', 'LO', '5'], ['UP', '10'], ['FX', '20'], ['UP', '8']]
+19:53:11.463851 line       185                     pass
+19:53:11.464305 line       122         for l in f:
+Modified var:.. l = '\tx8\tFR\tNone]'
+19:53:11.464634 line       123             tmp_l = l[3:].split() # through 3first elements for all except Eqin
+Modified var:.. tmp_l = ['FR', 'None]']
+19:53:11.465455 line       124             if tmp_l : # not an empty line
+19:53:11.470300 line       127                 if (l[:1] == 'A' ):
+19:53:11.471535 line       130                 elif(in_A and l[-2]!= ']'):
+19:53:11.472638 line       132                 elif(in_A and l[-2] == ']'): # end of block
+19:53:11.474285 line       137                 elif (l[:1] == 'b'):
+19:53:11.475950 line       140                 elif(in_b and l[-2]!= ']'):
+19:53:11.479184 line       142                 elif(in_b and l[-2] == ']'): # end of block
+19:53:11.480372 line       147                 elif (l[:1] == 'c'):
+19:53:11.481463 line       150                 elif(in_c and l[-2]!= ']'):
+19:53:11.482487 line       152                 elif(in_c and l[-2] == ']'): # end of block
+19:53:11.483478 line       157                 elif (l[:4] == 'Eqin'):
+19:53:11.484500 line       161                 elif(in_Eq and l[-2]!= ']'):
+19:53:11.485551 line       163                 elif(in_Eq and l[-2] == ']'): # end of block
+19:53:11.486583 line       168                 elif (l[:2] == 'BS' or in_BS):
+19:53:11.487583 line       169                     in_BS = True
+19:53:11.488624 line       170                     BS.append(tmp_l)
+Modified var:.. BS = [['[x1', 'LO', '5'], ['UP', '10'], ['FX', '20'], ['UP', '8'], ['FR', 'None]']]
+19:53:11.489699 line       185                     pass
+19:53:11.491475 line       122         for l in f:
+19:53:11.492509 line       188     return(A,b,c,E,BS)
+19:53:11.493699 return     188     return(A,b,c,E,BS)
+Return value:.. ([['-2', '2', '7', '9', '-1', '-2', '6', '12'], ...0'], ['FX', '20'], ['UP', '8'], ['FR', 'None]']])
+Elapsed time: 00:00:00.485316
