@@ -10,7 +10,20 @@ def read_matrix(file_name):
     pass
 
 def sp2csr(A):
-    pass
+    Anz,IA,JA =[],[],[]
+    IA.append(0)
+    nnz=0
+    # CSR scan through rows
+    for i in range(len(A)):
+        for j in range(len(A[i])):
+            if A[i][j] != 0 :
+                nnz = nnz+1 # increase number of non-zeros values
+                Anz.append(A[i][j])
+                JA.append(j) # append column indx
+        IA.append(IA[i-1]+nnz)
+    IA.append(nnz+1)
+
+    return(Anz,JA,IA)
 
 def sp2csc(A):
     pass
