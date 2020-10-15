@@ -1,10 +1,12 @@
 # @tassosblackg
 # Tassos Karageorgiadis
 # Read a Sparce matrix from file and converted to CSR or CSC form
+# -csr oprtion or (csc <- default)
+# Please read Instructions.md file before run
 
 # import numpy as np
 import argparse
-from pysnooper import snoop
+# from pysnooper import snoop
 
 # @snoop('read_matrix.log')
 def read_matrix(file_name):
@@ -22,6 +24,7 @@ def read_matrix(file_name):
                 else :
                     A.append(list(map(float,tmp_l))) # convert list of chars -> map of floats ->list of floats
     return A
+
 # @snoop('csr.log')
 def sp2csr(A):
     Anz,IA,JA =[],[],[]
@@ -38,7 +41,8 @@ def sp2csr(A):
     # IA.append(nnz+1)
 
     return(Anz,JA,IA)
-@snoop('csc.log')
+
+# @snoop('csc.log')
 def sp2csc(A):
     Anz,IA,JA =[],[],[]
     IA.append(0)
@@ -68,10 +72,10 @@ def parserM():
     # A = read_matrix()
     if (args.csr):
         [Anz,JA, IA] = sp2csr(matrix)
-        print(Anz,JA,IA)
+        print('\nAnz= \n',Anz,'\nJA= \n'JA,'\nIA= \n'IA)
     else:
         [Anz,JA,IA] = sp2csc(matrix)
-        print(Anz,JA,IA)
+        print('\nAnz= \n',Anz,'\nJA= \n'JA,'\nIA= \n'IA)
 # MAIN
 if __name__=="__main__":
     parserM()
