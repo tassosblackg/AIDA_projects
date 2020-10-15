@@ -16,3 +16,8 @@ A =
 - suppose there is only one array in file.
 
 # How to run the .py script
+python3 handle_sp_matrices.py -csr <input_file> # convert to csr form
+
+# OR
+
+python3 handle_sp_matrices.py <input_file> # convert to csc form -> default
