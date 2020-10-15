@@ -4,10 +4,12 @@
 
 
 import argparse
-
+from pysnooper import snoop
 
 def read_matrix(file_name):
-    pass
+    with open(file, mode='r') as f:
+        for l in f :
+            
 
 def sp2csr(A):
     Anz,IA,JA =[],[],[]
@@ -20,14 +22,26 @@ def sp2csr(A):
                 nnz = nnz+1 # increase number of non-zeros values
                 Anz.append(A[i][j])
                 JA.append(j) # append column indx
-        IA.append(IA[i-1]+nnz)
+        IA.append(nnz)
     IA.append(nnz+1)
 
     return(Anz,JA,IA)
 
 def sp2csc(A):
-    pass
+    Anz,IA,JA =[],[],[]
+    IA.append(0)
+    nnz=0
+    # CSC scan through columns first
+    for j in range(len(A[0])):
+        for i in range(len(A)):
+            if A[i][j] != 0 :
+                nnz = nnz+1 # increase number of non-zeros values
+                Anz.append(A[i][j])
+                JA.append(i) # append row indx
+        IA.append(nnz)
+    IA.append(nnz+1)
 
+    return(Anz,JA,IA)
 
 # parser menu
 def parserM():
