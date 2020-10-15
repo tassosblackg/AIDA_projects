@@ -1,7 +1,7 @@
 # author : @tassosblackg
 # create Logistic Regression classifier
 # for breast cancer dataset from UCI
-# IMPORTANT plots are show at the end after Regression calculations
+
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -29,8 +29,8 @@ X = x.to_numpy()
 # standarization of data before moving further
 X = pp.StandardScaler().fit_transform(X)
 
-#dimensionality reduction
-pca = PCA(n_components=7)
+#--------- Dimensionality reduction
+
 '''
 ------------non-standarized X before PCA------------------------
 for n=2, variance ratio was 0.982 0.016 => ~0.99
@@ -43,6 +43,14 @@ for n=5, variance ratio was  "     "      "   "    0.054 => ~0.84
 tested up to n=7 with variance ratio ~ 0.9
 -----------------------------------------------------------------
 '''
-
+pca = PCA(n_components=5)
 X_pca = pca.fit_transform(X)
-print(pca.explained_variance_ratio_)
+# print(pca.explained_variance_ratio_)
+
+# --- Get Labels Data
+y = df.Diagnosis #df.iloc[:,1]
+# print(y)
+
+# Convert letters to numbers
+lb = pp.LabelBinarizer()
+Y=lb.fit_transform(y)
