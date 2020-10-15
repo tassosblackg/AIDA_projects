@@ -109,7 +109,7 @@ def mps2data(file_name):
     return (problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n)
 
 
-@snoop('txt3mps.log')
+@snoop('txtFmps.log')
 def data2mps(file_name):
     '''
     Reads a .txt file with matrix data
@@ -118,13 +118,14 @@ def data2mps(file_name):
     A,b,c,E, BS = [],[],[],[],[]
     in_A,in_b,in_c,in_BS, in_Eq = [False]*5
 
-    with open(file,'r') as f:
+    with open(file_name,'r') as f:
         for l in f:
-            tmp_l = l[3:].split() # through 3first elements for all except Eqin
+            tmp_l = l.split()
             if tmp_l : # not an empty line
 
 #----------------- A
                 if (l[:1] == 'A' ):
+                    tmp_l = l[3:].split()
                     in_A = True
                     A.append(tmp_l)
                 elif(in_A and l[-2]!= ']'):
@@ -136,6 +137,7 @@ def data2mps(file_name):
 #---------------- b
                 elif (l[:1] == 'b'):
                     in_b = True
+                    tmp_l = l[3:].split()
                     b.append(tmp_l)
                 elif(in_b and l[-2]!= ']'):
                     b.append(tmp_l)
@@ -146,6 +148,7 @@ def data2mps(file_name):
 #---------------- c
                 elif (l[:1] == 'c'):
                     in_c = True
+                    tmp_l = l[3:].split()
                     c.append(tmp_l)
                 elif(in_c and l[-2]!= ']'):
                     c.append(tmp_l)
@@ -156,7 +159,7 @@ def data2mps(file_name):
 #---------------- Eqin
                 elif (l[:4] == 'Eqin'):
                     in_Eq = True
-                    tmp_l=l[6:].split()
+                    tmp_l = l[6:].split()
                     E.append(tmp_l)
                 elif(in_Eq and l[-2]!= ']'):
                     E.append(tmp_l)
@@ -165,12 +168,14 @@ def data2mps(file_name):
                     tmp_l[-1] = tmp_l[-1].replace(']','')
                     E.append(tmp_l)
 #---------------- BS
-                elif (l[:2] == 'BS' or in_BS):
+                elif (l[:2] == 'BS' ):
                     in_BS = True
+                    tmp_l = l[4:].split()
                     BS.append(tmp_l)
-                elif(in_BS and l[-2]!= ']'):
+                elif(in_BS and l[-1]!= ']'):
                     BS.append(tmp_l)
-                elif(in_BS and l[-2] == ']'): # end of block
+                elif(in_BS and l[-1] == ']'): # end of block
+                    tmp_l = l.split()
                     in_BS = False
                     tmp_l[-1] = tmp_l[-1].replace(']','')
                     BS.append(tmp_l)
@@ -192,23 +197,56 @@ def data2mps(file_name):
         line = 'NAME'+str(' '*11)+str(mps_file_name[:-4])+':'
         f.write(line+'\n') # Write first line
         f.write('ROWS'+'\n') #ROWS
-#----------- Write Type, Row data        
+        type = 'None'
+#----------- Write Type, Row data
         for indx, t in enumerate(E):
             if (t[0] == '-1'):
                 type = 'L'
             elif (t[0] == '0'):
                 type = 'E'
-            elif(t[0] == '1')
+            elif(t[0] == '1'):
                 type = 'G'
             else :
                 print("Error: type in E not exists\n")
 
             line = ' '+type+str(' '*2)+'R'+str(indx)+'\n'
             f.write(line)
+#-------------- Columns
+        f.write('COLUMNS'+'\n')
+        for col_indx in range(len(c)): # objective func col values
+            line = str(' '*4)+'COL'+str(col_indx)+str(' '*12)+str(c[col_indx][0]) #
+            f.write(line+'\n')
+#--------------- A matrix write
+            for row_indx in range(0,len(A),2):
+                chunk = b[row_indx:row_indx+2]
+                line = str(' '*4)+'COL'+str(col_indx)
+                for el in chunk:
+                    l +=str(' '*2)+'R'+str(row_indx)+str(' '*2)+str(el[0])
+                line+=l
+                f.write(line+'\n')
+                line=''
 
+#--------------- RHS
+        f.write('RHS'+'\n')
+        line = str(' '*4)+'RHS'
+        l=''
+        for i in range(0, len(b),2):
+            chunk = b[i:i+2]
+            l=''
+            for el in chunk:
+                l +=str(' '*2)+'R'+str(i)+str(' '*3)+str(el[0]) # line row,value pairs
+            line += l
+            f.write(line+'\n')
+#------------- BOUNDS
+        f.write('BOUNDS'+'\n')
+        for r in BS:
+            line = ' '+str(r[1])+' '+'B'+str(' '*2)+str(r[0])+str(' '*2)+str(r[1])
+            f.write(line+'\n')
+
+        f.write('ENDATA')
 
     f.close()
-    # return(A,b,c,E,BS)
+    return(A,b,c,E,BS)
 # parser menu
 def parserM():
 
