@@ -54,3 +54,6 @@ y = df.Diagnosis #df.iloc[:,1]
 # Convert letters to numbers
 lb = pp.LabelBinarizer()
 Y=lb.fit_transform(y)
+
+# split dataset to train and test, shuffle with seed 1 and stratify according Y to balance the split
+x_train, x_test, y_train, y_test = train_test_split(X_pca,Y,test_size=0.15,shuffle=True, random_state= 1, stratify=Y)
