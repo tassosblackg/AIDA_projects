@@ -43,7 +43,7 @@ for n=5, variance ratio was  "     "      "   "    0.054 => ~0.84
 tested up to n=7 with variance ratio ~ 0.9
 -----------------------------------------------------------------
 '''
-pca = PCA(n_components=5)
+pca = PCA(n_components=6)
 X_pca = pca.fit_transform(X)
 # print(pca.explained_variance_ratio_)
 
@@ -55,5 +55,24 @@ y = df.Diagnosis #df.iloc[:,1]
 lb = pp.LabelBinarizer()
 Y=lb.fit_transform(y)
 
+# train test split with keeping the balance  but using X without applying PCA, as was the first week's model
+x_train1, x_test1, y_train1, y_test1 = train_test_split(X,Y,test_size=0.15,shuffle=True, random_state= 1, stratify=Y)
+logReg1 = lr(max_iter=1000).fit(x_train1,y_train1.ravel())
+score1 = logReg1.score(x_test1,y_test1)
+
 # split dataset to train and test, shuffle with seed 1 and stratify according Y to balance the split
-x_train, x_test, y_train, y_test = train_test_split(X_pca,Y,test_size=0.15,shuffle=True, random_state= 1, stratify=Y)
+x_train2, x_test2, y_train2, y_test2 = train_test_split(X_pca,Y,test_size=0.15,shuffle=True, random_state= 1, stratify=Y)
+logReg2 = lr(max_iter=1000).fit(x_train2,y_train2.ravel())
+score2 = logReg2.score(x_test2,y_test2)
+
+
+print('\nScore logit without PCA = ',score1,'\nScore logit with PCA = ',score2 )
+'''
+For n=2 , the test_score_pca = ~0.941, & test_score_without_pca ~= 0.976 [not good -0.03]
+For n=3,4 , the test_score_pca = ~0.953, & test_score_without_pca ~= 0.976 [not good -0.02]
+
+For n=5 , the test_score_pca = ~0.965, & test_score_without_pca ~= 0.976 [not good but close]
+
+-> For n=6 , the test_score_pca = ~0.976, & test_score_without_pca ~= 0.976 [same, that's good] <-
+For n=7,8 still the same as n=6
+'''
