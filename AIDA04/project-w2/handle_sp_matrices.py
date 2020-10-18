@@ -72,10 +72,10 @@ def parserM():
     # A = read_matrix()
     if (args.csr):
         [Anz,JA, IA] = sp2csr(matrix)
-        print('\nAnz= \n',Anz,'\nJA= \n'JA,'\nIA= \n'IA)
+        print('\nAnz= \n',Anz,'\nJA= \n',JA,'\nIA= \n',IA)
     else:
         [Anz,JA,IA] = sp2csc(matrix)
-        print('\nAnz= \n',Anz,'\nJA= \n'JA,'\nIA= \n'IA)
+        print('\nAnz= \n',Anz,'\nJA= \n',JA,'\nIA= \n',IA)
 # MAIN
 if __name__=="__main__":
     parserM()
