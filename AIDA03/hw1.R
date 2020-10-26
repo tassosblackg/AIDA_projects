@@ -109,9 +109,9 @@ iris2b <- iris_with_ID %>%
 #    ακολουθούμενες από 50 εγγραφές με Sepal.Length για τα versicolor, κοκ. Εφόσον ο συνδυασμός ενός
 #    ID (1,2,3,...,50) για κάθε είδος λουλουδιού με τον τύπο του λουλουδιού είναι μοναδικός για κάθε
 #    εγγραφή, αρκεί να προσθέσουμε στο iris2 μια νέα στήλη με περιεχόμενο 12 φορές το διάνυσμα 1:50.
-iris_with_ID_3<-mutate(iris_drop_sums,ID=rep(1:50, each=4,times=3) )
-iris3b <- iris_with_ID %>%
-  gather("Sepal.Length","Sepal.Width","Petal.Length","Petal.Width", key="measure",value="value")
+iris2c<-mutate(iris2,ID=rep(1:50, each=4,times=3) )
+#iris3b <- iris_with_ID %>%
+ # gather("Sepal.Length","Sepal.Width","Petal.Length","Petal.Width", key="measure",value="value")
 #    Γενικά, για να δουλέψει το spead ή το pivot.wider, πρέπει κάθε set "απλωμένων" τιμών να αντιστοιχεί
 #    σε μοναδικό συνδυασμό τιμών των υπολοίπων στηλών.
 
