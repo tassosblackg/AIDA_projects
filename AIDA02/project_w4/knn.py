@@ -24,12 +24,7 @@ Y = df.Outcome # has 1, or 0 so no encode needed
 
 # split 2 train & test set
 x_train, x_test, y_train, y_test = train_test_split(X,Y,test_size=0.2,shuffle=True, random_state= 5, stratify=Y)
-sns.scatterplot(
-x='mean area',
-y='mean compactness',
-hue='benign',
-data=x_test.join(y_test, how='outer')
-)
+
 
 print("KNN Results for k=5\n ")
 k=5
