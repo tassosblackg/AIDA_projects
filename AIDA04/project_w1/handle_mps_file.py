@@ -1,22 +1,93 @@
 # author: @tassosblackg
 # Case of '$' character is not taken into account
+# RANGES section are ignored in our use cases
 # RANGES section is ignored
-
+import time
 import argparse
 import numpy as np
 from pysnooper import snoop
 
-# @snoop('mps2data_.log')
+# search for string key in dictionary return index i of the position
+def get_dict_indx(my_dict,key2search):
+    for indx, key in enumerate(my_dict):
+        if(key2search in key):
+            break
+        else:
+            indx =-1 # not found
+    return indx
+
+# Get Amn matrix of coefficients
+def col2matrix(columns_dict,rows_dict):
+    '''
+        Get COLUMNS section data aka the constraints' coefficients
+        @columns_dict: the dicitonary with columns section data
+        @rows_dict: the dictionary with rows data
+
+        @returns: A_mn array with the coefficients
+    '''
+
+    A = [ [0]*len(columns_dict) ]*len(rows_dict) #init M x N  array with 0
+    for indx_j, key in enumerate(columns_dict):
+        key_row_name = key[1] # get the 2d part of key_tuple => row_name
+        indx_i = get_dict_indx(rows_dict, key_row_name)
+        if (indx_i !=-1):
+            A[indx_i][indx_j]=columns_dict[key] # get value from dictionary
+        else:
+            print("Error Wrong Name for Row inside Columns section Row doesn;t exist in ROWS section!\n");
+    return A
+
+# Get objectives function coefficients dictionary and convert it to matrix
+def objectiveF_coef2matrix(columns_dict,obj_func_dict):
+    '''
+        Get objective's function coefficients dictionary and convert it to matrix/vector
+        @columns_dict : the dictionary of columns' section data
+        @obj_func_dict: the dictionary of objectives function's values
+
+        @returns : c array of objective function's coefficients
+    '''
+    obj_coef = [0]*len(columns_dict)
+    for indx_c, key in enumerate(obj_func_dict):
+        indx = get_dict_indx(columns_dict, key)
+        if(indx!=-1):
+            obj_coef[indx] = obj_func_dict[key]
+        else:
+            print("Error wrong name column from objective function dict i=-1\n")
+    return obj_coef
+
+def rows2matrix(rows_dict):
+    '''
+        Convert Rows constraints from categorical to numerical values and covert dictionary to matrix
+        @rows_dict: the dictionary with row's section data
+
+        @returns : Eqin array
+    '''
+    Eq = []
+    for key in rows_dict:
+        if (rows_dict[key] == 'E'):
+            Eq.append(0)
+        elif (rows_dict[key] == 'G'):
+            Eq.append(1)
+        elif (rows_dict[key] == 'L'):
+            Eq.append(-1)
+        else:
+
+            print("Error with Rows constraint Type see Row.keys()..\n")
+
+    return Eq
+
+@snoop('mps2dataD2_.log')
 def mps2data(file_name):
     '''
-    Read a .mps and return matrices with data
+        Read a .mps and return matrices with data
     '''
     # boolean
     in_ROWS_section = False
     in_COLS_section = False
     in_RHS_section = False
 
-    Rows,Bounds = {},{} # dictionaries
+    Rows,Bounds,RHS ={}, {},{} # dictionaries {'row_name':value}
+    Cols = {} # Cols is { ('col_name,row_name'):value }
+    obj = {}  # obj is {'col_name':value}, for Row_name == Objective function name
     A,c,b,Eq =[],[],[],[] # lists
 
     with open(file_name,'r') as f:
@@ -24,6 +95,11 @@ def mps2data(file_name):
 
             if( (len(l) == 0) or (l[:1] == '*') ): # if space or comment
                 pass
+            elif(l[:6]=='ENDATA'):
+#                   BOUNDS, RANGES are optional so might not exist, make False all the previous flags
+                in_BOUNDS_section = False
+                in_RHS_section = False
+                print("EOF reached..\n")
 # --------------------------------------------------| NAME section |---------------------------------------------------------------------
             elif(l[:4] == 'NAME'): #field 1
                 problem_name = l[14:22].strip() # field 3, through away spaces
@@ -38,68 +114,65 @@ def mps2data(file_name):
                 if(field1 == 'N'): #objective func
                     obj_func_name = field2 #name of objective fuction
                 else:
-                    Rows[int(field2)] = field1 # create Dictionary {key=Row_i, value in ['E','G','L'] }
+                    Rows[field2] = field1 # create Dictionary {key=Row_i, value in ['E','G','L'] }
 
 #--------------------------------------------------| COLUMNS section |-----------------------------------------------------------------------
             elif(l[:7]=='COLUMNS'): # => inside COLUMNS section
-                in_ROWS_section = False # outside the ROWS section
-                in_COLS_section = True  # inside COLUMNS section
+                in_ROWS_section = False
+                in_COLS_section = True
 
-            elif(in_COLS_section and l[:7] != 'COLUMNS'):
-                col_indx = int(l[5:13].strip()) # Col_name drop first_letter take number -> indx
+            elif(in_COLS_section and l[:3] != 'RHS'):
+                col_indx = l[4:13].strip() # Col_name
                 field4 = float(l[24:37].strip()) # Get value from field 4, convert to float
-
-                if(l[14:23].strip() == obj_func_name):
-                    c[col_indx] = field4
+#                    Has fields 5,6
+                if(len(l)>40):
+                    field5 = l[39:48].strip()
+                    field6 =float(l[50:62].strip())
+#                    ROW1 ,Value2 (Field3,Field4)
+                if( (l[14:23].strip() == obj_func_name) ): #<-is it constraint's row or objective's function??
+                    obj[col_indx] = field4
                 else: # row_name is not objective_function
-                    row_indx = int(l[15:23].strip()) # Row_name -> indx
-                    A[row_indx,col_indx] = field4
-                    if(len(l) > 40): # there is field5 field6
-                        row_indx = int(l[40:48].strip()) # field5 row_idx
-                        A[row_indx,col_indx] = float(l[50:62].strip()) #field6 value
-
-#--------------------------------------------------| RHS section |-----------------------------------------------------------------------
-            elif(l[:4] == 'RHS'):
+                    field3 = l[14:23].strip() # Row_name_1 -> indx
+                    Cols[col_indx,field3] = field4
+#                    ROW2 ,Value2 (Field5,Field6)
+                if((l[39:48].strip() == obj_func_name)):
+                    obj[col_indx]=float(l[50:62].strip())
+                else:
+                    Cols[col_indx,field5] = field6 #field6 value
+#
+# #--------------------------------------------------| RHS section |-----------------------------------------------------------------------
+            elif(l[:3] == 'RHS'):
                 in_COLS_section = False
                 in_RHS_section = True
-
-            elif(in_RHS_section and l[:4] != 'RHS'):
-                in_RHS_section = False
-                row_indx = int(l[15:23].strip()) # row_indx
-                b[row_indx] = float(l[24:36].strip()) # get value
+#               Check if not reach next section RANGES, and BOUNDS are optional so you have to check all cases
+            elif(in_RHS_section and (l[:7] != 'RANGES' and l[:6] != 'BOUNDS' and  l[:6] != 'ENDATA')): # inside RHS section, until next section
+                row_indx_1 = l[14:23].strip() # row_indx -> field2
+                RHS[row_indx_1]= float(l[24:36].strip()) # get value->field 3
                 if(len(l) > 40):
-                    row_indx = int(l[40:48].strip()) # field 5 -> row_indx
-                    b[row_indx] = float(l[50:62].strip()) # field 6 value
-#--------------------------------------------------| RANGES section |-----------------------------------------------------------------------
-            elif(l[:4] == 'RANGES'):
+                    row_indx_2 = l[39:48].strip() # field 5 -> row_indx name
+                    RHS[row_indx_2] = float(l[50:62].strip()) # field 6 value
+# #--------------------------------------------------| RANGES section |-----------------------------------------------------------------------
+            elif(l[:7] == 'RANGES'):
                 in_RHS_section = False
                 ''' ignore RANGES'''
-#--------------------------------------------------| BOUNDS section |-----------------------------------------------------------------------
+
+# #--------------------------------------------------| BOUNDS section |-----------------------------------------------------------------------
             elif(l[:6] == 'BOUNDS'):
                 in_BOUNDS_section = True
+                in_RHS_section = False
 
-            elif(in_BOUNDS_section and l[:6] != 'BOUNDS'):
-                col_indx = int(l[15:23].strip()) # get column name -> indx
+            elif(in_BOUNDS_section and l[:6] != 'ENDATA'):
+                col_indx = l[14:23].strip() # get column name -> 'indx'
                 values = [l[:4].strip(),l[25:37].strip()] # create a list contains [Type, Value] for each Bound
                 Bounds[col_indx] = values
-#--------------------------------------------------| ENDATA section |-----------------------------------------------------------------------
-            elif(l[:4]=='ENDATA'):
-                in_BOUNDS_section = False
-                print("EOF reached..\n")
+# #--------------------------------------------------| ENDATA section |-----------------------------------------------------------------------
 
         f.close()
 
+    c = objectiveF_coef2matrix(Cols, obj)
+    A = col2matrix(Cols,Rows)
 #------------------ Convert ['E', 'G', 'L'] -> [0,1,-1] ----------------------------------------------------------------------------------
-    for key in Rows:
-        if (Rows[key] == 'E'):
-            Eq.append(0)
-        elif (Rows[key] == 'G'):
-            Eq.append(1)
-        elif (Rows[key] == 'L'):
-            Eq.append(-1)
-        else:
-            print("Error with Rows constraint Type see Row.keys()..\n")
-
+    Eqin=rows2matrix(Rows)
 #------------------------------- RHS vector from 1xN to Nx1 format Transpose--------------------------------------------
     min_max = 1
     b_m = np.array(b).reshape(-1,1)
@@ -109,7 +182,7 @@ def mps2data(file_name):
     return (problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n)
 
 
-@snoop('txtFmps.log')
+# @snoop('txtFmps.log')
 def data2mps(file_name):
     '''
     Reads a .txt file with matrix data
@@ -255,12 +328,14 @@ def parserM():
     parser.add_argument('input_file',type=str,help='<file_name>')
     args=parser.parse_args()
     # print(args)
-
+    start=time.time()
     if (args.read):
         problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n = mps2data(args.input_file)
     else:
         A,b,c,E,BS = data2mps(args.input_file)
         print(A,b,c,E,BS)
+    end = time.time()
+    print("Total time to handle .mps : ",end-start,"\n")
 # MAIN
 if __name__=="__main__":
     parserM()
