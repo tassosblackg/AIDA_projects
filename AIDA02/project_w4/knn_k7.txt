@@ -1,0 +1,63 @@
+(768, 8)
+(614, 8) (154, 8)
+
+------| KNN Results for k= 7  |-------------------
+ 
+
+---------|STATS Before Re-shuffling missclassified : |--------------------------------
+
+
+Accuracy[k= 7 ,"euclidean"] =  0.7142857142857143
+
+Accuracy[k= 7 ,"manhattan"] =  0.7402597402597403
+
+Accuracy[k= 7 ,"chebyshev"] =  0.7402597402597403
+
+Accuracy[k= 7 ,"minkowski"] =  0.7142857142857143
+confusion Matrix KNN(euclidean) =
+ [[86 14]
+ [30 24]]
+confusion Matrix KNN(manhattan) =
+ [[87 13]
+ [27 27]]
+confusion Matrix KNN(chebyshev) =
+ [[81 19]
+ [32 22]]
+confusion Matrix KNN(minkowski) =
+ [[86 14]
+ [30 24]]
+
+-------------------------------------------------------------------------------------
+
+
+
+ --------|STATS after reshuffle_missclass: |------------------------------------------
+
+
+NEW Accuracy[k= 7 ,"euclidean"] = 0.7727272727272727 
+
+NEW confusion Matrix KNN(eucl) =
+ [[97 12]
+ [23 22]]
+
+NEW Accuracy[k= 7 ,"manhattan"] = 0.7662337662337663 
+
+NEW confusion Matrix KNN(manhattan) =
+ [[99 10]
+ [26 19]]
+
+NEW Accuracy[k= 7 ,"chebyshev"] = 0.7532467532467533 
+
+NEW confusion Matrix KNN(cheb) =
+ [[93 16]
+ [22 23]]
+
+NEW Accuracy[k= 7 ,"minkowski"] = 0.7532467532467533 
+
+NEW confusion Matrix KNN(mink) =
+ [[98 11]
+ [27 18]]
+
+-------------------------------------------------------------------------------------
+
+
