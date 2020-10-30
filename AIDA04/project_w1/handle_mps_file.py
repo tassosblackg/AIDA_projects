@@ -75,10 +75,30 @@ def rows2matrix(rows_dict):
 
     return Eq
 
+def rhs2matrix(rhs_dict,rows_dict):
+    '''
+        Convert RHS constraints covert dictionary to matrix
+        @rhs_dict : right hand constraints values
+        @rows_dict: the dictionary with row's section data
+
+        @returns : Eqin array
+    '''
+    b=[0]*len(rows_dict)
+    for key in rhs_dict:
+        indx = get_dict_indx(rows_dict, key)
+        if(indx != -1):
+            b[indx] = rhs_dict[key]
+        else:
+            print("Error in RHS2matrix rhs_dict key not found in rows_dict\n!")
+
+    return (b)
+
 @snoop('mps2dataD2_.log')
 def mps2data(file_name):
     '''
         Read a .mps and return matrices with data
+        @file_name: a mps file
+        @returns: problem_name, Rows,Bounds dicitonaries an Amn,b,c,Eqin numpy arrays
     '''
     # boolean
     in_ROWS_section = False
@@ -88,7 +108,6 @@ def mps2data(file_name):
     Rows,Bounds,RHS ={}, {},{} # dictionaries {'row_name':value}
     Cols = {} # Cols is { ('col_name,row_name'):value }
     obj = {}  # obj is {'col_name':value}, for Row_name == Objective function name
-    A,c,b,Eq =[],[],[],[] # lists
 
     with open(file_name,'r') as f:
         for l in f:
@@ -172,14 +191,17 @@ def mps2data(file_name):
     c = objectiveF_coef2matrix(Cols, obj)
     A = col2matrix(Cols,Rows)
 #------------------ Convert ['E', 'G', 'L'] -> [0,1,-1] ----------------------------------------------------------------------------------
-    Eqin=rows2matrix(Rows)
+    Eq=rows2matrix(Rows)
+#------------------- Convert right-hand constraints to array missing row values =zero
+    b = rhs2matrix(RHS,Rows)
 #------------------------------- RHS vector from 1xN to Nx1 format Transpose--------------------------------------------
     min_max = 1
-    b_m = np.array(b).reshape(-1,1)
+    b_m = np.array(b).reshape(-1,1)#<-
     A_mn = np.array(A)
     c_n = np.array(c)
     Eqin = np.array(Eq).reshape(-1,1)
-    return (problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n)
+    print("\n Finish reading",problem_name, ".mps...\n")
+    return (problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n,Eqin)
 
 
 # @snoop('txtFmps.log')
@@ -320,6 +342,7 @@ def data2mps(file_name):
 
     f.close()
     return(A,b,c,E,BS)
+
 # parser menu
 def parserM():
 
@@ -330,7 +353,7 @@ def parserM():
     # print(args)
     start=time.time()
     if (args.read):
-        problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n = mps2data(args.input_file)
+        problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n,Eqin = mps2data(args.input_file)
     else:
         A,b,c,E,BS = data2mps(args.input_file)
         print(A,b,c,E,BS)
