@@ -1,15 +1,26 @@
+# K-ton & singleton reduction on A_mn matrix
+# Week 3
+# author: @tassosblackg
+# All matrices must be numpy ones
+# A matrix must have shape(M,N)
+# b vector must have shape(M,)
+# c vector must have shape(1,N)
+# Eqin vector must have shape (M,)
+
+
+import time
+import argparse
 import numpy as np
 from read_mps import mps2data
 
 
-def singleton(A,b,c,Eq):
+def singleton(A,b,c,Eq,C0):
     '''
         If nnz in row = 1 redundant A,b,c,Eq
         @params A_mn coefficients,b_{mx1} right-hand values, c_{1xn} objective func coefficients,Eq_{mx1} in/equality
 
         @returns A,b,c,Eq,c0
     '''
-    C0 = 0
     start_row = A.shape[0] - 1 #indx of last row
 
     while(start_row>=0):
@@ -55,9 +66,6 @@ def k_ton(A,b,c,Eq,k):
     if (k > A.shape[1]):
         print("Error: k is bigger that columns length of array A, choose a \{k\} <len(columns)\n")
         exit(0)
-    elif (k==1):
-        A,b,c,Eq,C0 = singleton(A, b, c, Eq)
-
     else:
 
         C0 = 0
@@ -90,3 +98,30 @@ def k_ton(A,b,c,Eq,k):
                 start_i = start_ - 1
 
     return (A,b,c,Eq,C0)
+
+# parser menu
+def parserM():
+
+    parser=argparse.ArgumentParser(prog="k_ton reduction")
+    parser.add_argument('k',type=int,help='k number of non zeros to search for')
+    parser.add_argument('input_file',type=str,help='<file_name>')
+    args=parser.parse_args()
+
+    start=time.time()
+    problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n,Eqin = mps2data(args.input_file)
+
+    if (args.k == 1):
+
+        A,b,c,Eq,C0 = singleton(A_mn, b_m, c_n,Eqin,C0=0)
+
+    else:
+        A,b,c,Eq,C0 = k_ton(A_mn, b_m, c_n,Eqin, args.k)
+        # after finish k_ton check for singleton
+        A,b,c,Eq,C0 = singleton(A,b,c,Eq,C0)
+
+    end = time.time()
+    print("Total time to run : ",end-start,"\n")
+
+# MAIN
+if __name__=="__main__":
+    parserM()
