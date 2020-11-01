@@ -31,7 +31,7 @@ def singleton(A,b,c,Eq,C0):
                 position = (start_row,col) # keep last nnz position tuple (i,j)
 
         if (A[position[0]][position[1]]>= 0):
-            # singleton case
+                # singleton case
             if((nnz == 1) and (Eq[start_row] == 0) ):
                 xk = b[position[0]]/A[position[0]][position[1]]
                 b = b - xk*A[:,position[1]]
@@ -93,9 +93,9 @@ def k_ton(A,b,c,Eq,k):
                 #    finally delete column k
                 A = np.delete(A,position[1],axis=1)
 
-                start_i = A.shape[0] #  re-iterate A matrix from start to see for new k-tons
+                start_row = A.shape[0] #  re-iterate A matrix from start to see for new k-tons
             else:
-                start_i = start_ - 1
+                start_row = start_row - 1
 
     return (A,b,c,Eq,C0)
 
