@@ -4,8 +4,6 @@
 import numpy as np
 
 
-
-
 # search for string key in dictionary return index i of the position
 def get_dict_indx(my_dict,key2search):
     for indx, key in enumerate(my_dict):
@@ -195,10 +193,10 @@ def mps2data(file_name):
     b = rhs2matrix(RHS,Rows)
 #------------------------------- RHS vector from 1xN to Nx1 format Transpose--------------------------------------------
     min_max = 1
-    b_m = np.array(b).reshape(-1,1)#<-
+    b_m = np.array(b)
     A_mn = np.array(A)
-    c_n = np.array(c)
-    Eqin = np.array(Eq).reshape(-1,1)
+    c_n = np.array(c).reshape(1,-1) # C must be 1xN
+    Eqin = np.array(Eq)
     print("\n Finish reading",problem_name, ".mps...\n")
 
     return (problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n,Eqin)
