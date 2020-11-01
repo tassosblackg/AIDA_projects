@@ -26,9 +26,9 @@ def singleton(A,b,c,Eq,C0):
     while(start_row>=0):
         nnz = 0
         for col in range(A.shape[1]):
-            if(A[start_row][j] != 0):
+            if(A[start_row][col] != 0):
                 nnz = nnz +1
-                position = (start_row,j) # keep last nnz position tuple (i,j)
+                position = (start_row,col) # keep last nnz position tuple (i,j)
 
         if (A[position[0]][position[1]]>= 0):
             # singleton case
@@ -73,9 +73,9 @@ def k_ton(A,b,c,Eq,k):
         while(start_row>=0):
             nnz = 0
             for col in range(A.shape[1]):
-                if(A[start_row][j] != 0):
+                if(A[start_row][col] != 0):
                     nnz = nnz +1
-                    position = (start_row,j) # keep last nnz position tuple (i,j)
+                    position = (start_row,col) # keep last nnz position tuple (i,j)
 
             if((nnz == k)):
                 b[position[0]] = b[position[0]]/A[position[0]][position[1]]
