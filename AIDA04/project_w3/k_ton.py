@@ -113,12 +113,12 @@ def parserM():
     if (args.k == 1):
 
         A,b,c,Eq,C0 = singleton(A_mn, b_m, c_n,Eqin,C0=0)
-
+        print("\nA=\n",A,"\nb =\n",b,"\nc =\n",c,"\nEq =\n",Eq,"\nC0 =\n",C0)
     else:
         A,b,c,Eq,C0 = k_ton(A_mn, b_m, c_n,Eqin, args.k)
         # after finish k_ton check for singleton
         A,b,c,Eq,C0 = singleton(A,b,c,Eq,C0)
-
+        print("\nA=\n",A,"\nb =\n",b,"\nc =\n",c,"\nEq =\n",Eq,"\nC0 =\n",C0)
     end = time.time()
     print("Total time to run : ",end-start,"\n")
 
