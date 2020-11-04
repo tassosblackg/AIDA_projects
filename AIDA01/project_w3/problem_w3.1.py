@@ -36,7 +36,7 @@ def calculate_min_KLdivergence(D):
         P_i = D[row]
         KL_i,Q_indx = [],[]
 
-        for row2 in range(0, len(D), 1):
+        for row2 in range(len(D)):
             if(row2!=row):
                     # division with zero error
                 if(D[row2] == 0):
@@ -44,7 +44,7 @@ def calculate_min_KLdivergence(D):
                 else:
                     Q_i = D[row2]
                 sum = 0
-                for column in range(0, len(D[0]), step=1):
+                for column in range(len(D[0])):
                     sum = sum + P_i[column] * np.log(P_i[column] / Q_i[column])
                 KL_i.append(sum)
                 Q_indx.append(row2)
@@ -86,7 +86,7 @@ def calculate_MI(input_mat):
 def check_kl_matrix(A):
     mat = np.array(A)
     row_sum = np.sum(A,axis=1) # each row must sum to 1
-    for i in range(A.shape[0]):
+    for i in range(mat.shape[0]):
         if(row_sum[i] != 1):
             print("Error each distribution/row must sum to 1, check your input file again\n")
             exit(-1)
@@ -124,7 +124,7 @@ def parserM():
         is_negative(A)
         I_xy = calculate_MI(A)
         print("I_xy",I_xy)
-    end = time.time()
+    
 
 # MAIN
 if __name__=="__main__":
