@@ -34,3 +34,23 @@ def calculate_min_KLdivergence(D):
         best_KL_indx.append(Q_indx[index_min]) # index of best fit distribution among 1-N, for i!=j
 
     return best_KL_indx
+
+def calculate_MI(input_mat):
+    '''
+    Calculate Mutual Information between X, Y a set of discrete random variables
+
+    @input_mat: An 2D [NxN] list/array read from a file given as text
+
+    @returns: An number corresponds to the mutual information between X,Y
+    '''
+
+    P_xy = np.array(input_mat) # convert 2D list to numpy array
+    P_x = np.sum(P_xy,axis=1) # get Px by suming for each row the column's values
+    P_y = np.sum(P_xy,axis=0) # get Py by suming for each column the row's values
+    I_xy = 0
+    # rows corresponds to X,columns corresponds to Y
+    for i in range(P_xy.shape[0]): # rows
+        for j in range(P_xy.shape[1]):# columns
+            I_xy = I_xy + P_xy[i][j] * np.log(P_xy[i][j] / P_x[i]*P_y[j] )
+
+    return I_xy
