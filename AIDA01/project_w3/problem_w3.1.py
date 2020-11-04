@@ -116,10 +116,12 @@ def parserM():
     if (args.kl):
         A = read_matrix(args.input_file)
         check_kl_matrix(A)
+        is_negative(A)
         best_KL = calculate_min_KLdivergence(A)
         print(best_KL)
     else:
         A = read_matrix(args.input_file)
+        is_negative(A)
         I_xy = calculate_MI(A)
         print("I_xy",I_xy)
     end = time.time()
