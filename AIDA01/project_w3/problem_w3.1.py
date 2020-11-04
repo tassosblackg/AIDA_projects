@@ -1,6 +1,7 @@
 import numpy as np
 
 def read_matrix(file_name):
+    
     A = []
     with open(file_name, mode='r') as f:
         for l in f :
@@ -17,6 +18,13 @@ def read_matrix(file_name):
     return A
 
 def calculate_min_KLdivergence(D):
+    '''
+    Find the Y distribution which has the smallest KL divergence given a X distribution
+
+    @D: An 2D [NxM] list/array each row corresponds to a distribution i
+
+    @returns: A list with an index for each i, showing whith whom j!=i has the smallest KL divergence
+    '''
     best_KL_indx=[]
     for row in range(0, len(D), 1):
         P_i = D[row]
