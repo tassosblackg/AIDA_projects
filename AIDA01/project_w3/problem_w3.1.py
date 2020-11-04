@@ -98,6 +98,13 @@ def is_valid_Pxy(px,py):
         print("Error P(X,Y) is not valid, check sum of px or py is not 1\n")
         exit(-1)
 
+def is_negative(A):
+    mat = np.array(A)
+    has_negative = mat[mat<0]
+    if (len(has_negative)!=0):
+        printf("Error your input matrix has some negative values check again\n")
+        exit(-1)
+
 # parser menu
 def parserM():
 
