@@ -1,7 +1,9 @@
 import numpy as np
 
 def read_matrix(file_name):
-    
+    '''
+    Reads a .txt file with specific format an coverted to a list/array 2D 
+    '''
     A = []
     with open(file_name, mode='r') as f:
         for l in f :
