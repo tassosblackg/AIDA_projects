@@ -20,6 +20,7 @@ def calculate_min_KLdivergence(D):
     best_KL_indx=[]
     for row in range(0, len(D), 1):
         P_i = D[row]
+        KL_i,Q_indx = [],[]
         for row2 in range(0, len(D), 1):
             if(row2!=row):
                 Q_i = D[row2]
@@ -31,3 +32,5 @@ def calculate_min_KLdivergence(D):
         index_min = min(range(len(KL_i)), key=KL_i.__getitem__) # get the index of min(KL) of i
         #but the real index is stored inside Q_indx
         best_KL_indx.append(Q_indx[index_min]) # index of best fit distribution among 1-N, for i!=j
+
+    return best_KL_indx
