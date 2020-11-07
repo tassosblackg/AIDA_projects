@@ -18,11 +18,11 @@ def scaleA(A,b,c):
     sum_col = np.sum(A,axis=0) # length num of cols
     # calculate row scale factor
     for i in range(len(sum_row)):
-        r.append(row_nnz[i]/np.sum(sum_row[i]))
+        r.append(row_nnz[i]/sum_row[i])
     r = np.array(r) # final numpy scale r vector
     # calculate col scale factor
     for j in range(len(sum_col)):
-        s.append(col_nnz[j]/np.sum(sum_col[j]))
+        s.append(col_nnz[j]/sum_col[j])
     s = np.array(s) # final numpy scale r vector
     # scale rows
     for i in range(A.shape[0]):
@@ -32,3 +32,5 @@ def scaleA(A,b,c):
     for j in range(A.shape[1]):
         A[:,j] = A[:,j]*s
         c[:,j] = c[:,j]*s
+
+    return A,b,c
