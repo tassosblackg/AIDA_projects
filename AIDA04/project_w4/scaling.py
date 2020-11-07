@@ -3,6 +3,13 @@ import numpy as np
 
 
 def scaleA(A,b,c):
+    """
+    Calculate scaling factor for row,cols and adjust matrix A and vectors b,c
+    @A : nnz coefficients matrix
+    @b : right-hand values
+    @c : objective function's coefficients
+    @returns A,b,c scaled formatted
+    """
 
     r,s = [],[]
     row_nnz = (A!=0).sum(0)
