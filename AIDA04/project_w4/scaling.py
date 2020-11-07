@@ -24,3 +24,11 @@ def scaleA(A,b,c):
     for j in range(len(sum_col)):
         s.append(col_nnz[j]/np.sum(sum_col[j]))
     s = np.array(s) # final numpy scale r vector
+    # scale rows
+    for i in range(A.shape[0]):
+        A[i] = A[i]*r
+        b[i] = b[i]*r
+    # scale columns
+    for j in range(A.shape[1]):
+        A[:,j] = A[:,j]*s
+        c[:,j] = c[:,j]*s
