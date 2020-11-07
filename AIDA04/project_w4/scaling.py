@@ -12,8 +12,8 @@ def scaleA(A,b,c):
     """
 
     r,s = [],[]
-    row_nnz = (A!=0).sum(0)
-    col_nnz = (A!=0).sum(1)
+    row_nnz = (A!=0).sum(1) # count nnz elements of each row
+    col_nnz = (A!=0).sum(0) # count nnz elements of each column
     sum_row = np.sum(A,axis=1) # length num of rows
     sum_col = np.sum(A,axis=0) # length num of cols
     # calculate row scale factor
