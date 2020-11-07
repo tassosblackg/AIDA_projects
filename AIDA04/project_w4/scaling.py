@@ -22,11 +22,16 @@ def count_nz(A):
     return row_nnz,col_nnz
 
 def scaleA(A,b,c):
-    # calculate row scale factor
-    r = []
+
+    r,s = [],[]
     row_nnz,col_nnz = count_nz(A)
     sum_row = np.sum(A,axis=1) # length num of rows
     sum_col = np.sum(A,axis=0) # length num of cols
-    for i in
-    r.append(row_nnz/np.sum(A[i]))
+    # calculate row scale factor
+    for i in range(len(sum_row)):
+        r.append(row_nnz[i]/np.sum(sum_row[i]))
     r = np.array(r) # final numpy scale r vector
+    # calculate col scale factor
+    for j in range(len(sum_col)):
+        s.append(col_nnz[j]/np.sum(sum_col[j]))
+    s = np.array(s) # final numpy scale r vector
