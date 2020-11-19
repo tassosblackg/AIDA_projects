@@ -23,7 +23,8 @@ def col2matrix(columns_dict,rows_dict):
         @returns: A_mn array with the coefficients
     '''
 
-    A = [ [0]*len(columns_dict) ]*len(rows_dict) #init M x N  array with 0
+    # A = [ [0]*len(columns_dict) ]*len(rows_dict) #init M x N  array with 0
+    A = np.zeros((len(columns_dict),len(rows_dict)))
     for indx_j, key in enumerate(columns_dict):
         key_row_name = key[1] # get the 2d part of key_tuple => row_name
         indx_i = get_dict_indx(rows_dict, key_row_name)
