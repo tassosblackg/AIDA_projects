@@ -29,10 +29,7 @@ def col2matrix(columns_dict,len_rows_dict,num_unique_col):
 
         @returns: A_mn array with the coefficients
     '''
-
-    # print(columns_unique_names)
     A = np.zeros((len_rows_dict,num_unique_col)) #  matrix
-    print(A.shape)
     for  key in columns_dict:
         # get the 2d part of key_tuple => row_name (because rows with different name in col section)
         indx_i = convert_string_to_int(key[1]) -1  # get index for row i name
@@ -208,7 +205,7 @@ def mps2data(file_name):
     Eq=rows2matrix(Rows)
 #------------------- Convert right-hand constraints to array missing row values =zero
     b = rhs2matrix(RHS,len(Rows))
-#------------------------------- RHS vector from 1xN to Nx1 format Transpose--------------------------------------------
+#-------------------------------  lists/arrays to numpy format --------------------------------------------
     min_max = 1
     b_m = np.array(b)
     A_mn = np.array(A)
