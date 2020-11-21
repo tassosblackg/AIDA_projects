@@ -59,25 +59,17 @@ def get_db(AB_inv,A,P,lamda):
 @snoop('init_step.txt')
 def init_step(A, b, c,Eqin):
     AB,B,CB,new_Eqin = get_basis_B(Eqin)
-    print(AB.shape,B.shape,CB.shape)
     AB_inv = np.linalg.inv(AB)
     XB =  get_XB(AB_inv, b)
-    print(XB.shape,XB)
     N = np.arange(0,A.shape[1],dtype=np.uint32) # N set column indices
     w = get_w(CB, AB_inv)
-    print('\n',w.shape,'\n',w)
     Sn = get_Sn(c,w,A)
-    print('\n',Sn.shape,'\n',Sn)
-    print('\n',c.shape,'\n',c)
     P,Q = split_N(N, Sn)
-    print('\n',len(P),'\n',len(Q) )
     lamda = np.ones(len(P))
     S0 = get_S0(Sn, P, lamda)
-    print('\n',S0,type(S0),S0.shape)
     dB = get_db(AB_inv, A, P,lamda)
-    print('\n',dB.shape,'\n',dB)
-    #
-    # return(AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,db)
+
+    return(AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB)
 
 def count_pos_db(db):
     numOfpos = 0
@@ -114,7 +106,9 @@ def parserM():
     args=parser.parse_args()
 
     problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n,Eqin = mps2data(args.input_file)
-    init_step(A_mn, b_m, c_n, Eqin)
+    AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A_mn, b_m, c_n, Eqin)
+    numOfpos = count_pos_db(dB)
+    print(numOfpos,len(dB))
 
 if __name__ == '__main__':
     parserM()
