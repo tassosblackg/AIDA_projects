@@ -37,7 +37,7 @@ def get_Sn(c,w,A):
 
 def split_N(N,Sn):
     P,Q = [],[]
-    for index,val in enumerate(Sn):
+    for index,val in enumerate(Sn[0]):
         if val < 0:
             P.append(index)
         else:
@@ -69,7 +69,8 @@ def init_step(A, b, c,Eqin):
     Sn = get_Sn(c,w,A)
     print('\n',Sn.shape,'\n',Sn)
     print('\n',c.shape,'\n',c)
-    # P,Q = split_N(N, Sn)
+    P,Q = split_N(N, Sn)
+    print('\n',len(P),'\n',len(Q) )
     # lamda = np.ones(len(P))
     # S0 = get_S0(Sn, P, lamda)
     # dB = get_db(AB_inv, A, P)
