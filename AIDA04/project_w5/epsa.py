@@ -66,7 +66,9 @@ def init_step(A, b, c,Eqin):
     N = np.arange(0,A.shape[1],dtype=np.uint32) # N set column indices
     w = get_w(CB, AB_inv)
     print('\n',w.shape,'\n',w)
-    # Sn = get_Sn(c,w,A)
+    Sn = get_Sn(c,w,A)
+    print('\n',Sn.shape,'\n',Sn)
+    print('\n',c.shape,'\n',c)
     # P,Q = split_N(N, Sn)
     # lamda = np.ones(len(P))
     # S0 = get_S0(Sn, P, lamda)
