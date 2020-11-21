@@ -46,8 +46,8 @@ def split_N(N,Sn):
 
 def get_S0(Sn,P,lamda):
     tmp = []
-    for val in P:
-        tmp.append(lamda[val]*Sn[val])
+    for indx,val in enumerate(P):
+        tmp.append(lamda[indx]*Sn[0][val])
     return(sum(tmp))
 
 def get_db(AB_inv,A,P):
@@ -71,8 +71,9 @@ def init_step(A, b, c,Eqin):
     print('\n',c.shape,'\n',c)
     P,Q = split_N(N, Sn)
     print('\n',len(P),'\n',len(Q) )
-    # lamda = np.ones(len(P))
-    # S0 = get_S0(Sn, P, lamda)
+    lamda = np.ones(len(P))
+    S0 = get_S0(Sn, P, lamda)
+    print('\n',S0,type(S0),S0.shape)
     # dB = get_db(AB_inv, A, P)
     #
     # return(AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,db)
