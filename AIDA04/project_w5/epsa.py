@@ -1,6 +1,7 @@
 from read_mps import mps2data
 import argparse
 import numpy as np
+import time
 from pysnooper import snoop
 
 def get_basis_B(Eqin):
@@ -85,19 +86,35 @@ def is_db_pos(numOfpos,db_len):
         cond = False
     return cond
 
+def get_alpha(dB,XB):
+    a_indx,tmp = [],[]
+
+    for indx,val in enumerate(dB):
+        if val < 0:
+            tmp.append(XB[indx]/(-val))
+            a_indx.append(indx)
+    np_tmp = np.array(tmp)
+    alpha = min(np_tmp)
+    min_i = np.argmin(np_tmp)
+    r = a_indx[min_i] #
+
+    return (alpha,r)
+
 # def epsa(A, b, c,Eqin):
-#     AB,B,CB,XB,Sn,P,Q,S0,db = init_step(A,b,c,Eqin)
+#     AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A,b,c,Eqin)
 #     numOfiter = 0
 #     while(len(P)!=0 and S0 !=0):
-#         if( is_db_pos(count_pos_db,len(db)) ):
+#         if( is_db_pos(count_pos_db,len(dB)) ):
 #             if(S0 == 0):
 #                 break
 #         else:
 #             # check alpha and get r, k
+#
 #         # step 2 -pivoting
 #
 #         # step 3 - update
 #         numOfiter = numOfiter + 1
+
 # parser menu
 def parserM():
 
@@ -105,10 +122,18 @@ def parserM():
     parser.add_argument('input_file',type=str,help='<file_name>')
     args=parser.parse_args()
 
+    start=time.time()
     problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n,Eqin = mps2data(args.input_file)
     AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A_mn, b_m, c_n, Eqin)
     numOfpos = count_pos_db(dB)
     print(numOfpos,len(dB))
+    dB[0] =-1
+    dB[1] = -10
+    a,r = get_alpha(dB, XB)
+    print("\n",a,r)
+
+    end = time.time()
+    print("Total time to run read & epsa : ",end-start,"\n")
 
 if __name__ == '__main__':
     parserM()
