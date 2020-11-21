@@ -60,8 +60,9 @@ def get_db(AB_inv,A,P):
 def init_step(A, b, c,Eqin):
     AB,B,CB,new_Eqin = get_basis_B(Eqin)
     print(AB.shape,B.shape,CB.shape)
-    # AB_inv = np.linalg.inv(AB)
-    # XB =  get_XB(AB_inv, b)
+    AB_inv = np.linalg.inv(AB)
+    XB =  get_XB(AB_inv, b)
+    print(XB.shape,XB)
     # N = np.arange(0,A.shape[1],type=int) # N set column indices
     # w = get_w(CB, AB_inv)
     # Sn = get_Sn(c,w,A)
