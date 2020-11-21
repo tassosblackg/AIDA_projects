@@ -50,10 +50,10 @@ def get_S0(Sn,P,lamda):
         tmp.append(lamda[indx]*Sn[0][val])
     return(sum(tmp))
 
-def get_db(AB_inv,A,P):
+def get_db(AB_inv,A,P,lamda):
     tmp = []
-    for val in P:
-        tmp.append(lamda[val]*np.matmul(AB_inv,A[:,val]))
+    for indx,val in enumerate(P):
+        tmp.append(lamda[indx]*np.matmul(AB_inv,A[:,val]))
     return(sum(tmp))
 
 @snoop('init_step.txt')
@@ -74,7 +74,8 @@ def init_step(A, b, c,Eqin):
     lamda = np.ones(len(P))
     S0 = get_S0(Sn, P, lamda)
     print('\n',S0,type(S0),S0.shape)
-    # dB = get_db(AB_inv, A, P)
+    dB = get_db(AB_inv, A, P,lamda)
+    print('\n',dB.shape,'\n',dB)
     #
     # return(AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,db)
 
