@@ -63,8 +63,9 @@ def init_step(A, b, c,Eqin):
     AB_inv = np.linalg.inv(AB)
     XB =  get_XB(AB_inv, b)
     print(XB.shape,XB)
-    # N = np.arange(0,A.shape[1],type=int) # N set column indices
-    # w = get_w(CB, AB_inv)
+    N = np.arange(0,A.shape[1],dtype=np.uint32) # N set column indices
+    w = get_w(CB, AB_inv)
+    print('\n',w.shape,'\n',w)
     # Sn = get_Sn(c,w,A)
     # P,Q = split_N(N, Sn)
     # lamda = np.ones(len(P))
