@@ -4,7 +4,7 @@ import numpy as np
 import time
 from pysnooper import snoop
 
-def get_basis_B(Eqin):
+def get_basis_B(A,Eqin):
     """
     Create AB matrix with 1 or -1 in the main diagonial -- slack variables
     Create matrix B with columns indices for AB matrix of slack variables
@@ -23,9 +23,11 @@ def get_basis_B(Eqin):
             exit(-1)
         Eqin[i] = 0 # convert Inequality to equality
     # array with indices on columns of AB
-    B = np.arange(0, AB.shape[1], dtype=int)
+    ABN = np.concatenate((A,AB),axis=1) # concatenate An with AB
+    B = np.arange(A.shape[1], A.shape[1]+AB.shape[1], dtype=uint)
     CB = np.zeros((1,len(B)))
-    return(AB,B,CB,Eqin)
+    CBN = np.concatenate((c,CB),axis=1)
+    return(ABN,B,CBN,Eqin)
 
 def get_XB(AB_inv,b):
     return(np.matmul(AB_inv,b))
@@ -55,14 +57,15 @@ def get_db(AB_inv,A,P,lamda):
     tmp = []
     for indx,val in enumerate(P):
         tmp.append(lamda[indx]*np.matmul(AB_inv,A[:,val]))
-    return(sum(tmp))
+    return((-1)*sum(tmp))
 
 @snoop('init_step.txt')
 def init_step(A, b, c,Eqin):
-    AB,B,CB,new_Eqin = get_basis_B(Eqin)
-    AB_inv = np.linalg.inv(AB)
+    ABN,B,CBN,new_Eqin = get_basis_B(Eqin)
+    AB_inv = np.linalg.inv(ABN[:,B])
     XB =  get_XB(AB_inv, b)
     N = np.arange(0,A.shape[1],dtype=np.uint32) # N set column indices
+    CB = CBN[0,B]
     w = get_w(CB, AB_inv)
     Sn = get_Sn(c,w,A)
     P,Q = split_N(N, Sn)
@@ -70,7 +73,7 @@ def init_step(A, b, c,Eqin):
     S0 = get_S0(Sn, P, lamda)
     dB = get_db(AB_inv, A, P,lamda)
 
-    return(AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB)
+    return(ABN,AB_inv,B,CBN,new_Eqin,XB,Sn,P,Q,S0,dB)
 
 def count_pos_db(db):
     numOfpos = 0
@@ -100,20 +103,85 @@ def get_alpha(dB,XB):
 
     return (alpha,r)
 
-# def epsa(A, b, c,Eqin):
-#     AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A,b,c,Eqin)
-#     numOfiter = 0
-#     while(len(P)!=0 and S0 !=0):
-#         if( is_db_pos(count_pos_db,len(dB)) ):
-#             if(S0 == 0):
-#                 break
-#         else:
-#             # check alpha and get r, k
-#
-#         # step 2 -pivoting
-#
-#         # step 3 - update
-#         numOfiter = numOfiter + 1
+def get_HrP(AB_inv,r,A,P):
+    return(np.matmul(AB_inv[r,],A[:,P]))
+
+def get_HrQ(AB_inv,r,A,Q):
+    return(np.matmul(AB_inv[r,],A[:,Q]))
+
+def get_theta1(Sn,P,HrP):
+    tmp, min_i = [],[]
+    for indx,val in enumerate(HrP):
+        tmp.appemd(-Sn[P[indx]]/val)
+        min_i.append(indx)
+    np_tmp = np.array(tmp)
+    theta1 = min(np_tmp)
+    ith = np.argmin(np_tmp)
+    t1 = min_i[ith]
+
+    return(theta1,t1)
+
+def get_theta2(Sn,Q,HrQ):
+    tmp, min_i = [],[]
+    for indx,val in enumerate(HrQ):
+        tmp.appemd(-Sn[Q[indx]]/val)
+        min_i.append(indx)
+    np_tmp = np.array(tmp)
+    theta2 = min(np_tmp)
+    ith = np.argmin(np_tmp)
+    t2 = min_i[ith]
+
+    return(theta2,t2)
+
+def epsa(A, b, c,Eqin):
+    ABN,AB_inv,B,CBN,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A,b,c,Eqin)
+    numOfiter = 0
+    while(len(P)!=0 and S0 !=0):
+        # if all dB values are positive or equal to zero
+        if( is_db_pos(count_pos_db,len(dB)) ):
+            if(S0 == 0):
+                break
+        else: # dB has <0 values
+            # check alpha and get r, k
+            if (len(dB) == 0): # means a=inf, so problem is unbounded
+                print("\n LP1 is unbounded problem..exiting..\n")
+                exit(-1)
+            else:
+                a,r = get_alpha(dB,XB)
+                k = B[r]
+
+        # step 2 -pivoting
+        HrP = get_HrP(AB_inv,r,A,P)
+        HrQ = get_HrQ(AB_inv,r,A,Q)
+        theta1,t1 = get_theta1(Sn, P, HrP)
+        theta2,t2 = get_theta2(Sn, Q, HrQ)
+        if (theta1<theta2):
+            l = P[t1]
+        else:
+            l = Q[t2]
+
+        # step 3 - update
+        B[r] = l
+        if (theta1<theta2):
+            P.remove(l)
+            Q.append(k)
+        else:
+            Q[t2] = k
+
+        AB = ABN[:,B] # get new updated AB
+        AB_inv = np.linalg.inv(AB)
+        XB = get_XB(AB_inv, b)
+        CB = CBN[0,B] # new CB
+        w = get_w(CB, AB_inv)
+        N = P + Q           # concatenate new P and Q to form new N
+        Sn = get_Sn(CBN[0,N], w, ABN[:,N]) #??
+        lamda = np.ones(len(P))
+        S0 = get_S0(Sn, P, lamda)
+        dB = get_db(AB_inv, ABN[:,N], P, lamda)
+
+        numOfiter = numOfiter + 1
+
+    return(numOfiter,S0)
 
 # parser menu
 def parserM():
@@ -124,13 +192,17 @@ def parserM():
 
     start=time.time()
     problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n,Eqin = mps2data(args.input_file)
-    AB,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A_mn, b_m, c_n, Eqin)
+    AB,AB_inv,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A_mn, b_m, c_n, Eqin) #<- change returns
+    # numOfiter,S0 = epsa(A_mn, b_m, c_n,Eqin)
+    print('@\n',Sn.shape)
+    print("\n", len(P),len(Q))
     numOfpos = count_pos_db(dB)
     print(numOfpos,len(dB))
-    dB[0] =-1
-    dB[1] = -10
-    a,r = get_alpha(dB, XB)
+    a,r = get_alpha(dB,XB)
     print("\n",a,r)
+    HrP = get_HrP(AB_inv, r, A_mn, P)
+    print('\n',HrP.shape,'\n',HrP)
+
 
     end = time.time()
     print("Total time to run read & epsa : ",end-start,"\n")
