@@ -4,7 +4,7 @@ import numpy as np
 import time
 from pysnooper import snoop
 
-def get_basis_B(A,Eqin):
+def get_basis_B(A,c,Eqin):
     """
     Create AB matrix with 1 or -1 in the main diagonial -- slack variables
     Create matrix B with columns indices for AB matrix of slack variables
@@ -24,7 +24,7 @@ def get_basis_B(A,Eqin):
         Eqin[i] = 0 # convert Inequality to equality
     # array with indices on columns of AB
     ABN = np.concatenate((A,AB),axis=1) # concatenate An with AB
-    B = np.arange(A.shape[1], A.shape[1]+AB.shape[1], dtype=uint)
+    B = np.arange(A.shape[1], A.shape[1]+AB.shape[1], dtype=np.uint32)
     CB = np.zeros((1,len(B)))
     CBN = np.concatenate((c,CB),axis=1)
     return(ABN,B,CBN,Eqin)
@@ -33,9 +33,11 @@ def get_XB(AB_inv,b):
     return(np.matmul(AB_inv,b))
 
 def get_w(CB,AB_inv):
-    return(np.matmul(CB,AB_inv))
+    # print(CB.shape,AB_inv.shape)
+    return(np.matmul(CB.reshape(1,-1),AB_inv))
 
 def get_Sn(c,w,A):
+    # print('Sn\n',c.shape,w.shape,A.shape)
     return(c-np.matmul(w,A))
 
 def split_N(N,Sn):
@@ -61,7 +63,7 @@ def get_db(AB_inv,A,P,lamda):
 
 @snoop('init_step.txt')
 def init_step(A, b, c,Eqin):
-    ABN,B,CBN,new_Eqin = get_basis_B(Eqin)
+    ABN,B,CBN,new_Eqin = get_basis_B(A,c,Eqin)
     AB_inv = np.linalg.inv(ABN[:,B])
     XB =  get_XB(AB_inv, b)
     N = np.arange(0,A.shape[1],dtype=np.uint32) # N set column indices
@@ -91,7 +93,7 @@ def is_db_pos(numOfpos,db_len):
 
 def get_alpha(dB,XB):
     a_indx,tmp = [],[]
-
+    # print('DB',dB.shape)
     for indx,val in enumerate(dB):
         if val < 0:
             tmp.append(XB[indx]/(-val))
@@ -111,32 +113,40 @@ def get_HrQ(AB_inv,r,A,Q):
 
 def get_theta1(Sn,P,HrP):
     tmp, min_i = [],[]
-    for indx,val in enumerate(HrP):
-        tmp.appemd(-Sn[P[indx]]/val)
-        min_i.append(indx)
+    # Sp = Sn[0,P]
+    for indx in range(len(P)):
+        if HrP[indx] > 0:
+            tmp.append(-Sn[0][P[indx]]/HrP[indx])
+            min_i.append(indx)
+
     np_tmp = np.array(tmp)
     theta1 = min(np_tmp)
     ith = np.argmin(np_tmp)
     t1 = min_i[ith]
 
+
     return(theta1,t1)
 
 def get_theta2(Sn,Q,HrQ):
     tmp, min_i = [],[]
-    for indx,val in enumerate(HrQ):
-        tmp.appemd(-Sn[Q[indx]]/val)
-        min_i.append(indx)
-    np_tmp = np.array(tmp)
-    theta2 = min(np_tmp)
-    ith = np.argmin(np_tmp)
-    t2 = min_i[ith]
-
+    for indx in range(len(Q)):
+        if HrQ[indx] < 0:
+            tmp.append(-Sn[0][Q[indx]]/HrQ[indx])
+            min_i.append(indx)
+    if(len(tmp)!=0):
+        np_tmp = np.array(tmp)
+        theta2 = min(np_tmp)
+        ith = np.argmin(np_tmp)
+        t2 = min_i[ith]
+    else:
+        theta2 = float('inf')
+        t2 = 'None'
     return(theta2,t2)
 
 def epsa(A, b, c,Eqin):
     ABN,AB_inv,B,CBN,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A,b,c,Eqin)
     numOfiter = 0
-    while(len(P)!=0 and S0 !=0):
+    while(len(P)!=0 ):
         # if all dB values are positive or equal to zero
         if( is_db_pos(count_pos_db,len(dB)) ):
             if(S0 == 0):
@@ -148,7 +158,9 @@ def epsa(A, b, c,Eqin):
                 exit(-1)
             else:
                 a,r = get_alpha(dB,XB)
+
                 k = B[r]
+
 
         # step 2 -pivoting
         HrP = get_HrP(AB_inv,r,A,P)
@@ -169,15 +181,25 @@ def epsa(A, b, c,Eqin):
             Q[t2] = k
 
         AB = ABN[:,B] # get new updated AB
+        # with np.printoptions(threshold=np.inf):
+        #     print(AB)
+        # print('DET\n',)
+        if(np.linalg.det(AB) == 0):
+            print("Determinant of matrix AB is zero, can't get the inverse matrix..exiting\n")
+            break
         AB_inv = np.linalg.inv(AB)
         XB = get_XB(AB_inv, b)
         CB = CBN[0,B] # new CB
         w = get_w(CB, AB_inv)
         N = P + Q           # concatenate new P and Q to form new N
-        Sn = get_Sn(CBN[0,N], w, ABN[:,N]) #??
+
+        A = ABN
+        c = CBN[0,N].reshape(1,-1)
+        # print('\nWC',c.shape,w.shape,A[:,N].shape)
+        Sn = get_Sn(c, w, A[:,N]) #??
         lamda = np.ones(len(P))
         S0 = get_S0(Sn, P, lamda)
-        dB = get_db(AB_inv, ABN[:,N], P, lamda)
+        dB = get_db(AB_inv, A, P, lamda)
 
         numOfiter = numOfiter + 1
 
@@ -192,16 +214,10 @@ def parserM():
 
     start=time.time()
     problem_name, Rows, Bounds, min_max, A_mn, b_m, c_n,Eqin = mps2data(args.input_file)
-    AB,AB_inv,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A_mn, b_m, c_n, Eqin) #<- change returns
-    # numOfiter,S0 = epsa(A_mn, b_m, c_n,Eqin)
-    print('@\n',Sn.shape)
-    print("\n", len(P),len(Q))
-    numOfpos = count_pos_db(dB)
-    print(numOfpos,len(dB))
-    a,r = get_alpha(dB,XB)
-    print("\n",a,r)
-    HrP = get_HrP(AB_inv, r, A_mn, P)
-    print('\n',HrP.shape,'\n',HrP)
+    # AB,AB_inv,B,CB,new_Eqin,XB,Sn,P,Q,S0,dB = init_step(A_mn, b_m, c_n, Eqin) #<- change returns
+    print('\nStarting EPSA..\n')
+    numOfiter,S0 = epsa(A_mn, b_m, c_n,Eqin)
+    print('\n|NumberOfIterations= ',numOfiter,' | S0= ',S0,' |\n')
 
 
     end = time.time()
