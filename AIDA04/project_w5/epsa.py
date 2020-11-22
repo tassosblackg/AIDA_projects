@@ -1,8 +1,14 @@
+'''
+Project Week 5-6 EPSA
+author: @tassosblackg
+Comments: problem while inveriting AB matrix determinant can be zero, so inversion can't happen
+'''
+
 from read_mps import mps2data
 import argparse
 import numpy as np
 import time
-from pysnooper import snoop
+
 
 def get_basis_B(A,c,Eqin):
     """
@@ -61,8 +67,11 @@ def get_db(AB_inv,A,P,lamda):
         tmp.append(lamda[indx]*np.matmul(AB_inv,A[:,val]))
     return((-1)*sum(tmp))
 
-@snoop('init_step.txt')
+
 def init_step(A, b, c,Eqin):
+    '''
+    Calculate the Step 0 Vectors and Values
+    '''
     ABN,B,CBN,new_Eqin = get_basis_B(A,c,Eqin)
     AB_inv = np.linalg.inv(ABN[:,B])
     XB =  get_XB(AB_inv, b)
@@ -78,6 +87,9 @@ def init_step(A, b, c,Eqin):
     return(ABN,AB_inv,B,CBN,new_Eqin,XB,Sn,P,Q,S0,dB)
 
 def count_pos_db(db):
+    '''
+    count positve elements inside dB vector
+    '''
     numOfpos = 0
     for val in db:
         if val >= 0:
@@ -85,6 +97,9 @@ def count_pos_db(db):
     return numOfpos
 
 def is_db_pos(numOfpos,db_len):
+    '''
+    Boolean if dB has only positive elements
+    '''
     if (numOfpos == db_len):
         cond = True
     else:
@@ -162,7 +177,7 @@ def epsa(A, b, c,Eqin):
                 k = B[r]
 
 
-        # step 2 -pivoting
+        # ---------------------------------------|Step 2 - Pivoting|-------------------------------------------------------
         HrP = get_HrP(AB_inv,r,A,P)
         HrQ = get_HrQ(AB_inv,r,A,Q)
         theta1,t1 = get_theta1(Sn, P, HrP)
@@ -172,7 +187,7 @@ def epsa(A, b, c,Eqin):
         else:
             l = Q[t2]
 
-        # step 3 - update
+        # ----------------------------------------- |Step 3 - Update|-------------------------------------------------------
         B[r] = l
         if (theta1<theta2):
             P.remove(l)
@@ -192,10 +207,9 @@ def epsa(A, b, c,Eqin):
         CB = CBN[0,B] # new CB
         w = get_w(CB, AB_inv)
         N = P + Q           # concatenate new P and Q to form new N
-
         A = ABN
-        c = CBN[0,N].reshape(1,-1)
-        # print('\nWC',c.shape,w.shape,A[:,N].shape)
+        c = CBN[0,N].reshape(1,-1) # format to 1xN
+
         Sn = get_Sn(c, w, A[:,N]) #??
         lamda = np.ones(len(P))
         S0 = get_S0(Sn, P, lamda)
