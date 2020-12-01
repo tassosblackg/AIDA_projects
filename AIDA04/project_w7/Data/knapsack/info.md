@@ -1,6 +1,6 @@
 # Knapsack Data taken from : [DataSet](https://people.sc.fsu.edu/~jburkardt/datasets/knapsack_01/knapsack_01.html)
 
-# Each knapsack problem is compound from 4 .tx files,
+# Each knapsack problem is compound from 4 .txt files,
 
 [1.] *_c.txt contains the capacity of knapsack,  maybe there are multiple capacities
 
