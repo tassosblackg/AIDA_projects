@@ -22,3 +22,4 @@ legend('class1','class2')
 
 % class1 with x =0.6
 p1_06 = (1/sqrt(2*pi*std1) )*exp(-((0.6-mean1)^2)/(2*std1))
+% exei lathos thelei desmeymeni pithanotita gia na ypologiseis
