@@ -3,22 +3,164 @@ title: "Week5-Networks"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 ## Greece Network
 
-```{r cars}
+```{r Read Data}
   data <- read.csv('greece.csv')
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+## Load Libs
+```{r}
+library('tidyverse')
+library('dplyr')
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## create nodes and edges
+## Start From --Sources
+```{r}
+sources <- data %>%
+  distinct(from) %>%
+  rename(label = from)
+```
+## Destinations
+```{r}
+destinations <- data %>%
+  distinct(to) %>%
+  rename(label = to)
+```
+## join source destination and add id
+```{r}
+nodes <- full_join(sources,destinations,by="label")
+nodes <- tibble::rowid_to_column(nodes,"id")
+```
+## Plot Network
+
+```{r}
+library('visNetwork')
+
+```
+```{r VisNetwork}
+connections <- select(data, from, to)
+boroughs <- select(nodes,label) 
+boroughs<- boroughs %>% mutate(id=label)
+
+visNetwork(boroughs,connections)
+```
+```{r}
+library('tidygraph')
+graph_routes <- as_tbl_graph(data)
+
+graph_routes
+
+```
+
+
+```{r Simple Graph between nodes}
+library('ggraph')
+graph_routes %>%
+ggraph() + geom_edge_link() + geom_node_point() + theme_graph()
+
+```
+```{r}
+graph_routes %>% 
+  activate(edges) %>% 
+  arrange(desc(distance))
+```
+
+```{r Use distance as wight for edge}
+ggraph(graph_routes, layout = "graphopt") + 
+  geom_node_point() +
+  geom_edge_link(aes(width = distance), alpha = 0.8) + 
+  scale_edge_width(range = c(0.2, 2)) +
+  geom_node_text(aes(label = name), repel = TRUE) +
+  labs(edge_width = "Distance") +
+  theme_graph()
+```
+```{r}
+library(stringr)
+
+graph_routes <- graph_routes %>%
+  activate(nodes) %>%
+  mutate(
+    title = str_to_title(name),
+    label = str_replace_all(title, " ", "\n")
+  )
+
+graph_routes
+cities <- graph_routes %>%
+  activate(nodes) %>%
+  pull(title)
+
+cities
+```
+
+# 5 Morph Shortest Path
+```{r}
+# Morphing
+from <- which(cities == "Έβρος")
+to <-  which(cities == "Μεσσηνία")
+
+shortest <- graph_routes %>%
+  morph(to_shortest_path, from, to, weights = distance)
+
+shortest
+
+# Spanning Tree
+shortest2 <- graph_routes %>%
+  morph(to_minimum_spanning_tree)
+
+shortest2
+
+# Components
+shortest3 <- graph_routes %>%
+  morph(to_components)
+
+shortest3
+```
+
+## Example Graph plot shortest Path
+```{r}
+shortest %>%
+  mutate(selected_node = TRUE) %>%
+  unmorph()
+
+shortest <- shortest %>%
+  mutate(selected_node = TRUE) %>%
+  activate(edges) %>%
+  mutate(selected_edge = TRUE) %>%
+  unmorph() 
+
+shortest <- shortest %>%
+  activate(nodes) %>%
+  mutate(selected_node = ifelse(is.na(selected_node), 1, 2)) %>%
+  activate(edges) %>%
+  mutate(selected_edge = ifelse(is.na(selected_edge), 1, 2)) %>%
+  arrange(selected_edge)
+
+shortest
+
+shortest %>%
+  ggraph(layout = "kk") +
+    geom_edge_diagonal(aes(alpha = selected_edge), color = "gray") +
+    geom_node_text(aes(label = label, color =name, alpha = selected_node ), size = 3)
+```
+
+##Graph of Spanning Tree
+```{r}
+shortest2 %>%
+  ggraph(layout = "kk") +
+    geom_edge_diagonal(aes(alpha = selected_edge), color = "gray") +
+    geom_node_text(aes(label = label, color =name, alpha = selected_node ), size = 3) 
+```
+## Graph componets
+```{r}
+
+
+shortest3 %>%
+  ggraph(layout = "kk") +
+    geom_edge_diagonal(aes(alpha = selected_edge), color = "gray") +
+    geom_node_text(aes(label = label, color =name, alpha = selected_node ), size = 3) 
+```
+
