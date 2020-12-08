@@ -1,4 +1,8 @@
 # Data Generator for Knapsack
+# Give Inputs:
+#       NumerOfRecords
+#       capacity_start_range
+#       capacity_end_range
 # author: @tassosblackg
 import argparse
 import random
@@ -13,8 +17,8 @@ def knap_data(NumOfObjects,crange_start,crange_end):
     """
     capacity = random.randint(crange_start+11,crange_end+11)
 
-    weights = random.sample(range(0, capacity-1), NumOfObjects)
-    profits = random.sample(range(0, capacity-1), NumOfObjects) * 2
+    weights = random.sample(range(1, capacity-1), NumOfObjects)
+    profits = random.sample(range(2, capacity-1), NumOfObjects) * 2
 
     return capacity,weights,profits
 
@@ -47,7 +51,7 @@ def parserM():
     args=parser.parse_args()
 
     # Get capacity_int,weights_list,profits_list Array
-    c,w,p = tknap_data(args.numOfRecords,args.cstart_r,args.cend_r)
+    c,w,p = knap_data(args.numOfRecords,args.cstart_r,args.cend_r)
     datamat2txts(c,w,p)
 
 
