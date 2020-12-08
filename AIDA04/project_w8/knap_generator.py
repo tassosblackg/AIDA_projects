@@ -24,7 +24,7 @@ def knap_data(NumOfObjects,crange_start,crange_end):
 
 
 def datamat2txts(c,w,p):
-    name = 'kanp_'+str(len(w))
+    name = 'knap_'+str(len(w))
     ext = '.txt'
 
     with open(name+'_c'+ext,'w') as f:
