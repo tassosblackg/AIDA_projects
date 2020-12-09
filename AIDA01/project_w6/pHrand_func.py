@@ -5,6 +5,7 @@ from scipy.special import beta
 import random
 from statistics import stdev,mean
 from math import sqrt
+import scipy
 
 a,b = 1,1
 
@@ -35,14 +36,18 @@ print('For R=100,w=120 = ',pHr2,'\n')
 # N equal to the number of R,W values
 # For large values of R,W beta gives nan
 def converge_std():
-     R = random.sample(range(10, 130), 100)
+    # R = random.sample(range(10, 130), 100)
     #R = [1,10,100,140,180]
-    W = random.sample(range(min(R)+15, max(R)+15), 100)
+    # W = random.sample(range(min(R)+15, max(R)+15), 100)
     #W = [2,12,120,160,200]
+
+    N = 100
+    R = random.sample(range(1,200), N)
+    W = random.sample(range(10,220), N)
     val_equation, approx_val = [],[]
     for i in range(len(R)):
-        val_equation.append(p_random_H(R[i], W[i], 1, 1))
-        approx_val.append(0.5*sqrt(R[i]+W[i])) # std value given the type
+        val_equation.append(p_random_H(R[i], W[i], 1, 1)/N)
+        approx_val.append(0.5*sqrt(R[i]+W[i])/N) # std value given the type
 
     print(val_equation)
     std_equation = stdev(val_equation)
