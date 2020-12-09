@@ -1,3 +1,7 @@
+# HW 6
+# Problem 12.4
+# author:@tassosblackg
+
 import numpy as np
 from scipy.special import gamma
 

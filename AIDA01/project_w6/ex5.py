@@ -1,4 +1,5 @@
 # Through K fair Coins find K
+# Problem 5 - HW6
 # that maximises the likelihood
 # and what is p(K)
 # author: @tassosblackg
