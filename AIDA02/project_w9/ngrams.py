@@ -50,34 +50,47 @@ for book_txt in book_full_txt:
     for sent in sent_tokenize(book_txt):
         new_sentence = token+sent+token
     sentences.append(new_sentence)
-print("The number of total sentences is", len(sentences))
-print(sentences)
+# print("The number of total sentences is", len(sentences))
+# print(sentences)
 
 # ------------------
 #     Question D
 # ------------------
 books_words_unigram = ngrams(books_all_words, 1, pad_left=True, pad_right=True, left_pad_symbol=token, right_pad_symbol=token)
 unigram_fd = nltk.FreqDist(books_words_unigram)
-print(unigram_fd.keys())
+# print(unigram_fd.keys())
 
-bigram_fd = nltk.FreqDist(ngrams(books_all_words, 2, pad_left=True, pad_right=True, left_pad_symbol=token, right_pad_symbol=token))
-print(bigram_fd.keys())
+bigrams =ngrams(books_all_words, 2, pad_left=True, pad_right=True, left_pad_symbol=token, right_pad_symbol=token)
+bigram_fd = CFD(bigrams)
+# print(bigram_fd.keys())
 
-trigram_fd = nltk.FreqDist(ngrams(books_all_words, 3, pad_left=True, pad_right=True, left_pad_symbol=token, right_pad_symbol=token))
-print(trigram_fd.keys())
-print(trigram_fd['is'])
 
+trigrams = ngrams(books_all_words, 3, pad_left=True, pad_right=True, left_pad_symbol=token, right_pad_symbol=token)
+pairsOf3 = (((w0, w1), w2) for w0, w1, w2 in trigrams) # create tuple of words -trigrams and Calcualte CFD
+trigram_fd = CFD(pairsOf3)
+# print(trigram_fd.keys())
+
+
+# print(Text(pairsOf3).generate(length=15))
 
 # ------------------
 #     Question E
-# # ------------------
-# # peek a random word and generate 10 sentences
-# def generate_model(cfdist, word, num=15):
-#     for i in range(num):
-#         words = list(cfdist[word])
-#         word = random.choice(words)
-#         print(word,file=open('output.txt', 'a'))
-#
-#
+# ------------------
+# peek a random word and generate 10 sentences
+def generate_model(cfdist, word, num=15,file_n):
+    line = []
+    line.append(word)
+    for i in range(num):
+        words = list(cfdist[word])
+        word = random.choice(words)
+        # print(word,file=open('output.txt', 'a'))
+        line.append(word)
+        # print(line)
+    with open(file_n, 'a') as f:
+        f.write(str(line)+'\n')
+
+for i in range(0,10):
+    generate_model(bigram_fd, '<s>', num=15,'bigram_senteces.txt')
+
 # for i in range(0,10):
-#     generate_model(bigram_fd, 'The', num=15)
+#     generate_model(trigram_fd, '<s>', num=15,'trigram_senteces.txt')
