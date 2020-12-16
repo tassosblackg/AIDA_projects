@@ -14,6 +14,7 @@ pfile2 = 'knapsack_data/problem2/p02_p.txt' # ..
 wfile2 = 'knapsack_data/problem2/p02_w.txt' # ..
 sfile2 = 'knapsack_data/problem2/p02_s.txt' # ..
 
+# Read Data Func
 def get_knap_data(c_file,w_file,p_file,s_file):
     '''
     Get Knapsack problem data from 4 different files, each file
@@ -47,7 +48,29 @@ def get_knap_data(c_file,w_file,p_file,s_file):
     return capacity, weights,profits,solution_ohe
 
 
+# Init Heuristic Solution
+# Goal: is to put as many objects in the sack as possible
+def init_heuristic_solutionW(capacity,weights):
+    total_sum_w = sum(weights) # calculate total sum of weights
+    solution = [1]*len(weights) # suppose best solution all objects in
+    current_sum = total_sum_w
+    sublistOfWeights = weights
+
+    while(current_sum >capacity):
+        max_Weight = max(sublistOfWeights)
+        indexOfdroppedElement = sublistOfWeights.index(max_Weight) # get index of max weight value
+        sublistOfWeights[indexOfdroppedElement] = 0
+        current_sum = sum(sublistOfWeights) # new sum after removed element
+
+        solution[indexOfdroppedElement] = 0
+
+    return solution    
+
 # Read Problem Data
 # IMPORTANT: args of Input file names must be with the corect order
 capacity,weights,profits,solution_ohe = get_knap_data(cfile1,wfile1,pfile1,sfile1)
 print(capacity,weights,profits,solution_ohe)
+
+
+
+init_heuristic_solutionW(capacity,weights)
