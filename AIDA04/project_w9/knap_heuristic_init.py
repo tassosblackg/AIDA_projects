@@ -94,7 +94,7 @@ def calculate_total_profit(solution, profits):
 
 # Read Problem Data
 # IMPORTANT: args of Input file names must be with the corect order
-capacity,weights,profits,solution_ohe = get_knap_data(cfile1,wfile1,pfile1,sfile1)
+capacity,weights,profits,solution_ohe = get_knap_data(cfile2,wfile2,pfile2,sfile2)
 input_total_profit = calculate_total_profit(solution_ohe, profits)
 print('--------------- Problem\'s Input Data -----------------------\n')
 print('\n Capacity = ',capacity,'\n','\nWeight per item = \n',weights,'\n','\nProfits per item\n',profits,'\n','\nSolution O-H-E = \n',solution_ohe)
