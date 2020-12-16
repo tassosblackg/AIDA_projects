@@ -2,6 +2,17 @@
 # Construction Heuristic for Initial Solution
 # author:@tassosblackg
 
+# Problem Data 1
+cfile1 = 'knapsack_data/problem1/p01_c.txt' # capacity value
+pfile1 = 'knapsack_data/problem1/p01_p.txt' # profits values
+wfile1 = 'knapsack_data/problem1/p01_w.txt' # weights values
+sfile1 = 'knapsack_data/problem1/p01_s.txt' # solution values
+
+# Problem Data 2
+cfile2 = 'knapsack_data/problem2/p02_c.txt' # ..
+pfile2 = 'knapsack_data/problem2/p02_p.txt' # ..
+wfile2 = 'knapsack_data/problem2/p02_w.txt' # ..
+sfile2 = 'knapsack_data/problem2/p02_s.txt' # ..
 
 def get_knap_data(c_file,w_file,p_file,s_file):
     '''
@@ -34,3 +45,9 @@ def get_knap_data(c_file,w_file,p_file,s_file):
             solution_ohe.append(int(line.strip()))
 
     return capacity, weights,profits,solution_ohe
+
+
+# Read Problem Data
+# IMPORTANT: args of Input file names must be with the corect order
+capacity,weights,profits,solution_ohe = get_knap_data(cfile1,wfile1,pfile1,sfile1)
+print(capacity,weights,profits,solution_ohe)
