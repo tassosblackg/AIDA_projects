@@ -14,6 +14,12 @@ pfile2 = 'knapsack_data/problem2/p02_p.txt' # ..
 wfile2 = 'knapsack_data/problem2/p02_w.txt' # ..
 sfile2 = 'knapsack_data/problem2/p02_s.txt' # ..
 
+# Problem Data 2
+cfile3 = 'knapsack_data/problem3/p03_c.txt' # ..
+pfile3 = 'knapsack_data/problem3/p03_p.txt' # ..
+wfile3 = 'knapsack_data/problem3/p03_w.txt' # ..
+sfile3 = 'knapsack_data/problem3/p03_s.txt' # ..
+
 # Read Data Func
 def get_knap_data(c_file, w_file, p_file, s_file):
     '''
