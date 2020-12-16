@@ -51,6 +51,14 @@ def get_knap_data(c_file, w_file, p_file, s_file):
 # Init Heuristic Solution
 # Goal: is to put as many objects in the sack as possible
 def init_heuristic_solutionW(capacity, weights):
+    '''
+    Args:
+        - capacity : a int value showing the maximum capacity of the sack
+        - weights  : a list with weight values per item
+
+    Returns:
+        - solution : a list with ones and zeros, [1]: element in sack [0]: element not inside
+    '''
     total_sum_w = sum(weights) # calculate total sum of weights
     solution = [1]*len(weights) # suppose best solution all objects in
     current_sum = total_sum_w
@@ -66,11 +74,37 @@ def init_heuristic_solutionW(capacity, weights):
 
     return solution
 
+
+# Calculate the profit based on a solution list
+def calculate_total_profit(solution, profits):
+    '''
+    Args:
+        - solution : a list with ones and zeros based on which item is in the sack or not
+        - profits  : a list with values of profit per item
+
+    Returns:
+        - total_profit  : a value for the total profit of items inside the sack
+
+    '''
+    total_profit = 0
+    for indx,s in enumerate(solution):
+        if (s==1):
+            total_profit = total_profit + profits[indx]
+    return (total_profit)
+
 # Read Problem Data
 # IMPORTANT: args of Input file names must be with the corect order
 capacity,weights,profits,solution_ohe = get_knap_data(cfile1,wfile1,pfile1,sfile1)
-print(capacity,weights,profits,solution_ohe)
+input_total_profit = calculate_total_profit(solution_ohe, profits)
+print('--------------- Problem\'s Input Data -----------------------\n')
+print('\n Capacity = ',capacity,'\n','\nWeight per item = \n',weights,'\n','\nProfits per item\n',profits,'\n','\nSolution O-H-E = \n',solution_ohe)
+print('\nTotal Profit = ',input_total_profit,'\n')
+print('\n----------------------------------------------------------\n')
 
 
-
+# Initial solution problem 1
 sol = init_heuristic_solutionW(capacity, weights)
+prof = calculate_total_profit(sol,profits)
+
+print('\nInit Simple Heuristic Solution = ',sol)
+print('\nInit Simple Heuristic Max Profit = ',prof)
