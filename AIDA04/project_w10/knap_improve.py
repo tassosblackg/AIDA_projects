@@ -122,8 +122,8 @@ def improve_initial_solution(solution, weights, profits):
             profits_in[drop_i] = profits[current_item_out]
         # remove item from item_out list either fit or not, inside the bag
         # after comparing it with all the others inside the bag
-        items_out.remove(current_item_out)
-        profits_out.remove(current_item_out)
+        items_out.remove(items_out[item_indx_out])
+        profits_out.remove(profits_out[item_indx_out])
         numOfitemsOut = numOfitemsOut - 1
 
     return (solution,sum(profits_in))
