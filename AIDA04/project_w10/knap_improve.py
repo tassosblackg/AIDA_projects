@@ -1,7 +1,7 @@
 # COmpt Week 10
 # Improvement Heuristic for Initial Solution
 # author:@tassosblackg
-from pysnooper import snoop
+# from pysnooper import snoop
 # Problem Data 1
 cfile1 = 'knapsack_data/problem1/p01_c.txt' # capacity value
 pfile1 = 'knapsack_data/problem1/p01_p.txt' # profits values
@@ -80,7 +80,7 @@ def init_heuristic_solutionW(capacity, weights):
 
     return solution
 
-@snoop('imporve_init_sol.txt')
+# @snoop('imporve_init_sol.txt')
 # Try to improve the initial solution
 def improve_initial_solution(solution, weights, profits):
     '''
