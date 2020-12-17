@@ -164,8 +164,8 @@ def calculate_total_profit(solution, profits):
 # ---------------------------------------------------------------------------------------
 # @ !Tip: Comment out line according on which problem you want to read data from !
 
-# capacity,weights,profits,solution_ohe = get_knap_data(cfile1,wfile1,pfile1,sfile1)
-capacity,weights,profits,solution_ohe = get_knap_data(cfile2,wfile2,pfile2,sfile2)
+capacity,weights,profits,solution_ohe = get_knap_data(cfile1,wfile1,pfile1,sfile1)
+# capacity,weights,profits,solution_ohe = get_knap_data(cfile2,wfile2,pfile2,sfile2)
 # capacity,weights,profits,solution_ohe = get_knap_data(cfile3,wfile3,pfile3,sfile3)
 
 # ----------------------------------------------------------------------------------------
