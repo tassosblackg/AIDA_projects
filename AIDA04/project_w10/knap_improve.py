@@ -179,10 +179,13 @@ print('\n----------------------------------------------------------\n')
 
 # Initial solution problem 1
 init_solution = init_heuristic_solutionW(capacity, weights)
-prof = calculate_total_profit(init_solution,profits)
+init_profit = calculate_total_profit(init_solution,profits)
 
 print('\nInit Simple Heuristic Solution = ',init_solution)
-print('\nInit Simple Heuristic Max Profit = ',prof)
-sol, nprofit = improve_initial_solution(init_solution, weights, profits)
-print('\nImproved Solution =\n',sol)
+print('\nInit Simple Heuristic Max Profit = ',init_profit)
+
+nsol, nprofit = improve_initial_solution(init_solution, weights, profits)
+print('\nImproved Solution =\n',nsol)
 print('\nNew max profit = ',nprofit)
+improvement_perc = improvement_perc(init_profit, nprofit)
+print('\nImprove initial solution based on maximum profit = ',improvement_perc,' %\n')
