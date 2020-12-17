@@ -118,6 +118,18 @@ def improve_initial_solution(solution, weights, profits):
     if(swap):
         items_in
 
+#Calculate improvement percentage
+def improvement_perc(old_profit, new_profit):
+    '''
+    Args:
+        -old_profit: profit of initial solution
+        -new_profit: profit of improvement solution
+
+    Returns:
+        a percentage of the value change
+    '''
+    return ((new_profit-old_profit)/old_profit * 100)
+
 
 # Calculate the profit based on a solution list
 def calculate_total_profit(solution, profits):
