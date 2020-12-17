@@ -139,7 +139,7 @@ def improvement_perc(old_profit, new_profit):
     Returns:
         a percentage of the value change
     '''
-    return ((new_profit-old_profit)/old_profit * 100)
+    return ( round((new_profit-old_profit)/old_profit * 100,2) )
 
 
 # Calculate the profit based on a solution list
