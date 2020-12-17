@@ -88,6 +88,9 @@ def improve_initial_solution(solution, weights, profits):
         - solution: a list whith ones and zeros --initial solution
         - weights: all weights per items list
         - profits: a list with profits per item
+    Returns:
+        - solution: New solution list if updated
+        - new_profit: new total profit of items in sack
     '''
     items_out, items_in, profits_in, profits_out = [], [], [], []
     for item_indx, s in enumerate(solution):
@@ -98,25 +101,33 @@ def improve_initial_solution(solution, weights, profits):
             items_in.append(item_indx)
             profits_in.append(profits[item_indx])
 
-    # from items that are out find the one with max profit and its index
-    item_out_maxp = max(profits_out)
-    item_indx_out = profits_out.index(item_out_maxp)
-    current_item_out = items_out[item_indx_out] # index of item in the initial items list of weights etc
-    swap = False
-    drop_i = -1
-    for item_indx in item_in:
-        if( (weights[item_indx] >= weights[current_item_out]) and (profits[item_indx]) < profits[current_item_out]):
-            # swap one item in/out
-            swap = True
-            drop_i = item_indx
-            solution[item_indx] = 0
-            solution[current_item_out] = 1
-            break
+    numOfitemsOut = len(items_out)
+    while(numOfitemsOut >0):
+        # from items that are out find the one with max profit and its index
+        item_out_maxp = max(profits_out)
+        item_indx_out = profits_out.index(item_out_maxp)
+        current_item_out = items_out[item_indx_out] # index of item in the initial items list of weights etc
+        swap = False
+        drop_i = -1
+        for i,item_indx in enumerate(item_in):
+            if( (weights[item_indx] >= weights[current_item_out]) and (profits[item_indx]) < profits[current_item_out]):
+                # swap one item in/out
+                swap = True
+                drop_i = i
+                solution[item_indx] = 0
+                solution[current_item_out] = 1
+                break
+        if(swap):
+            items_in[drop_i] = current_item_out
+            profits_in[drop_i] = profits_out[current_item_out]
+        # remove item from item_out list either fit or not, inside the bag
+        # after comparing it with all the others inside the bag
+        items_out.remove(current_item_out)
+        profits_out.remove(current_item_out)
+        numOfitemsOut = numOfitemsOut - 1
 
-    items_out.remove(current_item_out)
-    profits_out.remove(current_item_out)
-    if(swap):
-        items_in
+    return (solution,sum(profits_in))
+
 
 #Calculate improvement percentage
 def improvement_perc(old_profit, new_profit):
