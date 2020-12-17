@@ -1,7 +1,7 @@
 # COmpt Week 10
 # Improvement Heuristic for Initial Solution
 # author:@tassosblackg
-
+# from pysnooper import snoop
 # Problem Data 1
 cfile1 = 'knapsack_data/problem1/p01_c.txt' # capacity value
 pfile1 = 'knapsack_data/problem1/p01_p.txt' # profits values
@@ -80,6 +80,67 @@ def init_heuristic_solutionW(capacity, weights):
 
     return solution
 
+# @snoop('imporve_init_sol.txt')
+# Try to improve the initial solution
+def improve_initial_solution(solution, weights, profits):
+    '''
+    Args:
+        - solution: a list whith ones and zeros --initial solution
+        - weights: all weights per items list
+        - profits: a list with profits per item
+    Returns:
+        - solution: New solution list if updated
+        - new_profit: new total profit of items in sack
+    '''
+    items_out, items_in, profits_in, profits_out = [], [], [], []
+    for item_indx, s in enumerate(solution):
+        if (s==0):
+            items_out.append(item_indx)
+            profits_out.append(profits[item_indx])
+        else:
+            items_in.append(item_indx)
+            profits_in.append(profits[item_indx])
+
+    numOfitemsOut = len(items_out)
+    while(numOfitemsOut >0):
+        # from items that are out find the one with max profit and its index
+        item_out_maxp = max(profits_out)
+        item_indx_out = profits_out.index(item_out_maxp)
+        current_item_out = items_out[item_indx_out] # index of item in the initial items list of weights etc
+        swap = False
+        drop_i = -1
+        for i,item_indx in enumerate(items_in):
+            if( (weights[item_indx] >= weights[current_item_out]) and (profits[item_indx]) < profits[current_item_out]):
+                # swap one item in/out
+                swap = True
+                drop_i = i
+                solution[item_indx] = 0
+                solution[current_item_out] = 1
+                break
+        if(swap):
+            items_in[drop_i] = current_item_out
+            profits_in[drop_i] = profits[current_item_out]
+        # remove item from item_out list either fit or not, inside the bag
+        # after comparing it with all the others inside the bag
+        items_out.remove(items_out[item_indx_out])
+        profits_out.remove(profits_out[item_indx_out])
+        numOfitemsOut = numOfitemsOut - 1
+
+    return (solution,sum(profits_in))
+
+
+#Calculate improvement percentage
+def improvement_perc(old_profit, new_profit):
+    '''
+    Args:
+        -old_profit: profit of initial solution
+        -new_profit: profit of improvement solution
+
+    Returns:
+        a percentage of the value change
+    '''
+    return ( round((new_profit-old_profit)/old_profit * 100,2) )
+
 
 # Calculate the profit based on a solution list
 def calculate_total_profit(solution, profits):
@@ -117,8 +178,14 @@ print('\n----------------------------------------------------------\n')
 
 
 # Initial solution problem 1
-sol = init_heuristic_solutionW(capacity, weights)
-prof = calculate_total_profit(sol,profits)
+init_solution = init_heuristic_solutionW(capacity, weights)
+init_profit = calculate_total_profit(init_solution,profits)
 
-print('\nInit Simple Heuristic Solution = ',sol)
-print('\nInit Simple Heuristic Max Profit = ',prof)
+print('\nInit Simple Heuristic Solution = ',init_solution)
+print('\nInit Simple Heuristic Max Profit = ',init_profit)
+
+nsol, nprofit = improve_initial_solution(init_solution, weights, profits)
+print('\nImproved Solution =\n',nsol)
+print('\nNew max profit = ',nprofit)
+improvement_perc = improvement_perc(init_profit, nprofit)
+print('\nImprove initial solution based on maximum profit = ',improvement_perc,' %\n')
