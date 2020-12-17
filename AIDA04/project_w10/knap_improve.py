@@ -81,6 +81,17 @@ def init_heuristic_solutionW(capacity, weights):
     return solution
 
 
+# Try to improve the initial solution
+def improve_initial_solution(solution, weights, profits):
+    '''
+    Args:
+        - solution: a list whith ones and zeros --initial solution
+        - weights: all weights per items list
+        - profits: a list with profits per item
+    '''
+
+
+
 # Calculate the profit based on a solution list
 def calculate_total_profit(solution, profits):
     '''
