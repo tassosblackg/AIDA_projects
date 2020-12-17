@@ -1,7 +1,7 @@
 # COmpt Week 10
 # Improvement Heuristic for Initial Solution
 # author:@tassosblackg
-
+from pysnooper import snoop
 # Problem Data 1
 cfile1 = 'knapsack_data/problem1/p01_c.txt' # capacity value
 pfile1 = 'knapsack_data/problem1/p01_p.txt' # profits values
@@ -80,7 +80,7 @@ def init_heuristic_solutionW(capacity, weights):
 
     return solution
 
-
+# @snoop('imporve_init_sol')
 # Try to improve the initial solution
 def improve_initial_solution(solution, weights, profits):
     '''
@@ -109,7 +109,7 @@ def improve_initial_solution(solution, weights, profits):
         current_item_out = items_out[item_indx_out] # index of item in the initial items list of weights etc
         swap = False
         drop_i = -1
-        for i,item_indx in enumerate(item_in):
+        for i,item_indx in enumerate(items_in):
             if( (weights[item_indx] >= weights[current_item_out]) and (profits[item_indx]) < profits[current_item_out]):
                 # swap one item in/out
                 swap = True
@@ -178,8 +178,11 @@ print('\n----------------------------------------------------------\n')
 
 
 # Initial solution problem 1
-sol = init_heuristic_solutionW(capacity, weights)
-prof = calculate_total_profit(sol,profits)
+init_solution = init_heuristic_solutionW(capacity, weights)
+prof = calculate_total_profit(init_solution,profits)
 
-print('\nInit Simple Heuristic Solution = ',sol)
+print('\nInit Simple Heuristic Solution = ',init_solution)
 print('\nInit Simple Heuristic Max Profit = ',prof)
+sol, nprofit = improve_initial_solution(init_solution, weights, profits)
+print('\nImproved Solution =\n',sol)
+print('\nNew max profit = ',nprofit)
