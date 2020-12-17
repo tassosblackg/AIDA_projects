@@ -89,7 +89,34 @@ def improve_initial_solution(solution, weights, profits):
         - weights: all weights per items list
         - profits: a list with profits per item
     '''
+    items_out, items_in, profits_in, profits_out = [], [], [], []
+    for item_indx, s in enumerate(solution):
+        if (s==0):
+            items_out.append(item_indx)
+            profits_out.append(profits[item_indx])
+        else:
+            items_in.append(item_indx)
+            profits_in.append(profits[item_indx])
 
+    # from items that are out find the one with max profit and its index
+    item_out_maxp = max(profits_out)
+    item_indx_out = profits_out.index(item_out_maxp)
+    current_item_out = items_out[item_indx_out] # index of item in the initial items list of weights etc
+    swap = False
+    drop_i = -1
+    for item_indx in item_in:
+        if( (weights[item_indx] >= weights[current_item_out]) and (profits[item_indx]) < profits[current_item_out]):
+            # swap one item in/out
+            swap = True
+            drop_i = item_indx
+            solution[item_indx] = 0
+            solution[current_item_out] = 1
+            break
+
+    items_out.remove(current_item_out)
+    profits_out.remove(current_item_out)
+    if(swap):
+        items_in
 
 
 # Calculate the profit based on a solution list
