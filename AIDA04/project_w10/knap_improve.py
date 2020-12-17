@@ -80,7 +80,7 @@ def init_heuristic_solutionW(capacity, weights):
 
     return solution
 
-# @snoop('imporve_init_sol')
+@snoop('imporve_init_sol.txt')
 # Try to improve the initial solution
 def improve_initial_solution(solution, weights, profits):
     '''
@@ -119,7 +119,7 @@ def improve_initial_solution(solution, weights, profits):
                 break
         if(swap):
             items_in[drop_i] = current_item_out
-            profits_in[drop_i] = profits_out[current_item_out]
+            profits_in[drop_i] = profits[current_item_out]
         # remove item from item_out list either fit or not, inside the bag
         # after comparing it with all the others inside the bag
         items_out.remove(current_item_out)
