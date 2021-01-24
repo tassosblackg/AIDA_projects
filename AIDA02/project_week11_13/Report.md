@@ -20,9 +20,12 @@ The next step was to format the input for encoder, decoder and the output by usi
 
 The model has two modules the Encoder and the Decoder. The Encoder has an input layer where the questions are feed, then there is an embending layer followed by an **LSTM** module.
 
-As for the Decoder it has also the same layers as the encoder but furthermore it has one layer where the states of encoder are bypassing the pipeline and inserting the layer (more like a Residual architecture) and then finally there is a Dense layer  using softmax as activation function in order to define the probability of each output word to be in output sequence as answer.
+As for the Decoder it has also the same layers as the encoder but furthermore it has one layer where the states of encoder are bypassing the pipeline and inserting the layer (more like a Residual architecture) and then finally there is a *Dense*    layer  using *softmax* as activation function in order to define the probability of each output word to be in output sequence as answer.
 
--> Add model image with params
+-> Model Parameters:
+
+![Model params](images/model_params.png)
+
 
 
 ## Training Phase
@@ -30,15 +33,20 @@ As for the Decoder it has also the same layers as the encoder but furthermore it
 Synthesize model with stacked encoder and decoder using *Adam* optimizer and *categorical cross entropy* as loss function. The model trained only in a small part of data only 8000 (~1/20 of the whole dataset) with a batch_size=50, for 250 epochs. Inorder to feed the network with all dataset I have to load data in chunks and it would take much more time so I only use one small chunk.
 
 
--> Add Training Run image:
-
+-> Training Execution image:
+![Training](images/training_process.png)
 
 ## Chating
 
 
-### Useful Links:
+### Usefull Links:
+
+[Model inspirated](https://medium.com/predict/creating-a-chatbot-from-scratch-using-keras-and-tensorflow-59e8fc76be79)
+
+[Reading data Idea](https://github.com/eloukas/seq2seq-chatbot/blob/master/pytorch_seq2seq_chatbot.ipynb)
 
 
+-----------------------
 Tassos Karageorgiadis
 
 |January 2021|
