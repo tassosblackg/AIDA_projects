@@ -9,7 +9,7 @@ import pickle
 import pandas as pd
 import tensorflow as tf
 from tensorflow.keras import layers , activations , models , preprocessing,utils
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 # from gensim.models import Word2Vec
 
 # Data path / Files
@@ -237,12 +237,13 @@ model = tf.keras.models.Model([encoder_inputs, decoder_inputs], output )
 model.compile(optimizer=tf.keras.optimizers.Adam(), loss='categorical_crossentropy')
 
 model.summary() # summary of the model params,architecture
+# utils.plot_model(model) # model architecture
 
-# Train model
+#Train model
 model.fit([encoder_input_data , decoder_input_data], decoder_output_data, batch_size=50, epochs=150 )
-model.save( 'model8k1.h5' ) # save trained model
-
-loaded_model = load_model('model8k1.h5')
+# model.save( 'model8k1.h5' ) # save trained model
+#
+# model = load_model('model8k1.h5')
 enc_model , dec_model = make_inference_models()
 
 

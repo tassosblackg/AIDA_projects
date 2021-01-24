@@ -10,6 +10,8 @@ MSc Artificial Intelligence and Data Analytics, UOM
 ## Initial Step
 Reading data from metalWOz is a little problematic because the file is .txt format but inside looks like a .json but is not. So, I read the file as .txt line by line where each line treated like a json object. After read all data, I created a list of dictionaries objects, then the useful information of dictionaries was only the key's 'turns' values. The *key* **['turns']** has all the questions and answers sentences, which was pushed list in a all together (as they are inside dictionary). Then I have to split them in questions and answers by defining which was talking, for that I supposed that user start the conversation with a random *greeting* [e.g. 'Hi'] and closes with a random *closing* [e.g. 'Thanks','bye'], check ***read_metalWOzQA()*** function lines *57-97*. With this technic I managed to evenly split sentences in the two categories (questions and answers). At the end I saved them into pairs in a *.tsv* file format inorder to use them directly with *pandas* library and not repeat the whole process from start each time.
 
+![questions](images/tsv_column_q.png)
+
 ## Prepare Data for the model
 
 In this step after loading questions and answers data, I added some start and end tokens to each answer and I concatanated into ***question** followed by an **answer with tags***. Then I created the vocabulary by using the *Tokenizer* package of Tensorflow.
@@ -42,6 +44,12 @@ Synthesize model with stacked encoder and decoder using *Adam* optimizer and *ca
 ![Training](images/training_process.png)
 
 ## Chating
+Didn't manage to get a conversation started. Needed more time to debug and design inference and load model.
+
+## Background with chatbots:
+
+Here is a github repo [WatsonGreekDialog](https://github.com/AnonKour/watson_dialog) with my previous team using IBM Watson platform and a Nao Aldebaran robot.
+
 
 
 ### Usefull Links:
