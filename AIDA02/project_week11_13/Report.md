@@ -22,6 +22,11 @@ The model has two modules the Encoder and the Decoder. The Encoder has an input 
 
 As for the Decoder it has also the same layers as the encoder but furthermore it has one layer where the states of encoder are bypassing the pipeline and inserting the layer (more like a Residual architecture) and then finally there is a *Dense*    layer  using *softmax* as activation function in order to define the probability of each output word to be in output sequence as answer.
 
+-> Model Architecture Visualization:
+![Model graph](images/model_vis.png)
+
+
+
 -> Model Parameters:
 
 ![Model params](images/model_params.png)
