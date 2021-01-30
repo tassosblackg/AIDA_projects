@@ -1,0 +1,181 @@
+---
+title: "hw8"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Whisky Data read
+```{r read data}
+df = read.csv('whisky.csv')
+
+colnames(df)
+head(df)
+
+```
+Import all libraries
+```{r import libraries}
+library(leaflet)
+library(dplyr)
+library(Hmisc)
+library(rgdal)
+library(sf)
+library(maps)
+library(ggplot2)
+library(tidyverse)
+library(mlbench)
+library(caret)
+library('corrplot')
+```
+
+Get additional info per column/feature
+```{r descibe data}
+describe(df)
+```
+With descibe() we can see the range of values that each column has as we can see they get values from 0 - 4 except columns with Distillery, postcode and Lat/Long. We also can observe the frequency of appearence of every value for a column
+
+
+# Validate use of cordiantes
+```{r}
+validateCoords(df$Longitude,df$Latitude,funcName = addCircleMarkers(),warn=TRUE)
+```
+
+#About Longtitude latitude data
+
+They are in United Kingdom Coordinate System (EPSG 27700). Therefore, we need to transform them into World Coordinate System (WGS84 (EPSG4326)). So we have to convert the data first before print the map.
+
+```{r transform coordinate system}
+df$Longitude = as.numeric(df$Longitude)
+df$Latitude = as.numeric(df$Latitude)
+head(df)
+
+worldMap = map_data('world')
+whiskies.coord <- data.frame(df$Latitude, df$Longitude) # dataFrame with long lat columns
+
+coordinates(whiskies.coord) <- ~df.Latitude + df.Longitude # dataFrame converted to Spatial data
+proj4string(whiskies.coord) <- CRS("+init=epsg:27700")
+
+whiskies.coord <- spTransform(whiskies.coord, CRS("+init=epsg:4326"))
+
+whisky.map <- 
+
+  data.frame(Distillery = df$Distillery,
+
+             lat = whiskies.coord$df.Latitude,
+
+             long = whiskies.coord$df.Longitude)
+
+new.data = merge(df,whisky.map,by='Distillery') # merge old data with new converted lat/long columns
+
+whisky.map = whisky.map %>% rename(long=lat,lat=long) # swap variables to correct order
+```
+
+Create a Global Map show case with the distilleries (all based in Scotland)
+```{r Print Map Distillery Locations}
+pal <- colorNumeric(
+  palette = "YlGnBu",
+  domain = df$Tobacco
+)
+leaflet()%>%
+  addTiles()%>%
+    addCircleMarkers(data=whisky.map,  color = ~pal(df$Tobacco),
+                       fillOpacity = 1,
+                       stroke = F,label = whisky.map$Distillery,clusterOptions = markerClusterOptions())%>%
+  addLegend("bottomright",pal = pal,values = df$Tobacco,title = "Tobacco Flavor Whiskies",opacity = 1)
+
+
+```
+In the above map we can see the clustered Ditilleries with wiskies that have a specific amount of 'Tobacco' flavour. We can use other types of flavors too.
+
+
+```{r plots}
+plot1 <- ggplot(df, aes(y=Body,x=Distillery)) + 
+  geom_boxplot(outlier.colour="red", outlier.shape=16,
+             outlier.size=2, notch=FALSE)+
+  geom_jitter(width=0.15)+
+  theme(axis.text.x = element_text(angle = 90,hjust =1,vjust=1,color = 'orange',margin = margin(t = .3, r =1, unit = "cm")))
+
+plot1
+```
+Whiskies 'Body' strength per Distillery is shown on the above plot.
+
+
+
+```{r plots2}
+plot2 <- ggplot(new.data, aes(y=Spicy,x=Longitude,group=1)) + 
+  geom_boxplot(outlier.colour="red", outlier.shape=16,
+               outlier.size=2, notch=FALSE)+
+  geom_jitter(width=0.15)+
+  theme(axis.text.x = element_text(angle = 90,hjust =1,vjust=1,color = 'orange',margin = margin(t = .3, r =1, unit = "cm")))
+plot2
+
+```
+Where 'Spicier' (stronger 'Spicy' flavour of wisky) based on Longitude are sailed in Distilleries around this area. We see that Distilleries based in a geographic Longitude between 8*(10^5) <-> 9*(10^5) in United Kingdom Coordinate System (EPSG 27700).
+
+
+
+
+Categorical Variables mosaic plot
+```{r mosaic plot1}
+library(ggmosaic)
+ggplot(data = df) +
+     geom_mosaic(aes(weight = Body, x = product(Malty), fill=factor(Smoky)), na.rm=TRUE, divider=mosaic("v")) +  labs(x = "Is Malty ? ",y='Body strength', title='f(Body Strength Malty |Smoky)')
+```
+Wiskies Body strength by Malty strength and Smoky flavours.
+
+```{r scatter}
+scatter2 <- ggplot(df,aes(x=Fruity,y=Floral))+geom_jitter()
+
+scatter2 +
+  labs(x = "Fruity taste", y = "Floral ") +
+  ggtitle("How flavors are connected?")
+
+```
+
+Fruity & Honey Mosaic
+```{r mosaicFH}
+
+ggplot(df, aes(x = Fruity, y = Honey)) +
+    geom_raster(aes(fill = Malty))+
+  labs(x = "Fruity taste", y = "Honey ") +
+  ggtitle("How Malty can be if?")
+```
+
+
+
+
+
+```{r Tobacco distilleries}
+ggplot(df, 
+       aes(x = Distillery, 
+           fill = Tobacco)) + 
+  geom_bar(position = "stack")+
+  theme(axis.text.x = element_text(angle = 90,hjust =1,vjust=1,color = 'orange',margin = margin(t = .3, r =1, unit = "cm")))
+
+```
+
+smoky and Medicinal
+```{r smokyMedicinal}
+ggplot(df, 
+       aes(x = Smoky, 
+           y = Medicinal)) +
+  geom_point(color= "steelblue") +
+  geom_smooth(method = "lm", 
+              formula = y ~ poly(x, 2), 
+              color = "indianred3")
+```
+
+
+Nutty Fruity Malty
+```{r nuttymalty}
+ggplot(df, aes(x = Nutty, 
+                     y = Fruity, 
+                     color=Malty)) +
+  geom_point() +
+  labs(title = "Whisky Nutty flavor by Malty and Fruity ")
+```
+
+
+
