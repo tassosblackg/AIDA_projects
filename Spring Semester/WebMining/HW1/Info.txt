@@ -1,0 +1,9 @@
+Code executed in jupiter notebook the results are shown inside *hw1.pdf file
+
+About the part of calculating avg_degree_coef and transitivity the Graph for Erdos-Renyi was taking
+too much time to executed so I stop it.
+
+There are some issues with exp binning
+
+the .py file contains only the Code
+the .ipynb is the notebook from where the pdf extracted
