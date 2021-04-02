@@ -1,2 +1,0 @@
-
-## Probabilistic Modeling Course

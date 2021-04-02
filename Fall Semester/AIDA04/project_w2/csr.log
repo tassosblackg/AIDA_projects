@@ -1,0 +1,151 @@
+Source path:... handle_sp_matrices.py
+Starting var:.. A = [[0.0, 1.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0,..., 0.0, 0.0, 1.0], [4.5, 0.0, 0.0, 0.0, 0.0, 0.0]]
+16:37:51.523885 call        26 def sp2csr(A):
+16:37:51.524775 line        27     Anz,IA,JA =[],[],[]
+New var:....... Anz = []
+New var:....... IA = []
+New var:....... JA = []
+16:37:51.525074 line        28     IA.append(0)
+Modified var:.. IA = [0]
+16:37:51.525509 line        29     nnz=0
+New var:....... nnz = 0
+16:37:51.525767 line        31     for i in range(len(A)):
+New var:....... i = 0
+16:37:51.526050 line        32         for j in range(len(A[i])):
+New var:....... j = 0
+16:37:51.526339 line        33             if A[i][j] != 0 :
+16:37:51.526734 line        32         for j in range(len(A[i])):
+Modified var:.. j = 1
+16:37:51.526924 line        33             if A[i][j] != 0 :
+16:37:51.527185 line        34                 nnz = nnz+1 # increase number of non-zeros values
+Modified var:.. nnz = 1
+16:37:51.527358 line        35                 Anz.append(A[i][j])
+Modified var:.. Anz = [1.0]
+16:37:51.527601 line        36                 JA.append(j) # append column indx
+Modified var:.. JA = [1]
+16:37:51.527902 line        32         for j in range(len(A[i])):
+Modified var:.. j = 2
+16:37:51.528256 line        33             if A[i][j] != 0 :
+16:37:51.528509 line        32         for j in range(len(A[i])):
+Modified var:.. j = 3
+16:37:51.528678 line        33             if A[i][j] != 0 :
+16:37:51.528947 line        32         for j in range(len(A[i])):
+Modified var:.. j = 4
+16:37:51.529165 line        33             if A[i][j] != 0 :
+16:37:51.529432 line        32         for j in range(len(A[i])):
+Modified var:.. j = 5
+16:37:51.529954 line        33             if A[i][j] != 0 :
+16:37:51.530242 line        32         for j in range(len(A[i])):
+16:37:51.530411 line        37         IA.append(nnz)
+Modified var:.. IA = [0, 1]
+16:37:51.530577 line        31     for i in range(len(A)):
+Modified var:.. i = 1
+16:37:51.530825 line        32         for j in range(len(A[i])):
+Modified var:.. j = 0
+16:37:51.531071 line        33             if A[i][j] != 0 :
+16:37:51.531312 line        32         for j in range(len(A[i])):
+Modified var:.. j = 1
+16:37:51.531479 line        33             if A[i][j] != 0 :
+16:37:51.531714 line        32         for j in range(len(A[i])):
+Modified var:.. j = 2
+16:37:51.531880 line        33             if A[i][j] != 0 :
+16:37:51.532117 line        32         for j in range(len(A[i])):
+Modified var:.. j = 3
+16:37:51.532282 line        33             if A[i][j] != 0 :
+16:37:51.532517 line        34                 nnz = nnz+1 # increase number of non-zeros values
+Modified var:.. nnz = 2
+16:37:51.532685 line        35                 Anz.append(A[i][j])
+Modified var:.. Anz = [1.0, 3.2]
+16:37:51.532921 line        36                 JA.append(j) # append column indx
+Modified var:.. JA = [1, 3]
+16:37:51.533156 line        32         for j in range(len(A[i])):
+Modified var:.. j = 4
+16:37:51.533389 line        33             if A[i][j] != 0 :
+16:37:51.533626 line        32         for j in range(len(A[i])):
+Modified var:.. j = 5
+16:37:51.533789 line        33             if A[i][j] != 0 :
+16:37:51.534050 line        32         for j in range(len(A[i])):
+16:37:51.534219 line        37         IA.append(nnz)
+Modified var:.. IA = [0, 1, 2]
+16:37:51.534382 line        31     for i in range(len(A)):
+Modified var:.. i = 2
+16:37:51.534618 line        32         for j in range(len(A[i])):
+Modified var:.. j = 0
+16:37:51.534859 line        33             if A[i][j] != 0 :
+16:37:51.535096 line        32         for j in range(len(A[i])):
+Modified var:.. j = 1
+16:37:51.535266 line        33             if A[i][j] != 0 :
+16:37:51.535504 line        34                 nnz = nnz+1 # increase number of non-zeros values
+Modified var:.. nnz = 3
+16:37:51.535673 line        35                 Anz.append(A[i][j])
+Modified var:.. Anz = [1.0, 3.2, 2.0]
+16:37:51.536040 line        36                 JA.append(j) # append column indx
+Modified var:.. JA = [1, 3, 1]
+16:37:51.536413 line        32         for j in range(len(A[i])):
+Modified var:.. j = 2
+16:37:51.536673 line        33             if A[i][j] != 0 :
+16:37:51.536921 line        34                 nnz = nnz+1 # increase number of non-zeros values
+Modified var:.. nnz = 4
+16:37:51.537088 line        35                 Anz.append(A[i][j])
+Modified var:.. Anz = [1.0, 3.2, 2.0, 1.0]
+16:37:51.537322 line        36                 JA.append(j) # append column indx
+Modified var:.. JA = [1, 3, 1, 2]
+16:37:51.537559 line        32         for j in range(len(A[i])):
+Modified var:.. j = 3
+16:37:51.537798 line        33             if A[i][j] != 0 :
+16:37:51.538052 line        32         for j in range(len(A[i])):
+Modified var:.. j = 4
+16:37:51.538214 line        33             if A[i][j] != 0 :
+16:37:51.538446 line        32         for j in range(len(A[i])):
+Modified var:.. j = 5
+16:37:51.538609 line        33             if A[i][j] != 0 :
+16:37:51.538845 line        34                 nnz = nnz+1 # increase number of non-zeros values
+Modified var:.. nnz = 5
+16:37:51.539007 line        35                 Anz.append(A[i][j])
+Modified var:.. Anz = [1.0, 3.2, 2.0, 1.0, 1.0]
+16:37:51.539241 line        36                 JA.append(j) # append column indx
+Modified var:.. JA = [1, 3, 1, 2, 5]
+16:37:51.539483 line        32         for j in range(len(A[i])):
+16:37:51.539721 line        37         IA.append(nnz)
+Modified var:.. IA = [0, 1, 2, 5]
+16:37:51.539888 line        31     for i in range(len(A)):
+Modified var:.. i = 3
+16:37:51.549957 line        32         for j in range(len(A[i])):
+Modified var:.. j = 0
+16:37:51.550450 line        33             if A[i][j] != 0 :
+16:37:51.550832 line        34                 nnz = nnz+1 # increase number of non-zeros values
+Modified var:.. nnz = 6
+16:37:51.551319 line        35                 Anz.append(A[i][j])
+
+-> Modified var:.. Anz = [1.0, 3.2, 2.0, 1.0, 1.0, 4.5]
+16:37:51.552561 line        36                 JA.append(j) # append column indx
+
+->  Modified var:.. JA = [1, 3, 1, 2, 5, 0]
+
+16:37:51.552970 line        32         for j in range(len(A[i])):
+Modified var:.. j = 1
+16:37:51.553318 line        33             if A[i][j] != 0 :
+16:37:51.553713 line        32         for j in range(len(A[i])):
+Modified var:.. j = 2
+16:37:51.554004 line        33             if A[i][j] != 0 :
+16:37:51.554288 line        32         for j in range(len(A[i])):
+Modified var:.. j = 3
+16:37:51.554465 line        33             if A[i][j] != 0 :
+16:37:51.554709 line        32         for j in range(len(A[i])):
+Modified var:.. j = 4
+16:37:51.554877 line        33             if A[i][j] != 0 :
+16:37:51.555119 line        32         for j in range(len(A[i])):
+Modified var:.. j = 5
+16:37:51.555286 line        33             if A[i][j] != 0 :
+16:37:51.555522 line        32         for j in range(len(A[i])):
+16:37:51.555688 line        37         IA.append(nnz)
+
+-> Modified var:.. IA = [0, 1, 2, 5, 6]
+
+16:37:51.555851 line        31     for i in range(len(A)):
+16:37:51.556057 line        40     return(Anz,JA,IA)
+16:37:51.556203 return      40     return(Anz,JA,IA)
+
+ -> Return value:.. ([1.0, 3.2, 2.0, 1.0, 1.0, 4.5], [1, 3, 1, 2, 5, 0], [0, 1, 2, 5, 6])
+
+Elapsed time: 00:00:00.032582

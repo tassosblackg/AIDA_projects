@@ -1,0 +1,4 @@
+if( !is.na(Petal.Width) & Petal.Width < 0){
+
+	Petal.Width <- NA
+}

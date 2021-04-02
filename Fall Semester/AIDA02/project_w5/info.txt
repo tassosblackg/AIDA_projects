@@ -1,0 +1,11 @@
+Jupiter notebook Mnist : https://colab.research.google.com/drive/1MqouTl4fUJnIdc8tmU47fBYJ3wkQ5ofz?usp=sharing
+
+Jupiter notebook Fashion_Mnist : https://colab.research.google.com/drive/1bwypElmqRhvBaluftSe8PdKvM1VZ0fPs?usp=sharing
+
+Mnist file : *w5a.py
+
+FashionMnist file : *w5b.py
+
+
+Benchmark and Test using mnist datasets for MLP architectures, introduction to ML
+

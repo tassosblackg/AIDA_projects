@@ -1,0 +1,275 @@
+Source path:... handle_sp_matrices.py
+Starting var:.. file_name = 'mat.txt'
+16:21:49.977760 call         9 def read_matrix(file_name):
+16:21:49.978332 line        10     with open(file_name, mode='r') as f:
+New var:....... f = <_io.TextIOWrapper name='mat.txt' mode='r' encoding='UTF-8'>
+16:21:49.978533 line        11         for l in f :
+New var:....... l = 'Alpha =\n'
+16:21:49.978762 line        12             if l :
+16:21:49.978960 line        13                 tmp_l = l.strip().split()
+New var:....... tmp_l = ['Alpha', '=']
+16:21:49.979096 line        14                 if tmp_l[1] == '=':
+16:21:49.979287 line        15                     sp_name = tmp_l[0] # get the name of array
+New var:....... sp_name = 'Alpha'
+16:21:49.979418 line        11         for l in f :
+Modified var:.. l = '[\n'
+16:21:49.979606 line        12             if l :
+16:21:49.979792 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['[']
+16:21:49.979924 line        14                 if tmp_l[1] == '=':
+16:21:49.980107 exception   14                 if tmp_l[1] == '=':
+Exception:..... IndexError: list index out of range
+Call ended by exception
+Elapsed time: 00:00:00.002783
+
+
+Source path:... handle_sp_matrices.py
+Starting var:.. file_name = 'mat.txt'
+16:24:11.750354 call         9 def read_matrix(file_name):
+16:24:11.750912 line        10     with open(file_name, mode='r') as f:
+New var:....... f = <_io.TextIOWrapper name='mat.txt' mode='r' encoding='UTF-8'>
+16:24:11.751112 line        11         for l in f :
+New var:....... l = 'Alpha =\n'
+16:24:11.751567 line        12             if l :
+16:24:11.751799 line        13                 tmp_l = l.strip().split()
+New var:....... tmp_l = ['Alpha', '=']
+16:24:11.751939 line        14                 if tmp_l.pop() == '=': # pop last element
+Modified var:.. tmp_l = ['Alpha']
+16:24:11.752135 line        15                     sp_name = tmp_l[0] # get the name of array
+New var:....... sp_name = 'Alpha'
+16:24:11.752332 line        11         for l in f :
+Modified var:.. l = '[\n'
+16:24:11.752529 line        12             if l :
+16:24:11.752721 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['[']
+16:24:11.752850 line        14                 if tmp_l.pop() == '=': # pop last element
+Modified var:.. tmp_l = []
+16:24:11.753039 line        16                 elif tmp_l[0] == '[': # start of array entries
+16:24:11.753225 exception   16                 elif tmp_l[0] == '[': # start of array entries
+Exception:..... IndexError: list index out of range
+Call ended by exception
+Elapsed time: 00:00:00.003330
+
+Source path:... handle_sp_matrices.py
+Starting var:.. file_name = 'mat.txt'
+16:27:52.924992 call         9 def read_matrix(file_name):
+16:27:52.925507 line        10     with open(file_name, mode='r') as f:
+New var:....... f = <_io.TextIOWrapper name='mat.txt' mode='r' encoding='UTF-8'>
+16:27:52.925714 line        11         for l in f :
+New var:....... l = 'Alpha =\n'
+16:27:52.926186 line        12             if l :
+16:27:52.926409 line        13                 tmp_l = l.strip().split()
+New var:....... tmp_l = ['Alpha', '=']
+16:27:52.926548 line        14                 tmp_lp = tmp_l
+New var:....... tmp_lp = ['Alpha', '=']
+16:27:52.926743 line        15                 if tmp_lp.pop() == '=': # pop last element
+Modified var:.. tmp_l = ['Alpha']
+Modified var:.. tmp_lp = ['Alpha']
+16:27:52.926944 line        16                     sp_name = tmp_l[0] # get the name of array
+New var:....... sp_name = 'Alpha'
+16:27:52.927198 line        11         for l in f :
+Modified var:.. l = '[\n'
+16:27:52.927392 line        12             if l :
+16:27:52.927582 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['[']
+16:27:52.927717 line        14                 tmp_lp = tmp_l
+Modified var:.. tmp_lp = ['[']
+16:27:52.927904 line        15                 if tmp_lp.pop() == '=': # pop last element
+Modified var:.. tmp_l = []
+Modified var:.. tmp_lp = []
+16:27:52.928092 line        17                 elif tmp_l[0] == '[': # start of array entries
+16:27:52.928367 exception   17                 elif tmp_l[0] == '[': # start of array entries
+Exception:..... IndexError: list index out of range
+Call ended by exception
+Elapsed time: 00:00:00.003830
+
+Source path:... handle_sp_matrices.py
+Starting var:.. file_name = 'mat.txt'
+16:33:19.750356 call         9 def read_matrix(file_name):
+16:33:19.750849 line        10     with open(file_name, mode='r') as f:
+New var:....... f = <_io.TextIOWrapper name='mat.txt' mode='r' encoding='UTF-8'>
+16:33:19.751048 line        11         for l in f :
+New var:....... l = 'Alpha =\n'
+16:33:19.751280 line        12             if l :
+16:33:19.751595 line        13                 tmp_l = l.strip().split()
+New var:....... tmp_l = ['Alpha', '=']
+16:33:19.751758 line        14                 if '=' in tmp_l: # pop last element
+16:33:19.751963 line        15                     sp_name = tmp_l[0] # get the name of array
+New var:....... sp_name = 'Alpha'
+16:33:19.752105 line        11         for l in f :
+Modified var:.. l = '[\n'
+16:33:19.752306 line        12             if l :
+16:33:19.752500 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['[']
+16:33:19.752631 line        14                 if '=' in tmp_l: # pop last element
+16:33:19.752819 line        16                 elif '[' in tmp_l: # start of array entries
+16:33:19.752951 line        17                     pass
+16:33:19.753079 line        11         for l in f :
+Modified var:.. l = '            0  1  0   0   0    0\n'
+16:33:19.753211 line        12             if l :
+16:33:19.753407 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['0', '1', '0', '0', '0', '0']
+16:33:19.753545 line        14                 if '=' in tmp_l: # pop last element
+16:33:19.753739 line        16                 elif '[' in tmp_l: # start of array entries
+16:33:19.753874 line        18                 elif  ']' in tmp_l: #close bracket stop reading
+16:33:19.754031 line        21                     A = list(map(float,tmp_l)) # convert list of chars -> map of floats ->list of floats
+New var:....... A = [0.0, 1.0, 0.0, 0.0, 0.0, 0.0]
+16:33:19.754181 line        11         for l in f :
+Modified var:.. l = '            0  0  0  3.2  0    0\n'
+16:33:19.754412 line        12             if l :
+16:33:19.754620 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['0', '0', '0', '3.2', '0', '0']
+16:33:19.754767 line        14                 if '=' in tmp_l: # pop last element
+16:33:19.754973 line        16                 elif '[' in tmp_l: # start of array entries
+16:33:19.755112 line        18                 elif  ']' in tmp_l: #close bracket stop reading
+16:33:19.755250 line        21                     A = list(map(float,tmp_l)) # convert list of chars -> map of floats ->list of floats
+Modified var:.. A = [0.0, 0.0, 0.0, 3.2, 0.0, 0.0]
+16:33:19.755397 line        11         for l in f :
+Modified var:.. l = '            0  2  1   0   0    1\n'
+16:33:19.755605 line        12             if l :
+16:33:19.755810 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['0', '2', '1', '0', '0', '1']
+16:33:19.755957 line        14                 if '=' in tmp_l: # pop last element
+16:33:19.756164 line        16                 elif '[' in tmp_l: # start of array entries
+16:33:19.756302 line        18                 elif  ']' in tmp_l: #close bracket stop reading
+16:33:19.756442 line        21                     A = list(map(float,tmp_l)) # convert list of chars -> map of floats ->list of floats
+Modified var:.. A = [0.0, 2.0, 1.0, 0.0, 0.0, 1.0]
+16:33:19.756591 line        11         for l in f :
+Modified var:.. l = '            4.5 0 0   0   0    0\n'
+16:33:19.756792 line        12             if l :
+16:33:19.756991 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['4.5', '0', '0', '0', '0', '0']
+16:33:19.757129 line        14                 if '=' in tmp_l: # pop last element
+16:33:19.757324 line        16                 elif '[' in tmp_l: # start of array entries
+16:33:19.757477 line        18                 elif  ']' in tmp_l: #close bracket stop reading
+16:33:19.757615 line        21                     A = list(map(float,tmp_l)) # convert list of chars -> map of floats ->list of floats
+Modified var:.. A = [4.5, 0.0, 0.0, 0.0, 0.0, 0.0]
+16:33:19.757756 line        11         for l in f :
+Modified var:.. l = ']\n'
+16:33:19.757974 line        12             if l :
+16:33:19.758172 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = [']']
+16:33:19.758311 line        14                 if '=' in tmp_l: # pop last element
+16:33:19.758584 line        16                 elif '[' in tmp_l: # start of array entries
+16:33:19.758887 line        18                 elif  ']' in tmp_l: #close bracket stop reading
+16:33:19.759029 line        19                     pass
+16:33:19.759168 line        11         for l in f :
+16:33:19.759341 line        22     return A
+16:33:19.759486 return      22     return A
+Return value:.. [4.5, 0.0, 0.0, 0.0, 0.0, 0.0]
+Elapsed time: 00:00:00.009382
+
+
+Source path:... handle_sp_matrices.py
+Starting var:.. file_name = 'mat.txt'
+16:34:12.508659 call         9 def read_matrix(file_name):
+16:34:12.509195 line        10     with open(file_name, mode='r') as f:
+New var:....... f = <_io.TextIOWrapper name='mat.txt' mode='r' encoding='UTF-8'>
+16:34:12.509588 line        11         for l in f :
+New var:....... l = 'Alpha =\n'
+16:34:12.509862 line        12             if l :
+16:34:12.510095 line        13                 tmp_l = l.strip().split()
+New var:....... tmp_l = ['Alpha', '=']
+16:34:12.510237 line        14                 if '=' in tmp_l: # pop last element
+16:34:12.510437 line        15                     sp_name = tmp_l[0] # get the name of array
+New var:....... sp_name = 'Alpha'
+16:34:12.510578 line        11         for l in f :
+Modified var:.. l = '[\n'
+16:34:12.510773 line        12             if l :
+16:34:12.510957 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['[']
+16:34:12.511090 line        14                 if '=' in tmp_l: # pop last element
+16:34:12.511279 line        16                 elif '[' in tmp_l: # start of array entries
+16:34:12.511409 line        17                     pass
+16:34:12.511542 line        11         for l in f :
+Modified var:.. l = '            0  1  0   0   0    0\n'
+16:34:12.511707 line        12             if l :
+16:34:12.511903 line        13                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['0', '1', '0', '0', '0', '0']
+16:34:12.512038 line        14                 if '=' in tmp_l: # pop last element
+16:34:12.512237 line        16                 elif '[' in tmp_l: # start of array entries
+16:34:12.512373 line        18                 elif  ']' in tmp_l: #close bracket stop reading
+16:34:12.512506 line        21                     A.append(list(map(float,tmp_l))) # convert list of chars -> map of floats ->list of floats
+16:34:12.512644 exception   21                     A.append(list(map(float,tmp_l))) # convert list of chars -> map of floats ->list of floats
+Exception:..... NameError: name 'A' is not defined
+Call ended by exception
+Elapsed time: 00:00:00.004444
+
+
+Source path:... handle_sp_matrices.py
+Starting var:.. file_name = 'mat.txt'
+16:34:25.790770 call         9 def read_matrix(file_name):
+16:34:25.803037 line        10     A = []
+New var:....... A = []
+16:34:25.803665 line        11     with open(file_name, mode='r') as f:
+New var:....... f = <_io.TextIOWrapper name='mat.txt' mode='r' encoding='UTF-8'>
+16:34:25.804182 line        12         for l in f :
+New var:....... l = 'Alpha =\n'
+16:34:25.804522 line        13             if l :
+16:34:25.804762 line        14                 tmp_l = l.strip().split()
+New var:....... tmp_l = ['Alpha', '=']
+16:34:25.804916 line        15                 if '=' in tmp_l: # pop last element
+16:34:25.805144 line        16                     sp_name = tmp_l[0] # get the name of array
+New var:....... sp_name = 'Alpha'
+16:34:25.805302 line        12         for l in f :
+Modified var:.. l = '[\n'
+16:34:25.805527 line        13             if l :
+16:34:25.805774 line        14                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['[']
+16:34:25.805954 line        15                 if '=' in tmp_l: # pop last element
+16:34:25.806182 line        17                 elif '[' in tmp_l: # start of array entries
+16:34:25.806328 line        18                     pass
+16:34:25.806469 line        12         for l in f :
+Modified var:.. l = '            0  1  0   0   0    0\n'
+16:34:25.806613 line        13             if l :
+16:34:25.806827 line        14                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['0', '1', '0', '0', '0', '0']
+16:34:25.806976 line        15                 if '=' in tmp_l: # pop last element
+16:34:25.807195 line        17                 elif '[' in tmp_l: # start of array entries
+16:34:25.807342 line        19                 elif  ']' in tmp_l: #close bracket stop reading
+16:34:25.807815 line        22                     A.append(list(map(float,tmp_l))) # convert list of chars -> map of floats ->list of floats
+Modified var:.. A = [[0.0, 1.0, 0.0, 0.0, 0.0, 0.0]]
+16:34:25.807997 line        12         for l in f :
+Modified var:.. l = '            0  0  0  3.2  0    0\n'
+16:34:25.809683 line        13             if l :
+16:34:25.810005 line        14                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['0', '0', '0', '3.2', '0', '0']
+16:34:25.810181 line        15                 if '=' in tmp_l: # pop last element
+16:34:25.811050 line        17                 elif '[' in tmp_l: # start of array entries
+16:34:25.812557 line        19                 elif  ']' in tmp_l: #close bracket stop reading
+16:34:25.812926 line        22                     A.append(list(map(float,tmp_l))) # convert list of chars -> map of floats ->list of floats
+Modified var:.. A = [[0.0, 1.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 3.2, 0.0, 0.0]]
+16:34:25.813170 line        12         for l in f :
+Modified var:.. l = '            0  2  1   0   0    1\n'
+16:34:25.813444 line        13             if l :
+16:34:25.813846 line        14                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['0', '2', '1', '0', '0', '1']
+16:34:25.815180 line        15                 if '=' in tmp_l: # pop last element
+16:34:25.815547 line        17                 elif '[' in tmp_l: # start of array entries
+16:34:25.815723 line        19                 elif  ']' in tmp_l: #close bracket stop reading
+16:34:25.815890 line        22                     A.append(list(map(float,tmp_l))) # convert list of chars -> map of floats ->list of floats
+Modified var:.. A = [[0.0, 1.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 3.2, 0.0, 0.0], [0.0, 2.0, 1.0, 0.0, 0.0, 1.0]]
+16:34:25.816114 line        12         for l in f :
+Modified var:.. l = '            4.5 0 0   0   0    0\n'
+16:34:25.816737 line        13             if l :
+16:34:25.817965 line        14                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = ['4.5', '0', '0', '0', '0', '0']
+16:34:25.818156 line        15                 if '=' in tmp_l: # pop last element
+16:34:25.818567 line        17                 elif '[' in tmp_l: # start of array entries
+16:34:25.818726 line        19                 elif  ']' in tmp_l: #close bracket stop reading
+16:34:25.818874 line        22                     A.append(list(map(float,tmp_l))) # convert list of chars -> map of floats ->list of floats
+Modified var:.. A = [[0.0, 1.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0,..., 0.0, 0.0, 1.0], [4.5, 0.0, 0.0, 0.0, 0.0, 0.0]]
+16:34:25.819027 line        12         for l in f :
+Modified var:.. l = ']\n'
+16:34:25.819240 line        13             if l :
+16:34:25.819446 line        14                 tmp_l = l.strip().split()
+Modified var:.. tmp_l = [']']
+16:34:25.819594 line        15                 if '=' in tmp_l: # pop last element
+16:34:25.819802 line        17                 elif '[' in tmp_l: # start of array entries
+16:34:25.819948 line        19                 elif  ']' in tmp_l: #close bracket stop reading
+16:34:25.820095 line        20                     pass
+16:34:25.820259 line        12         for l in f :
+16:34:25.820436 line        23     return A
+16:34:25.820578 return      23     return A
+Return value:.. [[0.0, 1.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0,..., 0.0, 0.0, 1.0], [4.5, 0.0, 0.0, 0.0, 0.0, 0.0]]
+Elapsed time: 00:00:00.030083
