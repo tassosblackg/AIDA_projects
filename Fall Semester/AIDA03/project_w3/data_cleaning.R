@@ -2,10 +2,12 @@
 #------------------------------ |Askhsh 3.1|------------------------------------------------------------
 df <- read.csv("~/projects/AIDA_projects/AIDA03/project_w3/dirty_iris.csv",stringsAsFactors=FALSE)
 head(df)
+
 # check percentage of missing values per column
 pMiss = function(x){sum(is.na(x))/length(x)*100}
 apply(df,2,pMiss)
 apply(df, 1, pMiss)
+
 # Find missing values in R
 ok <-complete.cases(df)
 ok
