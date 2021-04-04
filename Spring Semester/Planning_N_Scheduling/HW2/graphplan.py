@@ -52,8 +52,24 @@ fact_space,action_space = [],[]
 
 # 'at' combinations
 fact_counter = 1
-for obj in objects.items():
-    for place in places.items():
-        new_fact = Fact(fact_counter,'at',[ obj[1], place[1] ])
-        fact_space.append(new_fact)
-        fact_counter += 1 # increase counter of id
+for t in facts_types.items():
+    # 'at'
+    if (t[1]==1):
+        for obj in objects.items():
+            for place in places.items():
+                at_fact = Fact(fact_counter,t[0],[ obj[1], place[1] ])
+                fact_space.append(at_fact)
+                fact_counter += 1 # increase counter of id
+    # 'on'
+    elif (t[1]==2):
+        for obj in objects.items():
+            if ('crate' in obj[0] ):
+                for obj2 in objects.items():
+                    if( 'pallet' in obj2[0]):
+                        on_fact = Fact(fact_counter,t[0],[ obj[1],obj2[1] ])
+                        fact_space.append(on_fact)
+                        fact_counter += 1 # increase counter of id
+
+print(len(fact_space))
+for i in fact_space:
+    print(i.id,i.type,i.obj_id)
