@@ -4,25 +4,31 @@
 # github:@tassosblackg
 
 
-class FactNode():
+class Fact():
 
     def __init__(self,counter,type,objectsL):
         self.id = counter
         self.type = type
         self.obj_id = objectsL
-        self.leftSibling = []
-        self.rightSibling = []
 
-class ActionNode():
-    def __init__(self):
-        self.name = ""
-
-        self.leftSibling = []
-        self.rightSibling = []
 
 class Action():
 
-    def __init__(self,name):
-        self.name = name
+    def __init__(self,counter):
+        self.id = counter
+        self.params = []
         self.precond = []
-        self.effects = []
+        self.pos_eff = []
+        self.neg_eff = []
+
+
+# Graphplan Algo Components are part of a Linked-List
+class ActionNode(Action):
+    def __init__(self):
+        self.leftSibling = []
+        self.rightSibling = []
+
+class FactNode(Fact):
+    def __init__(self):
+        self.leftSibling = []
+        self.rightSibling = []
