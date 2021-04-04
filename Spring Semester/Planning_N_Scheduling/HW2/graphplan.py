@@ -54,14 +54,14 @@ fact_space,action_space = [],[]
 fact_counter = 1
 for t in facts_types.items():
     # 'at'
-    if (t[1]==1):
+    if ( t[1] == 1 ):
         for obj in objects.items():
             for place in places.items():
                 at_fact = Fact(fact_counter,t[0],[ obj[1], place[1] ])
                 fact_space.append(at_fact)
                 fact_counter += 1 # increase counter of id
     # 'on'
-    elif (t[1]==2):
+    elif ( t[1] == 2 ):
         for obj in objects.items():
             if ('crate' in obj[0] ):
                 for obj2 in objects.items():
@@ -69,7 +69,42 @@ for t in facts_types.items():
                         on_fact = Fact(fact_counter,t[0],[ obj[1],obj2[1] ])
                         fact_space.append(on_fact)
                         fact_counter += 1 # increase counter of id
+    # 'in'
+    elif ( t[1] == 3 ):
+            for obj in objects.items():
+                if ('crate' in obj[0] ):
+                    for obj2 in objects.items():
+                        if( 'truck' in obj2[0]):
+                            in_fact = Fact(fact_counter,t[0],[ obj[1],obj2[1] ])
+                            fact_space.append(in_fact)
+                            fact_counter += 1 # increase counter of id
+    # 'lifting'
+    elif ( t[1] == 4 ):
+        for obj in objects.items():
+            if ('hoist' in obj[0] ):
+                for obj2 in objects.items():
+                    if( 'crate' in obj2[0]):
+                        lifting_fact = Fact(fact_counter,t[0],[ obj[1],obj2[1] ])
+                        fact_space.append(lifting_fact)
+                        fact_counter += 1 # increase counter of id
+    # 'available'
+    elif ( t[1] == 5 ):
+        for obj in objects.items():
+            if ('hoist' in obj[0] ):
+                        av_fact = Fact(fact_counter,t[0],[ obj[1] ])
+                        fact_space.append(av_fact)
+                        fact_counter += 1 # increase counter of id
+    # 'clear'
+    elif ( t[1] == 6 ):
+        for obj in objects.items():
+            if ( ('crate' in obj[0]) or ('pallet' in obj[0]) ):
+                        clear_fact = Fact(fact_counter,t[0],[ obj[1] ])
+                        fact_space.append(clear_fact)
+                        fact_counter += 1 # increase counter of id
+    else:
+        print('\nError case in facts space building...\n')
 
+# Testing -- Facts Space -Q:a
 print(len(fact_space))
 for i in fact_space:
     print(i.id,i.type,i.obj_id)
