@@ -3,24 +3,26 @@
 # Tassos Karageorgiadis aid21002
 # github:@tassosblackg
 
-import os
 
-class StateNode():
+class FactNode():
 
-    def __init__(self):
-        self.name = ""
+    def __init__(self,counter,type,objectsL):
+        self.id = counter
+        self.type = type
+        self.obj_id = objectsL
         self.leftSibling = []
         self.rightSibling = []
 
 class ActionNode():
     def __init__(self):
         self.name = ""
+
         self.leftSibling = []
         self.rightSibling = []
 
 class Action():
 
-    def __init__(self):
-        self.name = ""
+    def __init__(self,name):
+        self.name = name
         self.precond = []
         self.effects = []
