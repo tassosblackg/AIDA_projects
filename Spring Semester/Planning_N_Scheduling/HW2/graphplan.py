@@ -3,6 +3,7 @@
 # Tassos Karageorgiadis aid21002
 # github:@tassosblackg
 
+import sys
 
 class Fact():
 
@@ -105,6 +106,11 @@ for t in facts_types.items():
         print('\nError case in facts space building...\n')
 
 # Testing -- Facts Space -Q:a
-print(len(fact_space))
-for i in fact_space:
-    print(i.id,i.type,i.obj_id)
+print('\n*Total facts spce size = ',len(fact_space))
+
+original_stdout = sys.stdout # save a ref to init stdout
+with open('facts_space.txt','w') as f:
+    sys.stdout = f
+    for i in fact_space:
+        print('Fact_id = ',i.id,i.type,' objects_IDs= ',i.obj_id)
+    sys.stdout = original_stdout # reset stdout
