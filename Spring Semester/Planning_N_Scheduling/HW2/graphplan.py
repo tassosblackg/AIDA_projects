@@ -5,22 +5,40 @@
 
 import sys
 
-class Fact():
 
-    def __init__(self,counter,type,objectsL):
+class Fact:
+    def __init__(self, counter, type, objectsL):
         self.id = counter
         self.type = type
         self.obj_id = objectsL
 
 
-class Action():
-
-    def __init__(self,counter):
+class Action:
+    def __init__(self, counter, n, param):
         self.id = counter
-        self.params = []
+        self.name = n
+        self.params = param
         self.precond = []
         self.pos_eff = []
         self.neg_eff = []
+
+    # add Preconditions
+    def addPrec(self, precond_l):
+        self.precond.append(Predicate(precond_l))
+
+    # add Positive effects
+    def addPos_eff(self, pos_l):
+        self.pos_eff.append(Predicate(pos_l))
+
+    # add Negative effects
+    def addNeg_eff(self, neg_l):
+        self.neg_eff.append(Predicate(neg_l))
+
+
+class Predicate:
+    def __init__(self, objl):
+        self.type = objl[0]
+        self.objects = objl[1:]
 
 
 # Graphplan Algo Components are part of a Linked-List
@@ -29,88 +47,135 @@ class ActionNode(Action):
         self.leftSibling = []
         self.rightSibling = []
 
+
 class FactNode(Fact):
     def __init__(self):
         self.leftSibling = []
         self.rightSibling = []
 
 
-
-'''
+"""
 Input Data passed trough by hand
-'''
+"""
 
 # all objects which are locatable of the problem
-objects = { 'truck0':1,'truck1':2,'pallet0':3,'pallet1':4,'pallet2':5,'crate0':6,'crate1':7,
-            'hoist0':8,'hoist1':9,'hoist2':10}
+objects = {
+    "truck0": 1,
+    "truck1": 2,
+    "pallet0": 3,
+    "pallet1": 4,
+    "pallet2": 5,
+    "crate0": 6,
+    "crate1": 7,
+    "hoist0": 8,
+    "hoist1": 9,
+    "hoist2": 10,
+}
 
 # Locations Data
-places = {'depot0':0,'distributor0':1,'distributor1':2}
+places = {"depot0": 0, "distributor0": 1, "distributor1": 2}
 
-facts_types = {'at':1,'on':2,'in':3,'lifting':4,'available':5,'clear':6}
+facts_types = {"at": 1, "on": 2, "in": 3, "lifting": 4, "available": 5, "clear": 6}
 
-fact_space,action_space = [],[]
+fact_space, action_space = [], []
 
+"""
+    Create Facts Space aka all possible facts
+"""
 # 'at' combinations
 fact_counter = 1
 for t in facts_types.items():
     # 'at'
-    if ( t[1] == 1 ):
+    if t[1] == 1:
         for obj in objects.items():
             for place in places.items():
-                at_fact = Fact(fact_counter,t[0],[ obj[1], place[1] ])
+                at_fact = Fact(fact_counter, t[0], [obj[1], place[1]])
                 fact_space.append(at_fact)
-                fact_counter += 1 # increase counter of id
+                fact_counter += 1  # increase counter of id
     # 'on'
-    elif ( t[1] == 2 ):
+    elif t[1] == 2:
         for obj in objects.items():
-            if ('crate' in obj[0] ):
+            if "crate" in obj[0]:
                 for obj2 in objects.items():
-                    if( 'pallet' in obj2[0]):
-                        on_fact = Fact(fact_counter,t[0],[ obj[1],obj2[1] ])
+                    if "pallet" in obj2[0]:
+                        on_fact = Fact(fact_counter, t[0], [obj[1], obj2[1]])
                         fact_space.append(on_fact)
-                        fact_counter += 1 # increase counter of id
+                        fact_counter += 1  # increase counter of id
     # 'in'
-    elif ( t[1] == 3 ):
-            for obj in objects.items():
-                if ('crate' in obj[0] ):
-                    for obj2 in objects.items():
-                        if( 'truck' in obj2[0]):
-                            in_fact = Fact(fact_counter,t[0],[ obj[1],obj2[1] ])
-                            fact_space.append(in_fact)
-                            fact_counter += 1 # increase counter of id
-    # 'lifting'
-    elif ( t[1] == 4 ):
+    elif t[1] == 3:
         for obj in objects.items():
-            if ('hoist' in obj[0] ):
+            if "crate" in obj[0]:
                 for obj2 in objects.items():
-                    if( 'crate' in obj2[0]):
-                        lifting_fact = Fact(fact_counter,t[0],[ obj[1],obj2[1] ])
+                    if "truck" in obj2[0]:
+                        in_fact = Fact(fact_counter, t[0], [obj[1], obj2[1]])
+                        fact_space.append(in_fact)
+                        fact_counter += 1  # increase counter of id
+    # 'lifting'
+    elif t[1] == 4:
+        for obj in objects.items():
+            if "hoist" in obj[0]:
+                for obj2 in objects.items():
+                    if "crate" in obj2[0]:
+                        lifting_fact = Fact(fact_counter, t[0], [obj[1], obj2[1]])
                         fact_space.append(lifting_fact)
-                        fact_counter += 1 # increase counter of id
+                        fact_counter += 1  # increase counter of id
     # 'available'
-    elif ( t[1] == 5 ):
+    elif t[1] == 5:
         for obj in objects.items():
-            if ('hoist' in obj[0] ):
-                        av_fact = Fact(fact_counter,t[0],[ obj[1] ])
-                        fact_space.append(av_fact)
-                        fact_counter += 1 # increase counter of id
+            if "hoist" in obj[0]:
+                av_fact = Fact(fact_counter, t[0], [obj[1]])
+                fact_space.append(av_fact)
+                fact_counter += 1  # increase counter of id
     # 'clear'
-    elif ( t[1] == 6 ):
+    elif t[1] == 6:
         for obj in objects.items():
-            if ( ('crate' in obj[0]) or ('pallet' in obj[0]) ):
-                        clear_fact = Fact(fact_counter,t[0],[ obj[1] ])
-                        fact_space.append(clear_fact)
-                        fact_counter += 1 # increase counter of id
+            if ("crate" in obj[0]) or ("pallet" in obj[0]):
+                clear_fact = Fact(fact_counter, t[0], [obj[1]])
+                fact_space.append(clear_fact)
+                fact_counter += 1  # increase counter of id
     else:
-        print('\nError case in facts space building...\n')
+        print("\nError case in facts space building...\n")
 
 # Testing -- Facts Space -Q:a
-print('\n*Total facts spce size = ',len(fact_space))
+print("\n*Total facts spce size = ", len(fact_space))
 
-original_stdout = sys.stdout # save a ref to init stdout
-with open('facts_space.txt','w') as f:
+original_stdout = sys.stdout  # save a ref to init stdout
+with open("facts_space.txt", "w") as f:
     sys.stdout = f
     for i in fact_space:
-        print('Fact_id = ',i.id,i.type,' objects_IDs= ',i.obj_id)
-    sys.stdout = original_stdout # reset stdout
+        print("Fact_id = ", i.id, i.type, " objects_IDs= ", i.obj_id)
+    sys.stdout = original_stdout  # reset stdout
+
+
+"""
+Action Space all possible actions
+
+"""
+action_types = {"Drive": 1, "Lift": 2, "Drop": 3, "Load": 4, "Unload": 5}
+action_counter = 0
+
+for t in action_types.items():
+    # 'Drive' actions
+    if t[1] == 1:
+        for obj in objects.items():
+            if "truck" in obj[0]:
+                for source in places.items():  # get source place
+                    for destination in places.items():  # get destination place
+                        if destination[1] != source[1]:
+                            # new action
+                            d_action = Action(
+                                action_counter,
+                                t[0],
+                                [obj[1], source[1], destination[1]],
+                            )
+                            # add precondition for action
+                            d_action.addPrec(["at", obj[1], source[1]])
+                            # add positive effect
+                            d_action.addPos_eff(["at", obj[1], destination[1]])
+                            # add negative precond not('predicate',?x,?y)
+                            d_action.addNeg_eff(["at", obj[1], source[1]])
+
+                            action_space.append(d_action)
+                            action_counter += 1
+for j in action_space:
+    print(j.id, j.name)
