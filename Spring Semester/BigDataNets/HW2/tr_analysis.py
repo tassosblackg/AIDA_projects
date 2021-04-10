@@ -67,7 +67,14 @@ def print_packets(pcap):
     Args:
         pcap: dpkt pcap reader object (dpkt.pcap.Reader)
     """
-    tcpcounter, udpcounter, icmpcounter, arpcounter, other_counter = 0, 0, 0, 0, 0
+    (
+        tcpcounter,
+        udpcounter,
+        icmpcounter,
+        arpcounter,
+        other_ip_counter,
+        other_non_ip_counter,
+    ) = (0, 0, 0, 0, 0, 0)
 
     # For each packet in the pcap process the contents
     for timestamp, buf in pcap:
@@ -94,13 +101,13 @@ def print_packets(pcap):
             ip = eth.data
 
             if ip.p == dpkt.ip.IP_PROTO_TCP:  # ip.p == 6:
-
                 tcpcounter += 1
-            if ip.p == dpkt.ip.IP_PROTO_UDP:  # ip.p==17:
-
+            elif ip.p == dpkt.ip.IP_PROTO_UDP:  # ip.p==17:
                 udpcounter += 1
-            if ip.p == dpkt.ip.IP_PROTO_ICMP:
+            elif ip.p == dpkt.ip.IP_PROTO_ICMP:
                 icmpcounter += 1
+            else:
+                other_ip_counter += 1
 
             #         print("Test me",ip.data)
             # Pull out fragment information (flags and offset all packed into off field, so use bitmasks)
@@ -109,41 +116,64 @@ def print_packets(pcap):
             fragment_offset = ip.off & dpkt.ip.IP_OFFMASK
         else:
             # print("Ignoring packets except ARP,TCP,UDP,ICMP \n")
-            other_counter += 1
+            other_non_ip_counter += 1
             continue
         # Print out the info
     #         print('IP: %s -> %s   (len=%d ttl=%d DF=%d MF=%d offset=%d)\n' % \
     #               (inet_to_str(ip.src), inet_to_str(ip.dst), ip.len, ip.ttl, do_not_fragment, more_fragments, fragment_offset))
     print("Pcap file's number of arp packets :", arpcounter)
-
     print("Pcap file's number of tcp packets :", tcpcounter)
-
     print("Pcap file's number of udp packets :", udpcounter)
     print("Pcap file's number of icmp packets :", icmpcounter)
-    print("Pcap file's number of OTHER packets :", other_counter)
+    print("Pcap file's number of Other-IP packets :", other_ip_counter)
+    print("Pcap file's number of  NON-IP packets :", other_non_ip_counter)
 
-    return (arpcounter, tcpcounter, udpcounter, icmpcounter, other_counter)
+    return (
+        arpcounter,
+        tcpcounter,
+        udpcounter,
+        icmpcounter,
+        other_ip_counter,
+        other_non_ip_counter,
+    )
 
 
 # In[ ]:
-total_arp, total_tcp, total_udp, total_icmp, total_other = 0, 0, 0, 0, 0
+total_arp, total_tcp, total_udp, total_icmp, total_ipother, total_nonip_other = (
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+)
 pcap_files = []
 with alive_bar(len(filenames)) as bar:
     for pcapf in filenames:
         print("Pcap file reading...==> ", str(pcapf), "\n")
         with open(path + str(pcapf), "rb") as f:
             file = dpkt.pcap.Reader(f)
-            n_arp, n_tcp, n_udp, n_icmp, n_other = print_packets(file)
+            n_arp, n_tcp, n_udp, n_icmp, n_otherip, n_noipother = print_packets(file)
             total_arp += n_arp
             total_tcp += n_tcp
             total_udp += n_udp
             total_icmp += n_icmp
-            total_other += n_other
+            total_ipother += n_otherip
+            total_nonip_other += n_noipother
+# total packets
 total_packets = (
-    total_arp + total_tcp + total_udp + total_icmp + total_other
-)  # total packets
+    total_arp + total_tcp + total_udp + total_icmp + total_ipother + total_nonip_other
+)
+
+# Print Packets number per protocol type
 print(
-    "Total ARPs: {} Total TCPs: {} Total UDPs: {} Total ICMPs: {} / Out Of {} total packets captured".format(
-        total_arp, total_tcp, total_udp, total_icmp, total_packets
+    "Total ARPs: {} Total TCPs: {} Total UDPs: {} Total ICMPs: {}, Other IP :{}, Other NON-IP :{} / Out Of {} total packets captured".format(
+        total_arp,
+        total_tcp,
+        total_udp,
+        total_icmp,
+        total_ipother,
+        total_nonip_other,
+        total_packets,
     )
 )
