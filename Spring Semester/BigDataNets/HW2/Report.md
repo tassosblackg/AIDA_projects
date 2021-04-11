@@ -6,8 +6,8 @@
 ------------------------------------------------------
 
 ### A) Introduction:
+------------------------------
 
------------------
 In this project I had to read a set of *.pcap* files and create a program that analyzes traffic statistics per protocol type or per flow for each protocol. The types of protocols that were taken into account was *TCP, UDP, ARP, ICMP*. All other types just ignored or simple count them as a percentage of the total traffic of packets across all data. The program was developed using Python while familiarized with the format of data per packet using Wireshark.
 
 ### B) Count packets per protocol:
@@ -26,7 +26,7 @@ Then I represent the above information with two figures showing the percentage a
 ![Raw Number of packets per protocol](Images/protocol_raw_val.png " Raw values for number of packets")
 
 ### C) CDF flow analysis per protocol:
-----------------------------------
+------------------------------------------
 
 In order to group packets into flows I used a python dictionary where key field contains a tuple with *sourceIP,sourcePort, destinationIP,destinationPort, and protocol_type*. In our case we take into account only TCP or UDP protocol flows so the the *protocol_type* field inside key's tuple has one string value "TCP" or "UDP". About the value part of the dictionary this is a list type and contains values like size,duration and last_timestamp. For example, a record inside our dictionary is ***('147.23.2.1', 80, '147.23.6.10', 456, 'TCP'):[60, 2, 1261070358.462197]***,so inside values' list size is the total size of a flow, duration value is the total duration of flow,timestamp is the last packet's  timestamp (last packet of a flow).
 
@@ -38,13 +38,31 @@ The figures  bellow describe these results:
 
 <ins>**TCP and UDP flows size**:</ins>
 
-![TCP UDP Size](Images/flows_size.png 'TCP UDP FLOWS sizes CDF')
+![TCP UDP Size](Images/flows_size.png "TCP UDP FLOWS sizes CDF")
+
+**Noticing  scaling in the x axis of flows size is (1e^7 or otherwise x10^7).**
+
 
 <ins>**TCP and UDP flows duration**:</ins>
 
-![TCP UDP Duration](Images/flows_duration.png 'TCP UDP FLOWS duration CDF')
+![TCP UDP Duration](Images/flows_duration.png "TCP UDP FLOWS duration CDF")
 
-**Noticing  scaling in the x axis of flows size is (1e^7 or otherwise x10^7) . **
+
+
+Maybe we are interested printing the PDFs too so,
+
+<ins>**TCP and UDP PDF flows size**:</ins>
+
+![TCP UDP Size](Images/tcp_udpSPDF.png "TCP UDP FLOWS sizes PDF")
+
+**Noticing  scaling in the x axis of flows size is (1e^7 or otherwise x10^7).**
+
+
+<ins>**TCP and UDP PDF flows duration**:</ins>
+
+![TCP UDP Duration](Images/tcp_udpPDFd.png "TCP UDP FLOWS duration PDF")
+
+
 
 ### D) Extra Comments:
 
