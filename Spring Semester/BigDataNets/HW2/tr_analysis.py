@@ -125,7 +125,7 @@ def print_packets(pcap):
 
 
 # ------- Main Function that performing all the steps of analysis, printing results ----------------------------------------------------------
-def packet_analysis():
+def packet_analysis(files):
     """
     Function that reads all pcap files from a directory, and performing the analysis tasks
     """
@@ -139,10 +139,10 @@ def packet_analysis():
         0,
     )
     pcap_files = []
-    with alive_bar(len(filenames)) as bar:
-        for pcapf in filenames:
+    with alive_bar(len(files)) as bar:
+        for pcapf in files:
             print("Pcap file reading...==> ", str(pcapf), "\n")
-            with open(path + str(pcapf), "rb") as f:
+            with open(str(pcapf), "rb") as f:
                 file = dpkt.pcap.Reader(f)
                 n_arp, n_tcp, n_udp, n_icmp, n_otherip, n_noipother = print_packets(
                     file
@@ -180,11 +180,12 @@ def packet_analysis():
 # read filenames from a give directory path
 def get_files2read(path):
 
-    filenames = []
+    filenames, files = [], []
     (_, _, filenames) = next(walk(path))
-
+    for i in filenames:
+        files.append(path + "/" + i)
     # print(filenames[0])
-    return filenames
+    return files
 
 
 # parser menu, pass argmunents
@@ -194,9 +195,11 @@ def parserMenu():
     # parser.add_argument("-csr","--csr",action="store_true",help='read mps file or LP file to convert')
     parser.add_argument("input_path", type=str, help="<directory_path>")
     args = parser.parse_args()
-    # print(args)
+    print(args.input_path)
     files = get_files2read(args.input_path)
-    print("\n->Files' names to be read .... ", files, "\n")
+    print("\n-> Files to be read .... \n", files, "\n")
+
+    packet_analysis(files)
 
 
 if __name__ == "__main__":
