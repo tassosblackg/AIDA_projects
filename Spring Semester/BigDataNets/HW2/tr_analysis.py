@@ -62,6 +62,10 @@ def print_packets(pcap):
         other_non_ip_counter,
     ) = (0, 0, 0, 0, 0, 0)
 
+    # Flows only for TCP or UDP packets
+    #                        key                          value
+    pflows = {}  # {(sIP,sPort,dIP,dPort,Type) : (size,duration,last_timestamp)}
+
     # For each packet in the pcap process the contents
     for timestamp, buf in pcap:
 
@@ -87,9 +91,17 @@ def print_packets(pcap):
             ip = eth.data
 
             if ip.p == dpkt.ip.IP_PROTO_TCP:  # ip.p == 6:
+                tcp = ip.data
                 tcpcounter += 1
+                print(
+                    "W ", inet_to_str(ip.src), tcp.sport, tcp.dport, inet_to_str(ip.dst)
+                )
             elif ip.p == dpkt.ip.IP_PROTO_UDP:  # ip.p==17:
+                udp = ip.data
                 udpcounter += 1
+                print(
+                    "E ", inet_to_str(ip.src), udp.sport, udp.dport, inet_to_str(ip.dst)
+                )
             elif ip.p == dpkt.ip.IP_PROTO_ICMP:
                 icmpcounter += 1
             else:
@@ -132,14 +144,6 @@ def packet_analysis(files):
     Function that reads all pcap files from a directory, and performing the analysis tasks
     """
 
-    total_arp, total_tcp, total_udp, total_icmp, total_ipother, total_nonip_other = (
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-    )
     types_of_packets = ["TCP", "UDP", "ARP", "ICMP", "OTHERip", "OTHERnon_ip"]
     num_of_packets_per_type = [0] * len(types_of_packets)
     with alive_bar(len(files)) as bar:
