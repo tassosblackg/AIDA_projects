@@ -172,7 +172,7 @@ def packet_analysis(files):
     )
 
     percentage_num_packets = [
-        i / total_num_packets * 100 for i in num_of_packets_per_type
+        round(i / total_num_packets * 100, 2) for i in num_of_packets_per_type
     ]
     print(
         "\nPercentage of packets per type out of the total packet number :\n",
@@ -180,20 +180,110 @@ def packet_analysis(files):
         "\n",
         percentage_num_packets,
     )
-    # # ----- Plot graphs ----------------------------------------------
-    # features_indx = np.arange(len(types_of_packets))  # positive integer xlabel
-    # bar_width = 0.4
-    # plt.figure(1)
-    #
-    # plt.bar(features_indx, median_Y1, bar_width, color="red", label="Y1")
-    # plt.bar(features_indx + bar_width, median_Y2, bar_width, color="green", label="Y2")
-    #
-    # # plt.yscale('log')
-    # plt.xlabel("Features")
-    # plt.ylabel("Median_Value")
-    # plt.title("Bar diagram of median(Y1,2) ")
-    # plt.xticks(features_indx + bar_width / 2, y_tags, rotation=90)
-    # plt.legend(loc="best")
+    # ----- Plot graphs ----------------------------------------------
+    print("\n...Ploting packets per protocol percentage... fig1\n")
+    bar_width = 0.4
+    plt.figure(1)
+
+    plt.bar(
+        types_of_packets[0],
+        percentage_num_packets[0],
+        bar_width,
+        color="red",
+        label="TCP",
+    )
+    plt.bar(
+        types_of_packets[1],
+        percentage_num_packets[1],
+        bar_width,
+        color="green",
+        label="UDP",
+    )
+    plt.bar(
+        types_of_packets[2],
+        percentage_num_packets[2],
+        bar_width,
+        color="blue",
+        label="ARP",
+    )
+    plt.bar(
+        types_of_packets[3],
+        percentage_num_packets[3],
+        bar_width,
+        color="magenta",
+        label="ICMP",
+    )
+    plt.bar(
+        types_of_packets[4],
+        percentage_num_packets[4],
+        bar_width,
+        color="yellow",
+        label="OTHERip",
+    )
+    plt.bar(
+        types_of_packets[5],
+        percentage_num_packets[5],
+        bar_width,
+        color="black",
+        label="OTHERnon_ip",
+    )
+    plt.xlabel("Packets protocol")
+    plt.ylabel("percentage('%')")
+    plt.title("Bar diagram of perc of packets out of total")
+    # plt.xticks(features_indx + bar_width / 2, types_of_packets, rotation=90)
+    plt.legend(loc="best")
+
+    # The same plot in absolute numbers
+    print("\n...Ploting packets per protocol absolute numbers... fig2\n")
+    plt.figure(2)
+    plt.bar(
+        types_of_packets[0],
+        num_of_packets_per_type[0],
+        bar_width,
+        color="red",
+        label="TCP",
+    )
+    plt.bar(
+        types_of_packets[1],
+        num_of_packets_per_type[1],
+        bar_width,
+        color="green",
+        label="UDP",
+    )
+    plt.bar(
+        types_of_packets[2],
+        num_of_packets_per_type[2],
+        bar_width,
+        color="blue",
+        label="ARP",
+    )
+    plt.bar(
+        types_of_packets[3],
+        num_of_packets_per_type[3],
+        bar_width,
+        color="magenta",
+        label="ICMP",
+    )
+    plt.bar(
+        types_of_packets[4],
+        num_of_packets_per_type[4],
+        bar_width,
+        color="yellow",
+        label="OTHERip",
+    )
+    plt.bar(
+        types_of_packets[5],
+        num_of_packets_per_type[5],
+        bar_width,
+        color="black",
+        label="OTHERnon_ip",
+    )
+    plt.xlabel("Packets protocol")
+    plt.ylabel("Absolute Number/Out of Total")
+    plt.title("Bar diagram num of packets out of total")
+    plt.legend(loc="best")
+
+    plt.show()
 
 
 # read filenames from a give directory path
