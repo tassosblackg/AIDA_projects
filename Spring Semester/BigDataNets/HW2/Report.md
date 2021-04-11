@@ -44,7 +44,7 @@ The figures  bellow describe these results:
 
 ![TCP UDP Duration](Images/flows_duration.png 'TCP UDP FLOWS duration CDF')
 
-**Noticing there is a possible miss scaling in the x axis. (Bug Issue)**
+**Noticing  scaling in the x axis of flows size is (1e^7 or otherwise x10^7) . **
 
 ### D) Extra Comments:
 
