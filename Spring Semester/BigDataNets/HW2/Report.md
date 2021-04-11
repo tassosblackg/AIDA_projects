@@ -1,22 +1,33 @@
+# Data Centers Traffic Analysis
 
+### HW2 Big Data Networks
 
-## Introduction:
+### AID21002
+------------------------------------------------------
+
+### A) Introduction:
+
 -----------------
 In this project I had to read a set of *.pcap* files and create a program that analyzes traffic statistics per protocol type or per flow for each protocol. The types of protocols that were taken into account was *TCP, UDP, ARP, ICMP*. All other types just ignored or simple count them as a percentage of the total traffic of packets across all data. The program was developed using Python while familiarized with the format of data per packet using Wireshark.
 
-## Count packets per protocol:
+### B) Count packets per protocol:
 ------------------------------
 
 
 ![Protocol Type percentage out of total number of packets](Images/ProtocolPerc.png "percentage of packets per protocol")
 
-## CDF flow analysis per protocol:
+### C) CDF flow analysis per protocol:
 ----------------------------------
 
 
 
+### D) Extra Figures :
 
-## Refferences:
+In the next figure we see the flows for *'univ1_pt1'*.pcap file analyzed inside the *Wireshark* environment using wireshark statistics and flows. This figures show the flows from IP to IP showing details about source and destination ports while at the comment section we can see the extra info for each flow e.g. protocol,ACK,SYN signals, etc.
+
+![Wireshark Flows For All Packets Example](Images/WiresharkFlows.png "Wireshark Flows ")
+
+### References:
 -----------------
 
 1. | [CDF Packets sizes examples][1]
