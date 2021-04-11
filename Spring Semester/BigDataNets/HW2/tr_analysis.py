@@ -8,29 +8,14 @@
 # #### Tassos Karageorgiadis
 
 # In[1]:
-
+import argparse
+from os import walk
 from alive_progress import alive_bar
 import matplotlib.pyplot as plt
 import dpkt
 import datetime
 import socket
 from dpkt.compat import compat_ord
-
-
-# In[2]:
-
-
-from os import walk
-
-path = "Data/"
-filenames = []
-(_, _, filenames) = next(walk(path))
-
-
-# In[4]:
-
-
-print(filenames[0])
 
 
 # In[4]:
@@ -139,42 +124,81 @@ def print_packets(pcap):
     )
 
 
-# In[ ]:
-total_arp, total_tcp, total_udp, total_icmp, total_ipother, total_nonip_other = (
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-)
-pcap_files = []
-with alive_bar(len(filenames)) as bar:
-    for pcapf in filenames:
-        print("Pcap file reading...==> ", str(pcapf), "\n")
-        with open(path + str(pcapf), "rb") as f:
-            file = dpkt.pcap.Reader(f)
-            n_arp, n_tcp, n_udp, n_icmp, n_otherip, n_noipother = print_packets(file)
-            total_arp += n_arp
-            total_tcp += n_tcp
-            total_udp += n_udp
-            total_icmp += n_icmp
-            total_ipother += n_otherip
-            total_nonip_other += n_noipother
-# total packets
-total_packets = (
-    total_arp + total_tcp + total_udp + total_icmp + total_ipother + total_nonip_other
-)
+# ------- Main Function that performing all the steps of analysis, printing results ----------------------------------------------------------
+def packet_analysis():
+    """
+    Function that reads all pcap files from a directory, and performing the analysis tasks
+    """
 
-# Print Packets number per protocol type
-print(
-    "Total ARPs: {} Total TCPs: {} Total UDPs: {} Total ICMPs: {}, Other IP :{}, Other NON-IP :{} / Out Of {} total packets captured".format(
-        total_arp,
-        total_tcp,
-        total_udp,
-        total_icmp,
-        total_ipother,
-        total_nonip_other,
-        total_packets,
+    total_arp, total_tcp, total_udp, total_icmp, total_ipother, total_nonip_other = (
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
     )
-)
+    pcap_files = []
+    with alive_bar(len(filenames)) as bar:
+        for pcapf in filenames:
+            print("Pcap file reading...==> ", str(pcapf), "\n")
+            with open(path + str(pcapf), "rb") as f:
+                file = dpkt.pcap.Reader(f)
+                n_arp, n_tcp, n_udp, n_icmp, n_otherip, n_noipother = print_packets(
+                    file
+                )
+                total_arp += n_arp
+                total_tcp += n_tcp
+                total_udp += n_udp
+                total_icmp += n_icmp
+                total_ipother += n_otherip
+                total_nonip_other += n_noipother
+    # total packets read
+    total_packets = (
+        total_arp
+        + total_tcp
+        + total_udp
+        + total_icmp
+        + total_ipother
+        + total_nonip_other
+    )
+
+    # Print Packets number per protocol type
+    print(
+        "Total ARPs: {} Total TCPs: {} Total UDPs: {} Total ICMPs: {}, Other IP :{}, Other NON-IP :{} / Out Of {} total packets captured".format(
+            total_arp,
+            total_tcp,
+            total_udp,
+            total_icmp,
+            total_ipother,
+            total_nonip_other,
+            total_packets,
+        )
+    )
+
+
+# read filenames from a give directory path
+def get_files2read(path):
+
+    filenames = []
+    (_, _, filenames) = next(walk(path))
+
+    # print(filenames[0])
+    return filenames
+
+
+# parser menu, pass argmunents
+def parserMenu():
+
+    parser = argparse.ArgumentParser(prog="traffic analysis")
+    # parser.add_argument("-csr","--csr",action="store_true",help='read mps file or LP file to convert')
+    parser.add_argument("input_path", type=str, help="<directory_path>")
+    args = parser.parse_args()
+    # print(args)
+    files = get_files2read(args.input_path)
+    print("\n->Files' names to be read .... ", files, "\n")
+
+
+if __name__ == "__main__":
+    # packet_analysis()
+    parserMenu()
