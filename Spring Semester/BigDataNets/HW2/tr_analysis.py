@@ -195,7 +195,7 @@ def packet_analysis(files):
                 num_of_packets_per_type[5] += packets_per_file[
                     5
                 ]  # total ohter_nonip packets
-
+            bar()  # upd bar loading
     # total packets read
     total_num_packets = sum(num_of_packets_per_type)
     # add dictionary records from a file
@@ -334,11 +334,15 @@ def packet_analysis(files):
     plt.legend(loc="best")
 
     ##----------------- Plots for Flows-------------------------------------
-    tcp_flow_sizes = [s[0] for s in total_tcp_flows.values()]  # get size of each flow
-    tcp_flow_duration = [d[1] for d in total_tcp_flows.values()]
+    # tcp_flow_sizes = [s[0] for s in total_tcp_flows.values()]  # get size of each flow
+    # tcp_flow_duration = [d[1] for d in total_tcp_flows.values()]
 
-    udp_flow_sizes = [s2[0] for s2 in total_udp_flows.values()]  # get size of each flow
-    udp_flow_duration = [d2[1] for d2 in total_udp_flows.values()]
+    tcp_flow_sizes, tcp_flow_duration, _ = map(list, zip(*total_tcp_flows.values()))
+
+    # udp_flow_sizes = [s2[0] for s2 in total_udp_flows.values()]  # get size of each flow
+    # udp_flow_duration = [d2[1] for d2 in total_udp_flows.values()]
+
+    udp_flow_sizes, udp_flow_duration, _ = map(list, zip(*total_udp_flows.values()))
 
     # getting data of the histogram
     count_tcp_s, bins_count_tcp_s = np.histogram(tcp_flow_sizes, bins=20)
