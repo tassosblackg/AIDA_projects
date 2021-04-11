@@ -34,8 +34,23 @@ About the results, I got a total number of *TCP flows* equal to **23695** while 
 
 As for computing the CDF for each type of flows I've create 2 lists for TCP flows keepin in one list the sizes of each flow, and into the other the duration for each flow. The same approach was used for UDP flows also. Then I used *numpy* library's histogram function to create bins, and number of elements (counts) aka a distribution, after that I computed the PDF values as *counts/sum(counts)*  and then computed the CDF using the *numpy.cumsum()* function. This process repeated four times one for *tcp flows' size*, one for *tcp flows' duration*, an other one for *udp flows' size* and finally one for *udp flows' duration*. This is part of the code starting at line *336* till line *377*. At the end I print the results using matplotlib.
 
+The figures  bellow describe these results:
 
-### D) Extra Figures :
+<ins>**TCP and UDP flows size**:</ins>
+
+![TCP UDP Size](Images/flows_size.png 'TCP UDP FLOWS sizes CDF')
+
+<ins>**TCP and UDP flows duration**:</ins>
+
+![TCP UDP Duration](Images/flows_duration.png 'TCP UDP FLOWS duration CDF')
+
+**Noticing there is a possible miss scaling in the x axis. (Bug Issue)**
+
+### D) Extra Comments:
+
+Last but not least the execution time of the whole program was around ** min and ** sec. An also important thing was that accessing and reading files was using a swap part from the disk to fetch faster the files, the size of this swap *72* MB, using a nvme ssd.
+
+### E) Extra Figures :
 
 In the next figure we see the flows for *'univ1_pt1'*.pcap file analyzed inside the *Wireshark* environment using wireshark statistics and flows. This figures show the flows from IP to IP showing details about source and destination ports while at the comment section we can see the extra info for each flow e.g. protocol,ACK,SYN signals, etc.
 
