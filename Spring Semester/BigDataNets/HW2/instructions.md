@@ -20,7 +20,7 @@
 
 ## Files structure:
 - instructions.md : Must be ***READ*** before starting!
-- requirements.md : contains all the package requirements needed for this project.
+- requirements.txt : contains all the package requirements needed for this project.
 - tr_analysis.py : is the actual program to analyze the pcap captured files.
 - *Report.pdf* : is short of a report for the project overview
 - Images/ : contains different kinds of images from running the program  or analysis from wireshark.
