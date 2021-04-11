@@ -15,7 +15,7 @@
 
     > python3 tr_analysis.py '/home/user/Projects/Hw2/Data'
 
-    where ***Data/*** directory, contains all the *pcap* files
+    where ***Data/*** directory, contains **only** all the *pcap* files.
 
 
 ## Files structure:
@@ -26,4 +26,5 @@
 - Images/ : contains different kinds of images from running the program  or analysis from wireshark.
 
 ## Important Notice :
-Project tested and developed using ***python3.9.2*** version
+
+Project tested and developed using ***Python3.9.2*** version, also developed at Linux distrOS (Manjaro Arch Based)
