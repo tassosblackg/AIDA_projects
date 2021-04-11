@@ -9,7 +9,7 @@
 
 # In[1]:
 import argparse
-from os import walk
+import os
 from alive_progress import alive_bar
 import matplotlib.pyplot as plt
 import dpkt
@@ -178,12 +178,12 @@ def packet_analysis(files):
 
 
 # read filenames from a give directory path
-def get_files2read(path):
+def get_files2read(directory):
 
     filenames, files = [], []
-    (_, _, filenames) = next(walk(path))
-    for i in filenames:
-        files.append(path + "/" + i)
+    for dirpath, _, filenames in os.walk(directory):
+        for f in filenames:
+            files.append(os.path.abspath(os.path.join(dirpath, f)))
     # print(filenames[0])
     return files
 
