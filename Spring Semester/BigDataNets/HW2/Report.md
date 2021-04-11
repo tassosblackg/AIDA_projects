@@ -32,7 +32,7 @@ In order to group packets into flows I used a python dictionary where key field 
 
 About the results, I got a total number of *TCP flows* equal to **23695** while *UDP flows* were counted **33655**. It would be important to notice that at the end I used two different dictionaries one TCP flows and one for UDP.
 
-As for computing the CDF for each type of flows I've create 2 lists for TCP flows keepin in one list the sizes of each flow, and into the other the duration for each flow. The same approach was used for UDP flows also. Then I used *numpy* library's histogram function to create bins, and number of elements (counts) aka a distribution, after that I computed the PDF values as *counts/sum(counts)*  and then computed the CDF using the *numpy.cumsum()* function. This process repeated four times one for *tcp flows' size*, one for *tcp flows' duration*, an other one for *udp flows' size* and finally one for *udp flows' duration*. This is part of the code starting at line *336* till line *377*. At the end I print the results using matplotlib. 
+As for computing the CDF for each type of flows I've create 2 lists for TCP flows keepin in one list the sizes of each flow, and into the other the duration for each flow. The same approach was used for UDP flows also. Then I used *numpy* library's histogram function to create bins, and number of elements (counts) aka a distribution, after that I computed the PDF values as *counts/sum(counts)*  and then computed the CDF using the *numpy.cumsum()* function. This process repeated four times one for *tcp flows' size*, one for *tcp flows' duration*, an other one for *udp flows' size* and finally one for *udp flows' duration*. This is part of the code starting at line *336* till line *377*. At the end I print the results using matplotlib.
 
 
 ### D) Extra Figures :
@@ -61,6 +61,8 @@ In the next figure we see the flows for *'univ1_pt1'*.pcap file analyzed inside 
 
 8. | [TCP Timestamps][8]
 
+9. | [CDF calculate][9]
+
 [1]:https://www.researchgate.net/figure/Packet-size-CDF-per-protocol-in-downlink-left-and-uplink-right-traffic_fig2_228395666
 [2]:https://community.cisco.com/t5/switching/arp-packet-size/td-p/1551467
 [3]:https://www2.tkn.tu-berlin.de/bib/limmer2009flowbased/limmer2009flowbased.pdf
@@ -69,6 +71,7 @@ In the next figure we see the flows for *'univ1_pt1'*.pcap file analyzed inside 
 [6]:https://el.wikipedia.org/wiki/%CE%A0%CF%81%CF%89%CF%84%CF%8C%CE%BA%CE%BF%CE%BB%CE%BB%CE%BF_%CE%95%CE%BB%CE%AD%CE%B3%CF%87%CE%BF%CF%85_%CE%9C%CE%B5%CF%84%CE%B1%CF%86%CE%BF%CF%81%CE%AC%CF%82
 [7]:https://linoxide.com/wireshark-filters/
 [8]:https://cloudshark.io/articles/tcp-timestamp-option/
+[9]:https://www.geeksforgeeks.org/how-to-calculate-and-plot-a-cumulative-distribution-function-with-matplotlib-in-python/
 
 ### Author
 
