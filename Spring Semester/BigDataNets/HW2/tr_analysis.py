@@ -114,14 +114,16 @@ def print_packets(pcap):
     print("Pcap file's number of Other-IP packets :", other_ip_counter)
     print("Pcap file's number of  NON-IP packets :", other_non_ip_counter)
 
-    return (
-        arpcounter,
+    num_packets_per_file = [
         tcpcounter,
         udpcounter,
+        arpcounter,
         icmpcounter,
         other_ip_counter,
         other_non_ip_counter,
-    )
+    ]
+
+    return num_packets_per_file
 
 
 # ------- Main Function that performing all the steps of analysis, printing results ----------------------------------------------------------
@@ -145,15 +147,17 @@ def packet_analysis(files):
             print("\n Next pcap file.. reading...==> ", str(pcapf), "\n")
             with open(str(pcapf), "rb") as f:
                 file = dpkt.pcap.Reader(f)
-                n_arp, n_tcp, n_udp, n_icmp, n_otherip, n_noipother = print_packets(
-                    file
-                )
-                num_of_packets_per_type[0] += n_tcp  # total tcp packets
-                num_of_packets_per_type[1] += n_udp  # total udp packets
-                num_of_packets_per_type[2] += n_arp  # total arp packets
-                num_of_packets_per_type[3] += n_icmp  # total icmp packets
-                num_of_packets_per_type[4] += n_otherip  # total other_ip  packets
-                num_of_packets_per_type[5] += n_noipother  # total ohter_nonip packets
+                packets_per_file = print_packets(file)
+                num_of_packets_per_type[0] += packets_per_file[0]  # total tcp packets
+                num_of_packets_per_type[1] += packets_per_file[1]  # total udp packets
+                num_of_packets_per_type[2] += packets_per_file[2]  # total arp packets
+                num_of_packets_per_type[3] += packets_per_file[3]  # total icmp packets
+                num_of_packets_per_type[4] += packets_per_file[
+                    4
+                ]  # total other_ip  packets
+                num_of_packets_per_type[5] += packets_per_file[
+                    5
+                ]  # total ohter_nonip packets
 
     # total packets read
     total_num_packets = sum(num_of_packets_per_type)
