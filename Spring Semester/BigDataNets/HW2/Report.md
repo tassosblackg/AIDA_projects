@@ -12,13 +12,25 @@ In this project I had to read a set of *.pcap* files and create a program that a
 
 ### B) Count packets per protocol:
 ------------------------------
+In order to count the number of packets per protocol I keep a counter for each type of protocols increasing each time with find a specific protocol packet inside a pcap file's buffer. The types that I keep is referenced inside a list **types_of_packets = ["TCP", "UDP", "ARP", "ICMP", "OTHERip", "OTHERnon_ip"]**, where *OTHERip* is all other protocols that have IPs except TCP, or UDP or ICMP and *OTHERnon_ip* is all the protocols except ARP, which are to using IPs. As a result I got the following stats about the number of packets per protocols :
 
+![Packets Statistics per Protocol Type](Images/out_percentagePerPack_cat.png "Terminal Output of packets stats")
+
+Then I represent the above information with two figures showing the percentage and the raw number of packets per protocol type.
+
+<ins>**Percentage Bar Plot**</ins>
 
 ![Protocol Type percentage out of total number of packets](Images/ProtocolPerc.png "percentage of packets per protocol")
+
+<ins>   **Raw value Bar Plot**</ins>
+![Raw Number of packets per protocol](Images/protocol_raw_val.png " Raw values for number of packets")
 
 ### C) CDF flow analysis per protocol:
 ----------------------------------
 
+In order to group packets into flows I used a python dictionary where key field contains a tuple with *sourceIP,sourcePort, destinationIP,destinationPort, and protocol_type*. In our case we take into account only TCP or UDP protocol flows so the the *protocol_type* field inside key's tuple has one string value "TCP" or "UDP". About the value part of the dictionary this is a list type and contains values like size,duration and last_timestamp. For example, a record inside our dictionary is ***('147.23.2.1', 80, '147.23.6.10', 456, 'TCP'):[60, 2, 1261070358.462197]***,so inside values' list size is the total size of a flow, duration value is the total duration of flow,timestamp is the last packet's  timestamp (last packet of a flow).
+
+About the results, I got a total number of *TCP flows* equal to **23695** while *UDP flows* were counted **33655**.
 
 
 ### D) Extra Figures :

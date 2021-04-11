@@ -64,8 +64,8 @@ def print_packets(pcap):
 
     # Flows only for TCP or UDP packets
     #                        key                          value
-    pflows = {}  # {(sIP,sPort,dIP,dPort,Type) : (size,duration,last_timestamp)}
-
+    tcp_flows = {}  # {(sIP,sPort,dIP,dPort,Type) : [size,duration,last_timestamp]}
+    udp_flows = {}
     # For each packet in the pcap process the contents
     for timestamp, buf in pcap:
 
@@ -93,15 +93,47 @@ def print_packets(pcap):
             if ip.p == dpkt.ip.IP_PROTO_TCP:  # ip.p == 6:
                 tcp = ip.data
                 tcpcounter += 1
-                print(
-                    "W ", inet_to_str(ip.src), tcp.sport, tcp.dport, inet_to_str(ip.dst)
+                tcp_key = (
+                    inet_to_str(ip.src),
+                    tcp.sport,
+                    inet_to_str(ip.dst),
+                    tcp.dport,
+                    "TCP",
                 )
+                if tcp_key in tcp_flows:  # check if key exists in dict
+                    # update duration with old_timestamp
+                    duration = tcp_flows[tcp_key][1] + (
+                        timestamp - tcp_flows[tcp_key][2]
+                    )
+                    # add new packets size to the old
+                    new_size = tcp_flows[tcp_key][0] + ip.len
+                    # update keys values adding packet
+                    tcp_flows[tcp_key] = [new_size, duration, timestamp]
+                else:  # key not in dict
+                    tcp_flows[tcp_key] = [ip.len, 0, timestamp]
+
             elif ip.p == dpkt.ip.IP_PROTO_UDP:  # ip.p==17:
                 udp = ip.data
                 udpcounter += 1
-                print(
-                    "E ", inet_to_str(ip.src), udp.sport, udp.dport, inet_to_str(ip.dst)
+                udp_key = (
+                    inet_to_str(ip.src),
+                    udp.sport,
+                    inet_to_str(ip.dst),
+                    udp.dport,
+                    "UDP",
                 )
+                if udp_key in udp_flows:  # check if key exists in dict
+                    # update duration with old_timestamp
+                    duration = udp_flows[udp_key][1] + (
+                        timestamp - udp_flows[udp_key][2]
+                    )
+                    # add new packets size to the old
+                    new_size = udp_flows[udp_key][0] + ip.len
+                    # update keys values adding packet
+                    udp_flows[udp_key] = [new_size, duration, timestamp]
+                else:  # key not in dict
+                    udp_flows[udp_key] = [ip.len, 0, timestamp]
+
             elif ip.p == dpkt.ip.IP_PROTO_ICMP:
                 icmpcounter += 1
             else:
@@ -135,7 +167,7 @@ def print_packets(pcap):
         other_non_ip_counter,
     ]
 
-    return num_packets_per_file
+    return num_packets_per_file, tcp_flows, udp_flows
 
 
 # ------- Main Function that performing all the steps of analysis, printing results ----------------------------------------------------------
@@ -143,7 +175,7 @@ def packet_analysis(files):
     """
     Function that reads all pcap files from a directory, and performing the analysis tasks
     """
-
+    total_tcp_flows, total_udp_flows = {}, {}
     types_of_packets = ["TCP", "UDP", "ARP", "ICMP", "OTHERip", "OTHERnon_ip"]
     num_of_packets_per_type = [0] * len(types_of_packets)
     with alive_bar(len(files)) as bar:
@@ -151,7 +183,7 @@ def packet_analysis(files):
             print("\n Next pcap file.. reading...==> ", str(pcapf), "\n")
             with open(str(pcapf), "rb") as f:
                 file = dpkt.pcap.Reader(f)
-                packets_per_file = print_packets(file)
+                packets_per_file, f_tcp_flows, f_udp_flows = print_packets(file)
                 num_of_packets_per_type[0] += packets_per_file[0]  # total tcp packets
                 num_of_packets_per_type[1] += packets_per_file[1]  # total udp packets
                 num_of_packets_per_type[2] += packets_per_file[2]  # total arp packets
@@ -165,6 +197,9 @@ def packet_analysis(files):
 
     # total packets read
     total_num_packets = sum(num_of_packets_per_type)
+    # add dictionary records from a file
+    total_tcp_flows.update(f_tcp_flows)
+    total_udp_flows.update(f_udp_flows)
 
     # Print Packets number per protocol type
     print(
@@ -176,6 +211,12 @@ def packet_analysis(files):
             num_of_packets_per_type[4],
             num_of_packets_per_type[5],
             total_num_packets,
+        )
+    )
+
+    print(
+        "\nTotal TCP Flows:{} and Total UDP Flows: {}\n".format(
+            len(total_tcp_flows), len(total_udp_flows)
         )
     )
 
