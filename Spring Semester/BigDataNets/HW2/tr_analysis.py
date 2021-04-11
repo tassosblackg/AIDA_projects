@@ -138,43 +138,62 @@ def packet_analysis(files):
         0,
         0,
     )
-    pcap_files = []
+    types_of_packets = ["TCP", "UDP", "ARP", "ICMP", "OTHERip", "OTHERnon_ip"]
+    num_of_packets_per_type = [0] * len(types_of_packets)
     with alive_bar(len(files)) as bar:
         for pcapf in files:
-            print("Pcap file reading...==> ", str(pcapf), "\n")
+            print("\n Next pcap file.. reading...==> ", str(pcapf), "\n")
             with open(str(pcapf), "rb") as f:
                 file = dpkt.pcap.Reader(f)
                 n_arp, n_tcp, n_udp, n_icmp, n_otherip, n_noipother = print_packets(
                     file
                 )
-                total_arp += n_arp
-                total_tcp += n_tcp
-                total_udp += n_udp
-                total_icmp += n_icmp
-                total_ipother += n_otherip
-                total_nonip_other += n_noipother
+                num_of_packets_per_type[0] += n_tcp  # total tcp packets
+                num_of_packets_per_type[1] += n_udp  # total udp packets
+                num_of_packets_per_type[2] += n_arp  # total arp packets
+                num_of_packets_per_type[3] += n_icmp  # total icmp packets
+                num_of_packets_per_type[4] += n_otherip  # total other_ip  packets
+                num_of_packets_per_type[5] += n_noipother  # total ohter_nonip packets
+
     # total packets read
-    total_packets = (
-        total_arp
-        + total_tcp
-        + total_udp
-        + total_icmp
-        + total_ipother
-        + total_nonip_other
-    )
+    total_num_packets = sum(num_of_packets_per_type)
 
     # Print Packets number per protocol type
     print(
-        "Total ARPs: {} Total TCPs: {} Total UDPs: {} Total ICMPs: {}, Other IP :{}, Other NON-IP :{} / Out Of {} total packets captured".format(
-            total_arp,
-            total_tcp,
-            total_udp,
-            total_icmp,
-            total_ipother,
-            total_nonip_other,
-            total_packets,
+        "Total TCPs: {} Total UDPs: {},Total ARPs: {}, Total ICMPs: {}, Other IP :{}, Other NON-IP :{} / Out Of {} total packets captured".format(
+            num_of_packets_per_type[0],
+            num_of_packets_per_type[1],
+            num_of_packets_per_type[2],
+            num_of_packets_per_type[3],
+            num_of_packets_per_type[4],
+            num_of_packets_per_type[5],
+            total_num_packets,
         )
     )
+
+    percentage_num_packets = [
+        i / total_num_packets * 100 for i in num_of_packets_per_type
+    ]
+    print(
+        "\nPercentage of packets per type out of the total packet number :\n",
+        types_of_packets,
+        "\n",
+        percentage_num_packets,
+    )
+    # # ----- Plot graphs ----------------------------------------------
+    # features_indx = np.arange(len(types_of_packets))  # positive integer xlabel
+    # bar_width = 0.4
+    # plt.figure(1)
+    #
+    # plt.bar(features_indx, median_Y1, bar_width, color="red", label="Y1")
+    # plt.bar(features_indx + bar_width, median_Y2, bar_width, color="green", label="Y2")
+    #
+    # # plt.yscale('log')
+    # plt.xlabel("Features")
+    # plt.ylabel("Median_Value")
+    # plt.title("Bar diagram of median(Y1,2) ")
+    # plt.xticks(features_indx + bar_width / 2, y_tags, rotation=90)
+    # plt.legend(loc="best")
 
 
 # read filenames from a give directory path
