@@ -10,6 +10,7 @@
 # In[1]:
 
 from alive_progress import alive_bar
+import matplotlib.pyplot as plt
 import dpkt
 import datetime
 import socket
