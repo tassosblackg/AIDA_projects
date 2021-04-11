@@ -2,11 +2,13 @@
 
 ## Introduction:
 -----------------
-In this project I had to read a set of *.pcap* files and create a program that analyzes traffic statistics per protocol type or per flow for each protocol. The types of protocols that were taken into account was TCP,UDP,ARP,ICMP. All other types just ignored or simple count them as a percentage of the total traffic of packets across all data. The program was developed using Python while familiarized with the format of data per packet using Wireshark.
+In this project I had to read a set of *.pcap* files and create a program that analyzes traffic statistics per protocol type or per flow for each protocol. The types of protocols that were taken into account was *TCP, UDP, ARP, ICMP*. All other types just ignored or simple count them as a percentage of the total traffic of packets across all data. The program was developed using Python while familiarized with the format of data per packet using Wireshark.
 
 ## Count packets per protocol:
 ------------------------------
 
+
+![Protocol Type percentage out of total number of packets](Images/ProtocolPerc.png "percentage of packets per protocol")
 
 ## CDF flow analysis per protocol:
 ----------------------------------
