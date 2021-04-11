@@ -10,6 +10,7 @@
 # In[1]:
 import argparse
 import os
+import numpy as np
 from alive_progress import alive_bar
 import matplotlib.pyplot as plt
 import dpkt
@@ -330,6 +331,71 @@ def packet_analysis(files):
     plt.xlabel("Packets protocol")
     plt.ylabel("Absolute Number/Out of Total")
     plt.title("Bar diagram num of packets out of total")
+    plt.legend(loc="best")
+
+    ##----------------- Plots for Flows-------------------------------------
+    tcp_flow_sizes = [s[0] for s in total_tcp_flows.values()]  # get size of each flow
+    tcp_flow_duration = [d[1] for d in total_tcp_flows.values()]
+
+    udp_flow_sizes = [s2[0] for s2 in total_udp_flows.values()]  # get size of each flow
+    udp_flow_duration = [d2[1] for d2 in total_udp_flows.values()]
+
+    # getting data of the histogram
+    count_tcp_s, bins_count_tcp_s = np.histogram(tcp_flow_sizes, bins=20)
+    count_tcp_d, bins_count_tcp_d = np.histogram(tcp_flow_duration, bins=20)
+
+    count_udp_s, bins_count_udp_s = np.histogram(udp_flow_sizes, bins=20)
+    count_udp_d, bins_count_udp_d = np.histogram(udp_flow_duration, bins=20)
+
+    # finding the PDF of the histogram using count values
+    pdf_tcp_s = count_tcp_s / sum(count_tcp_s)
+    pdf_tcp_d = count_tcp_d / sum(count_tcp_d)
+
+    pdf_udp_s = count_udp_s / sum(count_udp_s)
+    pdf_udp_d = count_udp_d / sum(count_udp_d)
+
+    # using numpy np.cumsum to calculate the CDF
+    # We can also find using the PDF values by looping and adding
+    cdf_tcp_s = np.cumsum(pdf_tcp_s)
+    cdf_tcp_d = np.cumsum(pdf_tcp_d)
+
+    cdf_udp_s = np.cumsum(pdf_udp_s)
+    cdf_udp_d = np.cumsum(pdf_udp_d)
+
+    # -- TCP and UDP Size flows CDF
+    plt.figure(3)
+    # plotting PDF and CDF
+    plt.plot(bins_count_tcp_s[1:], cdf_tcp_s, color="green", label="TCP_S_CDF")
+    plt.plot(bins_count_udp_s[1:], cdf_udp_s, label="UDP_S_CDF")
+
+    plt.xlabel("Flows Size in Bytes (x10^7)")
+    plt.ylabel("CDF")
+    plt.title("TCP UDP Flows Size CDF")
+    plt.legend(loc="best")
+
+    plt.figure(4)
+    plt.plot(bins_count_tcp_s[1:], pdf_tcp_s, color="green", label="TCP_D_PDF")
+    plt.plot(bins_count_udp_s[1:], pdf_udp_s, label="UDP_D_PDF")
+    plt.xlabel("Flows Time Size in Bytes (x10^7)")
+    plt.ylabel("PDF")
+    plt.title("TCP UDP Flows Size PDF")
+    plt.legend(loc="best")
+
+    # -- TCP and UDP duration plot CDF
+    plt.figure(5)
+    plt.plot(bins_count_tcp_d[1:], cdf_tcp_d, color="green", label="TCP_D_CDF")
+    plt.plot(bins_count_udp_d[1:], cdf_udp_d, label="UDP_D_CDF")
+    plt.xlabel("Flows Time Duration in Sec")
+    plt.ylabel("CDF")
+    plt.title("TCP UDP Flows Duration CDF")
+    plt.legend(loc="best")
+
+    plt.figure(6)
+    plt.plot(bins_count_tcp_d[1:], pdf_tcp_d, color="green", label="TCP_D_PDF")
+    plt.plot(bins_count_udp_d[1:], pdf_udp_d, label="UDP_D_PDF")
+    plt.xlabel("Flows Time Duration in Sec")
+    plt.ylabel("PDF")
+    plt.title("TCP UDP Flows Duration PDF")
     plt.legend(loc="best")
 
     plt.show()
