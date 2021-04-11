@@ -48,7 +48,7 @@ The figures  bellow describe these results:
 
 ### D) Extra Comments:
 
-Last but not least the execution time of the whole program was around ** min and ** sec. An also important thing was that accessing and reading files was using a swap part from the disk to fetch faster the files, the size of this swap *72* MB, using a nvme ssd.
+Last but not least the execution time of the whole program was around *16* min and *22* sec. An also important thing was that accessing and reading files was using a swap part from the disk to fetch faster the files, the size of this swap was *72* MB, using a nvme ssd. While the RAM load reached around *9* GB.
 
 ### E) Extra Figures :
 
