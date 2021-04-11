@@ -30,7 +30,9 @@ Then I represent the above information with two figures showing the percentage a
 
 In order to group packets into flows I used a python dictionary where key field contains a tuple with *sourceIP,sourcePort, destinationIP,destinationPort, and protocol_type*. In our case we take into account only TCP or UDP protocol flows so the the *protocol_type* field inside key's tuple has one string value "TCP" or "UDP". About the value part of the dictionary this is a list type and contains values like size,duration and last_timestamp. For example, a record inside our dictionary is ***('147.23.2.1', 80, '147.23.6.10', 456, 'TCP'):[60, 2, 1261070358.462197]***,so inside values' list size is the total size of a flow, duration value is the total duration of flow,timestamp is the last packet's  timestamp (last packet of a flow).
 
-About the results, I got a total number of *TCP flows* equal to **23695** while *UDP flows* were counted **33655**.
+About the results, I got a total number of *TCP flows* equal to **23695** while *UDP flows* were counted **33655**. It would be important to notice that at the end I used two different dictionaries one TCP flows and one for UDP.
+
+As for computing the CDF for each type of flows I've create 2 lists for TCP flows keepin in one list the sizes of each flow, and into the other the duration for each flow. The same approach was used for UDP flows also. Then I used *numpy* library's histogram function to create bins, and number of elements (counts) aka a distribution, after that I computed the PDF values as *counts/sum(counts)*  and then computed the CDF using the *numpy.cumsum()* function. This process repeated four times one for *tcp flows' size*, one for *tcp flows' duration*, an other one for *udp flows' size* and finally one for *udp flows' duration*. This is part of the code starting at line *336* till line *377*. At the end I print the results using matplotlib. 
 
 
 ### D) Extra Figures :
