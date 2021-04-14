@@ -1,4 +1,4 @@
-## Follow Executions Instractions
+## Follow Executions Instructions
 
 1. Check *requirements.txt* first to see dependencies.
 
