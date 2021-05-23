@@ -1,21 +1,20 @@
 #!/usr/bin/python
+import sys
 import random
 import subprocess
 from time import time, sleep
-from signal import SIGINT
 from xmlrpc.server import SimpleXMLRPCServer
 import xmlrpc.client as cl
-from mininet.util import pmonitor
 from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.util import dumpNodeConnections
 from mininet.log import setLogLevel, info
-from mininet.cli import CLI
+
 import matplotlib.pyplot as plt
 
-# define num of servers and requests
-NumOfServers = 5  # <- this should be read as input from sys
-NumOfRequests = 8 * NumOfServers
+# # define num of servers and requests
+# NumOfServers = 5  # <- this should be read as input from sys
+# NumOfRequests = 8 * NumOfServers
 
 # mininet topology
 class MyTopology(Topo):
@@ -30,13 +29,14 @@ class MyTopology(Topo):
 
 
 class Embedder:
-    def __init__(self):
+    def __init__(self, NumOfServers):
         # available cpu per server
         self.servers_avail_load = [1 for i in range(NumOfServers)]
         self.cpu_perc_used = []  # cpu used per server for all req
         self.requests = []
         self.accepted_req = 0  # count accepted requests
         self.denied_req = 0  # count denied requests from servers
+        self.NumOfRequests = 8 * NumOfServers
 
     # Generate Random CPU demand requests
     def generate_requests(self):
@@ -142,7 +142,9 @@ def simpleTest():
     output = subprocess.run(["sudo", "mn", "-c"])
     print(output)
 
-    # seconds = 10
+    # get input from the user
+    NumOfServers = sys.argv[1]
+
     topo = MyTopology(n=4)
     net = Mininet(topo)
     net.start()
@@ -159,17 +161,13 @@ def simpleTest():
     p1 = server1.popen("python3 tserver.py")
     sleep(1)
     res2 = emb.cmdPrint("python3 tclient.py 10.0.0.2")
-    the_embedder = Embedder()
+
+    the_embedder = Embedder(int(NumOfServers))
     acc_resp, cpu_load = the_embedder.get_client_response(res2)
     print(acc_resp, cpu_load)
-    the_embedder.count_accepted(acc_resp)
-    print(the_embedder.accepted_req)
-    # print(res2, type(res2))
-    # outp = res2.split(",")
-    # print(outp[0], outp[1])
-    # i = outp[1].strip()
-    # print(i, float(i))
-    # # print(outp, int(outp[1]))
+    # the_embedder.count_accepted(acc_resp)
+    # print(the_embedder.accepted_req)
+
     #
     # p2 = server2.popen("python3 tserver.py")
     # sleep(5)
