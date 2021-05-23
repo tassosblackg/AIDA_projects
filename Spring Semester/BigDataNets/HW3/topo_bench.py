@@ -11,6 +11,9 @@ from mininet.util import dumpNodeConnections
 from mininet.log import setLogLevel, info
 from mininet.cli import CLI
 
+# define num of servers and requests
+NumfOfServers = 5  # <- this should be read as input from sys
+NumOfRequests = 8 * NumfOfServers
 
 # mininet topology
 class MyTopology(Topo):
@@ -26,7 +29,7 @@ class MyTopology(Topo):
 
 class Embedder:
     def __init__(self):
-        self.servers_load = [0 for i in range(NumOfServers)]
+        self.servers_load = [1 for i in range(NumOfServers)]
         self.requests = []
         self.accepted_req = 0  # count accepted requests
         self.denied_req = 0  # count denied requests from servers
@@ -38,6 +41,21 @@ class Embedder:
         ]
 
         return random_float_list
+
+    # Methods For choosing a server
+    def random_server_indx():
+        return random.randrange(len(self.servers_load))
+
+    def first_fit_server_indx(cpu_req):
+        return next((indx for indx, x in enumerate(self.servers_load) if x >= cpu_req))
+
+    def best_fit_server_indx(cpu_req):
+        min_val = min(val for val in self.servers_load if val >= cpu_req)
+        return self.servers_load.index(min_val)
+
+    def worst_fit_server_idx():
+        max_val = max(self.servers_load)
+        return self.servers_load.index(max_val)
 
 
 class Server:
