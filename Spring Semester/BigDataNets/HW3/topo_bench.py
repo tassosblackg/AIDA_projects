@@ -145,7 +145,7 @@ def simpleTest():
     # get input from the user
     NumOfServers = sys.argv[1]
 
-    topo = MyTopology(n=4)
+    topo = MyTopology(int(NumOfServers))
     net = Mininet(topo)
     net.start()
     print("Dumping host connections")
@@ -162,9 +162,9 @@ def simpleTest():
     sleep(1)
     res2 = emb.cmdPrint("python3 tclient.py 10.0.0.2")
 
-    the_embedder = Embedder(int(NumOfServers))
-    acc_resp, cpu_load = the_embedder.get_client_response(res2)
-    print(acc_resp, cpu_load)
+    # the_embedder = Embedder(int(NumOfServers))
+    # acc_resp, cpu_load = the_embedder.get_client_response(res2)
+    # print(acc_resp, cpu_load)
     # the_embedder.count_accepted(acc_resp)
     # print(the_embedder.accepted_req)
 
