@@ -12,9 +12,6 @@ from mininet.log import setLogLevel, info
 
 import matplotlib.pyplot as plt
 
-# # define num of servers and requests
-# NumOfServers = 5  # <- this should be read as input from sys
-# NumOfRequests = 8 * NumOfServers
 
 # mininet topology
 class MyTopology(Topo):
@@ -41,10 +38,10 @@ class Embedder:
     # Generate Random CPU demand requests
     def generate_requests(self):
         random_float_list = [
-            round(random.uniform(0.05, 0.2), 2) for i in range(NumOfRequests)
+            round(random.uniform(0.05, 0.2), 2) for i in range(self.NumOfRequests)
         ]
 
-        return random_float_list
+        self.requests = random_float_list
 
     # CPU Utiliazation calculate
     def get_cpu_utilization(self):
@@ -79,7 +76,7 @@ class Embedder:
 
     # ---------------| Metrics |----------------------------------------------------
     def request_acceptance_rate(self):
-        return self.accepted_req / NumOfRequests
+        return self.accepted_req / self.NumOfRequests
 
     def cpu_utilization(self):
         return round(sum(self.cpu_perc_used) / len(self.cpu_perc_used), 3)
@@ -120,21 +117,6 @@ class Embedder:
         plt.show()
 
 
-class Server:
-    def __init__(self):
-        self.cpu_avail = 1
-        self.accepted = False
-
-    def check_req(cpu_req):
-        if cpu_req <= cpu_avail:
-            self.cpu_avail -= cpu_req  # update new avail cpu
-            self.accepted = True
-        else:
-            self.accepted = False
-
-        return (self.accepted, self.cpu_avail)
-
-
 # Test topology benchmarks, main
 def simpleTest():
     "Create and test a simple network"
@@ -147,20 +129,33 @@ def simpleTest():
 
     topo = MyTopology(int(NumOfServers))
     net = Mininet(topo)
+
     net.start()
     print("Dumping host connections")
     dumpNodeConnections(net.hosts)
     print("Testing network connectivity")
     net.pingAll()
 
+    # split Hosts
     emb = net.get("embedder")
-    server1 = net.get("server1")
+    servers = net.hosts
+    servers = servers[1:]  # drop embedder from list
+
+    # create objects
+    the_embedder = Embedder(int(NumOfServers))
+    # ----| Start handling requests |-------
+    the_embedder.generate_requests()
+    # -- | Random Method | -----
+    for r in the_embedder.requests:
+        print(r)
+    # print(servers)
+    # server1 = net.get("server1")
     # server2 = net.get("server2")
     # server3 = net.get("server3")
-    print(emb.IP(), server1.IP())
-    p1 = server1.popen("python3 tserver.py")
-    sleep(1)
-    res2 = emb.cmdPrint("python3 tclient.py 10.0.0.2")
+    # print(emb.IP(), servers[0].IP())
+    # p1 = servers[0].popen("python3 tserver.py")
+    # sleep(1)
+    # res2 = emb.cmdPrint("python3 tclient.py 10.0.0.2")
 
     # the_embedder = Embedder(int(NumOfServers))
     # acc_resp, cpu_load = the_embedder.get_client_response(res2)
@@ -168,13 +163,7 @@ def simpleTest():
     # the_embedder.count_accepted(acc_resp)
     # print(the_embedder.accepted_req)
 
-    #
-    # p2 = server2.popen("python3 tserver.py")
-    # sleep(5)
-    #
-    # res3 = server3.cmdPrint("python3 tclient.py 10.0.0.3 ")
-    p1.terminate()
-    # sleep(5)
+    # p1.terminate()
 
     net.stop()
 
