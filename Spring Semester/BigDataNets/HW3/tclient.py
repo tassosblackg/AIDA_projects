@@ -30,5 +30,9 @@ proxy = cl.ServerProxy("http://" + str(x) + ":8100")
 num1 = 30
 num2 = 20
 
-result = proxy.add(num1, num2)
-print(f"Result is : {result}")
+# result = proxy.add(num1, num2)
+# print(f"Result is : {result}")
+ack, cpu_l = proxy.check_req(0.8, 0.2)
+print(f"{ack},{cpu_l}")
+# print(f"Server Answer-> status= {ack}, new_cpu_avail= {cpu_l}")
+# print(round(cpu_l, 2))
