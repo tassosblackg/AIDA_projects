@@ -4,7 +4,11 @@
 
 ## Program execution
 
- `sudo python3 topo_bench.py` 
+ `sudo python3 topo_bench.py 10`
+
+ `sudo python3 topo_bench.py 20`
+
+ ... passing an integer value for the number of servers-hosts to create 
 
 ## More :
 
