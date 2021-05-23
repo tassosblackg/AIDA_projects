@@ -26,8 +26,12 @@ def simpleTest():
     net.pingAll()
     print("Ifconfig h1\n")
     h1 = net.get("h1")
+    s = net.hosts
+    for i in s:
+        print(i.IP(), i.name)
     result = h1.cmd("ping -c 3 10.0.0.3")
     print(result)
+    print("TYPEEE hos -", type(net.hosts))  # is a list
     net.stop()
 
 

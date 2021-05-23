@@ -108,7 +108,7 @@ class GraphPlots:
         plt.plot(x, y4, label="WorstFit")
 
     def plot_RAR(self, fig, x, y1, y2, y3, y4):
-        plot_4_methods(x, fig, y1, y2, y3, y4)
+        self.plot_4_methods(x, fig, y1, y2, y3, y4)
         plt.title("Requests Acceptance Rate - (RAR)")
         plt.xlabel("Number of Total Requests")
         plt.ylabel("RAR (n)")
@@ -116,7 +116,7 @@ class GraphPlots:
         plt.show()
 
     def plot_CPU_util(self, fig, x, y1, y2, y3, y4):
-        plot_4_methods(x, y1, y2, y3, y4)
+        self.plot_4_methods(x, y1, y2, y3, y4)
         plt.title("CPU Utilization")
         plt.xlabel("Number of Total Requests")
         plt.ylabel("CPU_util(n)")
@@ -124,7 +124,7 @@ class GraphPlots:
         plt.show()
 
     def plot_CPU_balance(self, fig, x, y1, y2, y3, y4):
-        plot_4_methods(x, y1, y2, y3, y4)
+        self.plot_4_methods(x, y1, y2, y3, y4)
         plt.title("CPU load balance")
         plt.xlabel("Number of Total Requests")
         plt.ylabel("CPU_bal(n)")
