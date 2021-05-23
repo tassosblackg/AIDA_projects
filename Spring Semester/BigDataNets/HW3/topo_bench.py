@@ -112,7 +112,7 @@ class GraphPlots:
         plt.title("Requests Acceptance Rate - (RAR)")
         plt.xlabel("Number of Total Requests")
         plt.ylabel("RAR (n)")
-
+        plt.savefig("PicturesResults/RARplot.png")
         plt.show()
 
     def plot_CPU_util(self, fig, x, y1, y2, y3, y4):
@@ -120,7 +120,7 @@ class GraphPlots:
         plt.title("CPU Utilization")
         plt.xlabel("Number of Total Requests")
         plt.ylabel("CPU_util(n)")
-
+        plt.savefig("PicturesResults/Cpu_util.png")
         plt.show()
 
     def plot_CPU_balance(self, fig, x, y1, y2, y3, y4):
@@ -128,7 +128,7 @@ class GraphPlots:
         plt.title("CPU load balance")
         plt.xlabel("Number of Total Requests")
         plt.ylabel("CPU_bal(n)")
-
+        plt.savefig("PicturesResults/Cpu_load_bal.png")
         plt.show()
 
 
@@ -297,6 +297,7 @@ def simpleTest():
             cpu_bal_method4.append(the_embedder4.cpu_balancing())
 
             bar1()  # update
+    print("\n -------| RAR |----------| CPU_util |----------| CPU_bal |------\n ")
     print("\nStats1 ", rar_val_method1, cpu_util_method1, cpu_bal_method1)
     print("\nStats2 ", rar_val_method2, cpu_util_method2, cpu_bal_method2)
     print("\nStats3 ", rar_val_method3, cpu_util_method3, cpu_bal_method3)
@@ -328,26 +329,6 @@ def simpleTest():
         cpu_bal_method3,
         cpu_bal_method4,
     )
-
-    # print(result_response)
-    #
-    # print(servers)
-    # server1 = net.get("server1")
-    # server2 = net.get("server2")
-    # server3 = net.get("server3")
-    # emb = net.get("embedder")
-    # print(emb.IP(), servers[0].IP())
-    # p1 = servers[0].popen("python3 tserver.py")
-    # sleep(1)
-    # res2 = emb.cmdPrint("python3 tclient.py 10.0.0.2 " + str(0.8) + " " + str(0.2))
-    #
-    # the_embedder = Embedder(int(NumOfServers))
-    # acc_resp, cpu_load = the_embedder.get_client_response(res2)
-    # print(acc_resp, cpu_load)
-    # the_embedder.count_accepted(acc_resp)
-    # print(the_embedder.accepted_req)
-
-    # p1.terminate()
 
     net.stop()
 
