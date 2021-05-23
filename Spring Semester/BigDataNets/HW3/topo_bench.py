@@ -1,17 +1,21 @@
 import random
+import subprocess
+from time import time, sleep
+from signal import SIGINT
+from xmlrpc.server import SimpleXMLRPCServer
+import xmlrpc.client as cl
+from mininet.util import pmonitor
 from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.util import dumpNodeConnections
-from mininet.log import setLogLevel
+from mininet.log import setLogLevel, info
+from mininet.cli import CLI
 
-# global variables
-NumOfServers = 5
-NumOfRequests = 8 * NumOfServers
 
 # mininet topology
 class MyTopology(Topo):
     def build(self, n=2):
-        switch = self.addSwitch("s1")
+        switch = self.addSwitch("sw1")
         embedder = self.addHost("embedder")
         self.addLink(embedder, switch)
         # Python's range(N) generates 0..N-1
@@ -20,37 +24,34 @@ class MyTopology(Topo):
             self.addLink(host, switch)
 
 
-class MyEmbedderClient:
+class Embedder:
     def __init__(self):
         self.servers_load = [0 for i in range(NumOfServers)]
         self.requests = []
+        self.accepted_req = 0  # count accepted requests
+        self.denied_req = 0  # count denied requests from servers
 
     # Generate Random CPU demand requests
     def generate_requests():
         random_float_list = [
             round(random.uniform(0.05, 0.2), 2) for i in range(NumOfRequests)
         ]
-        print(random_float_list)
 
         return random_float_list
 
-    def checkAvailability():
-        pass
+
+class Server:
+    pass
 
 
-class MyServer:
-    def __init__(self):
-        self.available_cpu_load = 1  # normalized between 0-1 instead of 100
-
-    def reply2client():
-        pass
-
-
-# vm_cpu_requests = generate_requests()
-
-
+# Test topology benchmarks, main
 def simpleTest():
     "Create and test a simple network"
+    print("Clearing old topologies....\n")
+    output = subprocess.run(["sudo", "mn", "-c"])
+    print(output)
+
+    # seconds = 10
     topo = MyTopology(n=4)
     net = Mininet(topo)
     net.start()
@@ -58,15 +59,23 @@ def simpleTest():
     dumpNodeConnections(net.hosts)
     print("Testing network connectivity")
     net.pingAll()
-    print("Ifconfig h1\n")
-    h1 = net.get("embedder")
-    result = h1.cmd("ifconfig")
-    print("IP = ", h1.IP())
-    print(result)
-    # print(net.hosts)
-    # hostss = net.hosts
-    # for hh in hostss:
-    #     print("IPee = ", hh.IP())
+
+    # emb = net.get("embedder")
+    # server1 = net.get("server1")
+    # server2 = net.get("server2")
+    # server3 = net.get("server3")
+    # print(emb.IP(), server1.IP())
+    # p1 = server1.popen("python3 tserver.py")
+    # sleep(10)
+    # res2 = emb.cmdPrint("python3 tclient.py 10.0.0.2")
+    #
+    # p2 = server2.popen("python3 tserver.py")
+    # sleep(5)
+    #
+    # res3 = server3.cmdPrint("python3 tclient.py 10.0.0.3 ")
+    # p1.terminate()
+    # sleep(5)
+
     net.stop()
 
 
