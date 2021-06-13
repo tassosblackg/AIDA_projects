@@ -482,21 +482,18 @@ def main():
     )
     print("\n training...")
 
-    # read grid data
     racetrack = read_grid(Grid_Filename)
 
-    # How many times the race car will do a single time trial
-    races = NO_RACES
+    races = NO_RACES  # times to start a race
 
     while no_training_iter < MAX_TRAIN_ITER:
 
         # Keep track of the total number of steps
         total_steps = 0
 
-        # Record the crash scenario
         bad_crash = False
 
-        # Retrieve the policy
+        # retrieve the policy
         policy = value_iteration(
             racetrack, bad_crash=bad_crash, no_training_iter=no_training_iter
         )
@@ -509,55 +506,52 @@ def main():
         print("Number of Training Iterations: " + str(no_training_iter))
         print(
             "Average Number of Steps the car took "
-            + "Finding the Finish Line: "
             + str(total_steps / races)
             + " steps\n"
         )
         print("\n training. ...")
 
         # Delay
-        time.sleep(FRAME_TIME + 4)
+        time.sleep(FRAME_TIME + 5)
 
-        # Testing statistics
-        test_stats_file = THIS_TRACK
-        test_stats_file += "_"
-        test_stats_file += ALGORITHM_NAME + "_iter"
-        test_stats_file += str(no_training_iter) + "_cr"
-        test_stats_file += str(crash_scenario) + "_stats.txt"
+        # SAVE STATS INTO FILESS
+        stats_file = THIS_TRACK
+        stats_file += "_"
+        stats_file += ALGORITHM_NAME + "_iter"
+        stats_file += str(no_training_iter) + "_cr"
+        stats_file += str(crash_scenario) + "_stats.txt"
 
-        ## Open a test_stats_file
-        outfile_ts = open(test_stats_file, "w")
+        outfile_stat = open(stats_file, "w")
 
-        outfile_ts.write(
+        outfile_stat.write(
             "------------------------------------------------------------------\n"
         )
-        outfile_ts.write(ALGORITHM_NAME + " Summary Statistics\n")
-        outfile_ts.write(
+        outfile_stat.write(ALGORITHM_NAME + " Summary Statistics\n")
+        outfile_stat.write(
             "------------------------------------------------------------------\n"
         )
-        outfile_ts.write("Track: ")
-        outfile_ts.write(THIS_TRACK)
-        outfile_ts.write("\nNumber of Training Iterations: " + str(no_training_iter))
+        outfile_stat.write("Track: ")
+        outfile_stat.write(THIS_TRACK)
+        outfile_stat.write("\nNumber of Training Iterations: " + str(no_training_iter))
         if crash_scenario == 1:
-            outfile_ts.write("\nCrash Scenario: Return to the nearest cell" "\n")
+            outfile_stat.write("\nCrash Scenario: Return to the nearest cell" "\n")
 
-        outfile_ts.write(
+        outfile_stat.write(
             "Average Number of Steps the Car Took "
-            + "Before Finding the Finish Line: "
             + str(total_steps / races)
             + " steps\n"
         )
 
         # Show functioning of the program
-        trace_runs_file = THIS_TRACK
-        trace_runs_file += "_"
-        trace_runs_file += ALGORITHM_NAME + "_iter"
-        trace_runs_file += str(no_training_iter) + "_cr"
-        trace_runs_file += str(crash_scenario) + "_trace.txt"
+        trace_file = THIS_TRACK
+        trace_file += "_"
+        trace_file += ALGORITHM_NAME + "_iter"
+        trace_file += str(no_training_iter) + "_cr"
+        trace_file += str(crash_scenario) + "_trace.txt"
 
         if no_training_iter <= 5:
 
-            outfile_tr = open(trace_runs_file, "w")
+            outfile_tr = open(trace_file, "w")
 
             # Print trace runs that demonstrate proper functioning of the code
             outfile_tr.write(str(policy))
