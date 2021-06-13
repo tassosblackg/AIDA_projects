@@ -62,37 +62,31 @@ def read_grid(filename):
 
 def print_grid(grid, car_position=[0, 0]):
     """
-    This method reads in the grid and current
-    (y,x) position of the car and prints the grid to the console
-    :param list grid
-    :param list car_position
+    reads in the grid and currentposition of
+    the car and prints the grid to the output
+    :list grid
+    :list car_position
     """
-    # Store value of current grid square
+    # current position/location coordinates
     temp = grid[car_position[0]][car_position[1]]
 
-    # Move the car to current grid square
+    # car current location
     grid[car_position[0]][car_position[1]] = "X"
 
-    # Delay
     time.sleep(FRAME_TIME)
 
-    # Clear the printed output
     clear()
 
     # For each line in the grid
     for line in grid:
 
-        # Initialize a string
         text = ""
 
-        # Add each character to create a line
         for character in line:
             text += character
 
-        # Print the line of the grid
         print(text)
 
-    # Retstore value of current grid square
     grid[car_position[0]][car_position[1]] = temp
 
 
@@ -109,8 +103,9 @@ def get_random_start_position(grid):
     This method reads in the grid and selects a random
     starting position on the racetrack (x, y). Note that
     (0,0) corresponds to the down left corner of the racetrack/grid.
-    :param list grid: list of lines
-    :return random starting coordinate (x,y) on the racetrack
+    :list grid: list of lines
+
+    :returns random starting coordinate (x,y) on the racetrack
 
     """
     # Collect all possible starting positions on the racetrack
@@ -451,7 +446,6 @@ def do_time_trial(grid, policy, bad_crash=False, animate=True, max_steps=MAX_STE
 
     stop_clock = 0
 
-    # Begin time trial
     for i in range(max_steps):
 
         if animate:
