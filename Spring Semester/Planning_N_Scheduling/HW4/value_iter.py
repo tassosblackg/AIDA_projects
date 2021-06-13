@@ -1,15 +1,13 @@
 import os
 import sys
 import time
-from random import shuffle
-from random import random
-from copy import deepcopy
 import numpy as np
+from copy import deepcopy
+from random import random, shuffle
 
 
-# Define constants
 ALGORITHM_NAME = "Value_Iteration"
-FILENAME = "u_track.txt"
+Grid_Filename = "u_track.txt"
 THIS_TRACK = "u_track"
 START = "S"
 GOAL = "F"
@@ -152,13 +150,6 @@ def get_new_velocity(old_vel, accel, min_vel=MIN_VELOCITY, max_vel=MAX_VELOCITY)
 
 
 def get_new_position(old_loc, vel, grid):
-    """
-    Get a new position using the old position and the velocity
-    :param tuple old_loc: (y,x) position of the car
-    :param tuple vel: (vy,vx) velocity of the car
-    :param list grid
-    :return y+vy, x+vx: (new_y,new_x)
-    """
     y, x = old_loc[0], old_loc[1]
     vy, vx = vel[0], vel[1]
 
@@ -267,19 +258,6 @@ def act(
 
 
 def get_policy_from_Q(cols, rows, vel_range, Q, actions):
-    """
-    This method returns the policy pi(s) based on the action taken in each state
-    that maximizes the value of Q in the table Q[s,a]. This is pi*(s)...the
-    best action that the race car should take in each state is the one that
-    maximizes the value of Q. (* means optimal)
-    :param int cols: Number of columns in the grid
-    :param int rows: Number of rows (i.e. lines) in the grid
-    :param list vel_range: Range of the velocity of the race car
-    :param list of tuples actions: actions = [(ay,ax),(ay,ax)....]
-    :return pi : the policy
-    :rtype: dictionary: key is the state tuple, value is the
-       action tuple (ay,ax)
-    """
     # Create an empty dictionary called pi
     pi = {}
 
@@ -502,8 +480,7 @@ def main():
     print("\n training...")
 
     # read grid data
-    racetrack_name = FILENAME
-    racetrack = read_grid(racetrack_name)
+    racetrack = read_grid(Grid_Filename)
 
     # How many times the race car will do a single time trial
     races = NO_RACES
