@@ -165,13 +165,16 @@ def get_nearest_open_cell(
 
     If velocity is provided, search in opposite direction of velocity so that
     there is no movement over walls
-    :param list grid
-    :param int ycrash: y coordinate where crash happened
-    :param int xcrash: x coordinate where crash happened
-    :param int vy: velocity in y direction when crash occurred
-    :param int vx: velocity in x direction when crash occurred
-    :param list of strings open: Contains grid types
-    :return tuple of the nearest open y and x position on the racetrack
+    parameters:
+    -----------
+    :list grid
+    :int ycrash: y coordinate where crash happened
+    :int xcrash: x coordinate where crash happened
+    :int vy: velocity in y direction when crash occurred
+    :int vx: velocity in x direction when crash occurred
+    :list of strings open: Contains grid types
+
+    :returns tuple of the nearest open y and x position on the racetrack
     """
     rows = len(grid)
     cols = len(grid[0])
