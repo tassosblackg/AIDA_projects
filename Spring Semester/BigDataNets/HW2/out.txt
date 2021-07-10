@@ -1,0 +1,123 @@
+univ1_pt13
+[?25l[2Kon 0: Pcap file reading...==>  univ1_pt13 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 80053
+[2Kon 0: Pcap file's number of tcp packets : 608139
+[2Kon 0: Pcap file's number of udp packets : 219159
+[2Kon 0: Pcap file's number of icmp packets : 26326
+[2Kon 0: Pcap file reading...==>  univ1_pt6 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 49368
+[2Kon 0: Pcap file's number of tcp packets : 747990
+[2Kon 0: Pcap file's number of udp packets : 116012
+[2Kon 0: Pcap file's number of icmp packets : 26130
+[2Kon 0: Pcap file reading...==>  univ1_pt19 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 19304
+[2Kon 0: Pcap file's number of tcp packets : 873001
+[2Kon 0: Pcap file's number of udp packets : 56469
+[2Kon 0: Pcap file's number of icmp packets : 6270
+[2Kon 0: Pcap file reading...==>  univ1_pt11 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 94270
+[2Kon 0: Pcap file's number of tcp packets : 640477
+[2Kon 0: Pcap file's number of udp packets : 174718
+[2Kon 0: Pcap file's number of icmp packets : 32209
+[2Kon 0: Pcap file reading...==>  univ1_pt17 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 17931
+[2Kon 0: Pcap file's number of tcp packets : 897856
+[2Kon 0: Pcap file's number of udp packets : 33424
+[2Kon 0: Pcap file's number of icmp packets : 6735
+[2Kon 0: Pcap file reading...==>  univ1_pt20 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 15411
+[2Kon 0: Pcap file's number of tcp packets : 907226
+[2Kon 0: Pcap file's number of udp packets : 25065
+[2Kon 0: Pcap file's number of icmp packets : 6032
+[2Kon 0: Pcap file reading...==>  univ1_pt1 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 100746
+[2Kon 0: Pcap file's number of tcp packets : 666096
+[2Kon 0: Pcap file's number of udp packets : 128726
+[2Kon 0: Pcap file's number of icmp packets : 38911
+[2Kon 0: Pcap file reading...==>  univ1_pt7 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 71433
+[2Kon 0: Pcap file's number of tcp packets : 739901
+[2Kon 0: Pcap file's number of udp packets : 115388
+[2Kon 0: Pcap file's number of icmp packets : 26276
+[2Kon 0: Pcap file reading...==>  univ1_pt15 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 12195
+[2Kon 0: Pcap file's number of tcp packets : 851001
+[2Kon 0: Pcap file's number of udp packets : 86422
+[2Kon 0: Pcap file's number of icmp packets : 5734
+[2Kon 0: Pcap file reading...==>  univ1_pt9 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 61899
+[2Kon 0: Pcap file's number of tcp packets : 644547
+[2Kon 0: Pcap file's number of udp packets : 217419
+[2Kon 0: Pcap file's number of icmp packets : 24036
+[2Kon 0: Pcap file reading...==>  univ1_pt4 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 89818
+[2Kon 0: Pcap file's number of tcp packets : 678843
+[2Kon 0: Pcap file's number of udp packets : 140387
+[2Kon 0: Pcap file's number of icmp packets : 33369
+[2Kon 0: Pcap file reading...==>  univ1_pt5 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 65594
+[2Kon 0: Pcap file's number of tcp packets : 597059
+[2Kon 0: Pcap file's number of udp packets : 245245
+[2Kon 0: Pcap file's number of icmp packets : 22552
+[2Kon 0: Pcap file reading...==>  univ1_pt2 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 74305
+[2Kon 0: Pcap file's number of tcp packets : 711749
+[2Kon 0: Pcap file's number of udp packets : 114105
+[2Kon 0: Pcap file's number of icmp packets : 37982
+[2Kon 0: Pcap file reading...==>  univ1_pt14 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 54700
+[2Kon 0: Pcap file's number of tcp packets : 699789
+[2Kon 0: Pcap file's number of udp packets : 161421
+[2Kon 0: Pcap file's number of icmp packets : 20512
+[2Kon 0: Pcap file reading...==>  univ1_pt10 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 97520
+[2Kon 0: Pcap file's number of tcp packets : 691377
+[2Kon 0: Pcap file's number of udp packets : 116570
+[2Kon 0: Pcap file's number of icmp packets : 39955
+[2Kon 0: Pcap file reading...==>  univ1_pt8 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 57504
+[2Kon 0: Pcap file's number of tcp packets : 661227
+[2Kon 0: Pcap file's number of udp packets : 184924
+[2Kon 0: Pcap file's number of icmp packets : 26404
+[2Kon 0: Pcap file reading...==>  univ1_pt16 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 16401
+[2Kon 0: Pcap file's number of tcp packets : 842185
+[2Kon 0: Pcap file's number of udp packets : 93130
+[2Kon 0: Pcap file's number of icmp packets : 5768
+[2Kon 0: Pcap file reading...==>  univ1_pt18 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 17052
+[2Kon 0: Pcap file's number of tcp packets : 870997
+[2Kon 0: Pcap file's number of udp packets : 57874
+[2Kon 0: Pcap file's number of icmp packets : 6369
+[2Kon 0: Pcap file reading...==>  univ1_pt12 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 81297
+[2Kon 0: Pcap file's number of tcp packets : 597652
+[2Kon 0: Pcap file's number of udp packets : 234146
+[2Kon 0: Pcap file's number of icmp packets : 24945
+[2Kon 0: Pcap file reading...==>  univ1_pt3 
+[2Kon 0: 
+[2Kon 0: Pcap file's number of arp packets : 47859
+[2Kon 0: Pcap file's number of tcp packets : 793206
+[2Kon 0: Pcap file's number of udp packets : 82525
+[2Kon 0: Pcap file's number of icmp packets : 25143
+[?25h|⚠                                       | (!) 0/20 [0%] in 5:28.8 (0.00/s)
+Total ARPs: 1124660 Total TCPs: 14720318 Total UDPs: 2603129 Total ICMPs: 441658

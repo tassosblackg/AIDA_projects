@@ -1,0 +1,2792 @@
+
+*Total actions space size =  192
+
+Action_id =  0 Drive  params=  [1, 0, 1]
+*preconditions:
+  at [1, 0]
+*positive effects:
+  at [1, 1]
+*negative (not) effects:
+  at [1, 0]
+------------------------------------------------------------
+
+Action_id =  1 Drive  params=  [1, 0, 2]
+*preconditions:
+  at [1, 0]
+*positive effects:
+  at [1, 2]
+*negative (not) effects:
+  at [1, 0]
+------------------------------------------------------------
+
+Action_id =  2 Drive  params=  [1, 1, 0]
+*preconditions:
+  at [1, 1]
+*positive effects:
+  at [1, 0]
+*negative (not) effects:
+  at [1, 1]
+------------------------------------------------------------
+
+Action_id =  3 Drive  params=  [1, 1, 2]
+*preconditions:
+  at [1, 1]
+*positive effects:
+  at [1, 2]
+*negative (not) effects:
+  at [1, 1]
+------------------------------------------------------------
+
+Action_id =  4 Drive  params=  [1, 2, 0]
+*preconditions:
+  at [1, 2]
+*positive effects:
+  at [1, 0]
+*negative (not) effects:
+  at [1, 2]
+------------------------------------------------------------
+
+Action_id =  5 Drive  params=  [1, 2, 1]
+*preconditions:
+  at [1, 2]
+*positive effects:
+  at [1, 1]
+*negative (not) effects:
+  at [1, 2]
+------------------------------------------------------------
+
+Action_id =  6 Drive  params=  [2, 0, 1]
+*preconditions:
+  at [2, 0]
+*positive effects:
+  at [2, 1]
+*negative (not) effects:
+  at [2, 0]
+------------------------------------------------------------
+
+Action_id =  7 Drive  params=  [2, 0, 2]
+*preconditions:
+  at [2, 0]
+*positive effects:
+  at [2, 2]
+*negative (not) effects:
+  at [2, 0]
+------------------------------------------------------------
+
+Action_id =  8 Drive  params=  [2, 1, 0]
+*preconditions:
+  at [2, 1]
+*positive effects:
+  at [2, 0]
+*negative (not) effects:
+  at [2, 1]
+------------------------------------------------------------
+
+Action_id =  9 Drive  params=  [2, 1, 2]
+*preconditions:
+  at [2, 1]
+*positive effects:
+  at [2, 2]
+*negative (not) effects:
+  at [2, 1]
+------------------------------------------------------------
+
+Action_id =  10 Drive  params=  [2, 2, 0]
+*preconditions:
+  at [2, 2]
+*positive effects:
+  at [2, 0]
+*negative (not) effects:
+  at [2, 2]
+------------------------------------------------------------
+
+Action_id =  11 Drive  params=  [2, 2, 1]
+*preconditions:
+  at [2, 2]
+*positive effects:
+  at [2, 1]
+*negative (not) effects:
+  at [2, 2]
+------------------------------------------------------------
+
+Action_id =  12 Lift  params=  [8, 7, 3, 0]
+*preconditions:
+  at [8, 0]
+  available [8]
+  at [7, 0]
+  on [7, 3]
+  clear [7, 3]
+*positive effects:
+  lifting [8, 7]
+  clear [3]
+*negative (not) effects:
+  at [7, 0]
+  clear [3]
+  available [8]
+  on [7, 3]
+------------------------------------------------------------
+
+Action_id =  13 Drop  params=  [8, 7, 3, 0]
+*preconditions:
+  at [8, 0]
+  at [3, 0]
+  clear [3]
+  lifting [8, 7]
+*positive effects:
+  available [8]
+  at [7, 3]
+  clear [7]
+  on [7, 3]
+*negative (not) effects:
+  lifting [8, 7]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  14 Lift  params=  [8, 7, 3, 1]
+*preconditions:
+  at [8, 1]
+  available [8]
+  at [7, 1]
+  on [7, 3]
+  clear [7, 3]
+*positive effects:
+  lifting [8, 7]
+  clear [3]
+*negative (not) effects:
+  at [7, 1]
+  clear [3]
+  available [8]
+  on [7, 3]
+------------------------------------------------------------
+
+Action_id =  15 Drop  params=  [8, 7, 3, 1]
+*preconditions:
+  at [8, 1]
+  at [3, 1]
+  clear [3]
+  lifting [8, 7]
+*positive effects:
+  available [8]
+  at [7, 3]
+  clear [7]
+  on [7, 3]
+*negative (not) effects:
+  lifting [8, 7]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  16 Lift  params=  [8, 7, 3, 2]
+*preconditions:
+  at [8, 2]
+  available [8]
+  at [7, 2]
+  on [7, 3]
+  clear [7, 3]
+*positive effects:
+  lifting [8, 7]
+  clear [3]
+*negative (not) effects:
+  at [7, 2]
+  clear [3]
+  available [8]
+  on [7, 3]
+------------------------------------------------------------
+
+Action_id =  17 Drop  params=  [8, 7, 3, 2]
+*preconditions:
+  at [8, 2]
+  at [3, 2]
+  clear [3]
+  lifting [8, 7]
+*positive effects:
+  available [8]
+  at [7, 3]
+  clear [7]
+  on [7, 3]
+*negative (not) effects:
+  lifting [8, 7]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  18 Lift  params=  [8, 7, 5, 0]
+*preconditions:
+  at [8, 0]
+  available [8]
+  at [7, 0]
+  on [7, 5]
+  clear [7, 5]
+*positive effects:
+  lifting [8, 7]
+  clear [5]
+*negative (not) effects:
+  at [7, 0]
+  clear [5]
+  available [8]
+  on [7, 5]
+------------------------------------------------------------
+
+Action_id =  19 Drop  params=  [8, 7, 5, 0]
+*preconditions:
+  at [8, 0]
+  at [5, 0]
+  clear [5]
+  lifting [8, 7]
+*positive effects:
+  available [8]
+  at [7, 5]
+  clear [7]
+  on [7, 5]
+*negative (not) effects:
+  lifting [8, 7]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  20 Lift  params=  [8, 7, 5, 1]
+*preconditions:
+  at [8, 1]
+  available [8]
+  at [7, 1]
+  on [7, 5]
+  clear [7, 5]
+*positive effects:
+  lifting [8, 7]
+  clear [5]
+*negative (not) effects:
+  at [7, 1]
+  clear [5]
+  available [8]
+  on [7, 5]
+------------------------------------------------------------
+
+Action_id =  21 Drop  params=  [8, 7, 5, 1]
+*preconditions:
+  at [8, 1]
+  at [5, 1]
+  clear [5]
+  lifting [8, 7]
+*positive effects:
+  available [8]
+  at [7, 5]
+  clear [7]
+  on [7, 5]
+*negative (not) effects:
+  lifting [8, 7]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  22 Lift  params=  [8, 7, 5, 2]
+*preconditions:
+  at [8, 2]
+  available [8]
+  at [7, 2]
+  on [7, 5]
+  clear [7, 5]
+*positive effects:
+  lifting [8, 7]
+  clear [5]
+*negative (not) effects:
+  at [7, 2]
+  clear [5]
+  available [8]
+  on [7, 5]
+------------------------------------------------------------
+
+Action_id =  23 Drop  params=  [8, 7, 5, 2]
+*preconditions:
+  at [8, 2]
+  at [5, 2]
+  clear [5]
+  lifting [8, 7]
+*positive effects:
+  available [8]
+  at [7, 5]
+  clear [7]
+  on [7, 5]
+*negative (not) effects:
+  lifting [8, 7]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  24 Lift  params=  [8, 7, 4, 0]
+*preconditions:
+  at [8, 0]
+  available [8]
+  at [7, 0]
+  on [7, 4]
+  clear [7, 4]
+*positive effects:
+  lifting [8, 7]
+  clear [4]
+*negative (not) effects:
+  at [7, 0]
+  clear [4]
+  available [8]
+  on [7, 4]
+------------------------------------------------------------
+
+Action_id =  25 Drop  params=  [8, 7, 4, 0]
+*preconditions:
+  at [8, 0]
+  at [4, 0]
+  clear [4]
+  lifting [8, 7]
+*positive effects:
+  available [8]
+  at [7, 4]
+  clear [7]
+  on [7, 4]
+*negative (not) effects:
+  lifting [8, 7]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  26 Lift  params=  [8, 7, 4, 1]
+*preconditions:
+  at [8, 1]
+  available [8]
+  at [7, 1]
+  on [7, 4]
+  clear [7, 4]
+*positive effects:
+  lifting [8, 7]
+  clear [4]
+*negative (not) effects:
+  at [7, 1]
+  clear [4]
+  available [8]
+  on [7, 4]
+------------------------------------------------------------
+
+Action_id =  27 Drop  params=  [8, 7, 4, 1]
+*preconditions:
+  at [8, 1]
+  at [4, 1]
+  clear [4]
+  lifting [8, 7]
+*positive effects:
+  available [8]
+  at [7, 4]
+  clear [7]
+  on [7, 4]
+*negative (not) effects:
+  lifting [8, 7]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  28 Lift  params=  [8, 7, 4, 2]
+*preconditions:
+  at [8, 2]
+  available [8]
+  at [7, 2]
+  on [7, 4]
+  clear [7, 4]
+*positive effects:
+  lifting [8, 7]
+  clear [4]
+*negative (not) effects:
+  at [7, 2]
+  clear [4]
+  available [8]
+  on [7, 4]
+------------------------------------------------------------
+
+Action_id =  29 Drop  params=  [8, 7, 4, 2]
+*preconditions:
+  at [8, 2]
+  at [4, 2]
+  clear [4]
+  lifting [8, 7]
+*positive effects:
+  available [8]
+  at [7, 4]
+  clear [7]
+  on [7, 4]
+*negative (not) effects:
+  lifting [8, 7]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  30 Load  params=  [8, 7, 2, 0]
+*preconditions:
+  at [8, 0]
+  at [2, 0]
+  lifting [8, 7]
+*positive effects:
+  in [7, 2]
+  available [8]
+*negative (not) effects:
+  lifting [8, 7]
+------------------------------------------------------------
+
+Action_id =  31 UnLoad  params=  [8, 7, 2, 0]
+*preconditions:
+  at [8, 0]
+  at [2, 0]
+  available [8]
+  in [7, 2]
+*positive effects:
+  lifting [8, 7]
+*negative (not) effects:
+  in [7, 2]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  32 Load  params=  [8, 7, 2, 1]
+*preconditions:
+  at [8, 1]
+  at [2, 1]
+  lifting [8, 7]
+*positive effects:
+  in [7, 2]
+  available [8]
+*negative (not) effects:
+  lifting [8, 7]
+------------------------------------------------------------
+
+Action_id =  33 UnLoad  params=  [8, 7, 2, 1]
+*preconditions:
+  at [8, 1]
+  at [2, 1]
+  available [8]
+  in [7, 2]
+*positive effects:
+  lifting [8, 7]
+*negative (not) effects:
+  in [7, 2]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  34 Load  params=  [8, 7, 2, 2]
+*preconditions:
+  at [8, 2]
+  at [2, 2]
+  lifting [8, 7]
+*positive effects:
+  in [7, 2]
+  available [8]
+*negative (not) effects:
+  lifting [8, 7]
+------------------------------------------------------------
+
+Action_id =  35 UnLoad  params=  [8, 7, 2, 2]
+*preconditions:
+  at [8, 2]
+  at [2, 2]
+  available [8]
+  in [7, 2]
+*positive effects:
+  lifting [8, 7]
+*negative (not) effects:
+  in [7, 2]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  36 Load  params=  [8, 7, 1, 0]
+*preconditions:
+  at [8, 0]
+  at [1, 0]
+  lifting [8, 7]
+*positive effects:
+  in [7, 1]
+  available [8]
+*negative (not) effects:
+  lifting [8, 7]
+------------------------------------------------------------
+
+Action_id =  37 UnLoad  params=  [8, 7, 1, 0]
+*preconditions:
+  at [8, 0]
+  at [1, 0]
+  available [8]
+  in [7, 1]
+*positive effects:
+  lifting [8, 7]
+*negative (not) effects:
+  in [7, 1]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  38 Load  params=  [8, 7, 1, 1]
+*preconditions:
+  at [8, 1]
+  at [1, 1]
+  lifting [8, 7]
+*positive effects:
+  in [7, 1]
+  available [8]
+*negative (not) effects:
+  lifting [8, 7]
+------------------------------------------------------------
+
+Action_id =  39 UnLoad  params=  [8, 7, 1, 1]
+*preconditions:
+  at [8, 1]
+  at [1, 1]
+  available [8]
+  in [7, 1]
+*positive effects:
+  lifting [8, 7]
+*negative (not) effects:
+  in [7, 1]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  40 Load  params=  [8, 7, 1, 2]
+*preconditions:
+  at [8, 2]
+  at [1, 2]
+  lifting [8, 7]
+*positive effects:
+  in [7, 1]
+  available [8]
+*negative (not) effects:
+  lifting [8, 7]
+------------------------------------------------------------
+
+Action_id =  41 UnLoad  params=  [8, 7, 1, 2]
+*preconditions:
+  at [8, 2]
+  at [1, 2]
+  available [8]
+  in [7, 1]
+*positive effects:
+  lifting [8, 7]
+*negative (not) effects:
+  in [7, 1]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  42 Lift  params=  [8, 6, 3, 0]
+*preconditions:
+  at [8, 0]
+  available [8]
+  at [6, 0]
+  on [6, 3]
+  clear [6, 3]
+*positive effects:
+  lifting [8, 6]
+  clear [3]
+*negative (not) effects:
+  at [6, 0]
+  clear [3]
+  available [8]
+  on [6, 3]
+------------------------------------------------------------
+
+Action_id =  43 Drop  params=  [8, 6, 3, 0]
+*preconditions:
+  at [8, 0]
+  at [3, 0]
+  clear [3]
+  lifting [8, 6]
+*positive effects:
+  available [8]
+  at [6, 3]
+  clear [6]
+  on [6, 3]
+*negative (not) effects:
+  lifting [8, 6]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  44 Lift  params=  [8, 6, 3, 1]
+*preconditions:
+  at [8, 1]
+  available [8]
+  at [6, 1]
+  on [6, 3]
+  clear [6, 3]
+*positive effects:
+  lifting [8, 6]
+  clear [3]
+*negative (not) effects:
+  at [6, 1]
+  clear [3]
+  available [8]
+  on [6, 3]
+------------------------------------------------------------
+
+Action_id =  45 Drop  params=  [8, 6, 3, 1]
+*preconditions:
+  at [8, 1]
+  at [3, 1]
+  clear [3]
+  lifting [8, 6]
+*positive effects:
+  available [8]
+  at [6, 3]
+  clear [6]
+  on [6, 3]
+*negative (not) effects:
+  lifting [8, 6]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  46 Lift  params=  [8, 6, 3, 2]
+*preconditions:
+  at [8, 2]
+  available [8]
+  at [6, 2]
+  on [6, 3]
+  clear [6, 3]
+*positive effects:
+  lifting [8, 6]
+  clear [3]
+*negative (not) effects:
+  at [6, 2]
+  clear [3]
+  available [8]
+  on [6, 3]
+------------------------------------------------------------
+
+Action_id =  47 Drop  params=  [8, 6, 3, 2]
+*preconditions:
+  at [8, 2]
+  at [3, 2]
+  clear [3]
+  lifting [8, 6]
+*positive effects:
+  available [8]
+  at [6, 3]
+  clear [6]
+  on [6, 3]
+*negative (not) effects:
+  lifting [8, 6]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  48 Lift  params=  [8, 6, 5, 0]
+*preconditions:
+  at [8, 0]
+  available [8]
+  at [6, 0]
+  on [6, 5]
+  clear [6, 5]
+*positive effects:
+  lifting [8, 6]
+  clear [5]
+*negative (not) effects:
+  at [6, 0]
+  clear [5]
+  available [8]
+  on [6, 5]
+------------------------------------------------------------
+
+Action_id =  49 Drop  params=  [8, 6, 5, 0]
+*preconditions:
+  at [8, 0]
+  at [5, 0]
+  clear [5]
+  lifting [8, 6]
+*positive effects:
+  available [8]
+  at [6, 5]
+  clear [6]
+  on [6, 5]
+*negative (not) effects:
+  lifting [8, 6]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  50 Lift  params=  [8, 6, 5, 1]
+*preconditions:
+  at [8, 1]
+  available [8]
+  at [6, 1]
+  on [6, 5]
+  clear [6, 5]
+*positive effects:
+  lifting [8, 6]
+  clear [5]
+*negative (not) effects:
+  at [6, 1]
+  clear [5]
+  available [8]
+  on [6, 5]
+------------------------------------------------------------
+
+Action_id =  51 Drop  params=  [8, 6, 5, 1]
+*preconditions:
+  at [8, 1]
+  at [5, 1]
+  clear [5]
+  lifting [8, 6]
+*positive effects:
+  available [8]
+  at [6, 5]
+  clear [6]
+  on [6, 5]
+*negative (not) effects:
+  lifting [8, 6]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  52 Lift  params=  [8, 6, 5, 2]
+*preconditions:
+  at [8, 2]
+  available [8]
+  at [6, 2]
+  on [6, 5]
+  clear [6, 5]
+*positive effects:
+  lifting [8, 6]
+  clear [5]
+*negative (not) effects:
+  at [6, 2]
+  clear [5]
+  available [8]
+  on [6, 5]
+------------------------------------------------------------
+
+Action_id =  53 Drop  params=  [8, 6, 5, 2]
+*preconditions:
+  at [8, 2]
+  at [5, 2]
+  clear [5]
+  lifting [8, 6]
+*positive effects:
+  available [8]
+  at [6, 5]
+  clear [6]
+  on [6, 5]
+*negative (not) effects:
+  lifting [8, 6]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  54 Lift  params=  [8, 6, 4, 0]
+*preconditions:
+  at [8, 0]
+  available [8]
+  at [6, 0]
+  on [6, 4]
+  clear [6, 4]
+*positive effects:
+  lifting [8, 6]
+  clear [4]
+*negative (not) effects:
+  at [6, 0]
+  clear [4]
+  available [8]
+  on [6, 4]
+------------------------------------------------------------
+
+Action_id =  55 Drop  params=  [8, 6, 4, 0]
+*preconditions:
+  at [8, 0]
+  at [4, 0]
+  clear [4]
+  lifting [8, 6]
+*positive effects:
+  available [8]
+  at [6, 4]
+  clear [6]
+  on [6, 4]
+*negative (not) effects:
+  lifting [8, 6]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  56 Lift  params=  [8, 6, 4, 1]
+*preconditions:
+  at [8, 1]
+  available [8]
+  at [6, 1]
+  on [6, 4]
+  clear [6, 4]
+*positive effects:
+  lifting [8, 6]
+  clear [4]
+*negative (not) effects:
+  at [6, 1]
+  clear [4]
+  available [8]
+  on [6, 4]
+------------------------------------------------------------
+
+Action_id =  57 Drop  params=  [8, 6, 4, 1]
+*preconditions:
+  at [8, 1]
+  at [4, 1]
+  clear [4]
+  lifting [8, 6]
+*positive effects:
+  available [8]
+  at [6, 4]
+  clear [6]
+  on [6, 4]
+*negative (not) effects:
+  lifting [8, 6]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  58 Lift  params=  [8, 6, 4, 2]
+*preconditions:
+  at [8, 2]
+  available [8]
+  at [6, 2]
+  on [6, 4]
+  clear [6, 4]
+*positive effects:
+  lifting [8, 6]
+  clear [4]
+*negative (not) effects:
+  at [6, 2]
+  clear [4]
+  available [8]
+  on [6, 4]
+------------------------------------------------------------
+
+Action_id =  59 Drop  params=  [8, 6, 4, 2]
+*preconditions:
+  at [8, 2]
+  at [4, 2]
+  clear [4]
+  lifting [8, 6]
+*positive effects:
+  available [8]
+  at [6, 4]
+  clear [6]
+  on [6, 4]
+*negative (not) effects:
+  lifting [8, 6]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  60 Load  params=  [8, 6, 2, 0]
+*preconditions:
+  at [8, 0]
+  at [2, 0]
+  lifting [8, 6]
+*positive effects:
+  in [6, 2]
+  available [8]
+*negative (not) effects:
+  lifting [8, 6]
+------------------------------------------------------------
+
+Action_id =  61 UnLoad  params=  [8, 6, 2, 0]
+*preconditions:
+  at [8, 0]
+  at [2, 0]
+  available [8]
+  in [6, 2]
+*positive effects:
+  lifting [8, 6]
+*negative (not) effects:
+  in [6, 2]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  62 Load  params=  [8, 6, 2, 1]
+*preconditions:
+  at [8, 1]
+  at [2, 1]
+  lifting [8, 6]
+*positive effects:
+  in [6, 2]
+  available [8]
+*negative (not) effects:
+  lifting [8, 6]
+------------------------------------------------------------
+
+Action_id =  63 UnLoad  params=  [8, 6, 2, 1]
+*preconditions:
+  at [8, 1]
+  at [2, 1]
+  available [8]
+  in [6, 2]
+*positive effects:
+  lifting [8, 6]
+*negative (not) effects:
+  in [6, 2]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  64 Load  params=  [8, 6, 2, 2]
+*preconditions:
+  at [8, 2]
+  at [2, 2]
+  lifting [8, 6]
+*positive effects:
+  in [6, 2]
+  available [8]
+*negative (not) effects:
+  lifting [8, 6]
+------------------------------------------------------------
+
+Action_id =  65 UnLoad  params=  [8, 6, 2, 2]
+*preconditions:
+  at [8, 2]
+  at [2, 2]
+  available [8]
+  in [6, 2]
+*positive effects:
+  lifting [8, 6]
+*negative (not) effects:
+  in [6, 2]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  66 Load  params=  [8, 6, 1, 0]
+*preconditions:
+  at [8, 0]
+  at [1, 0]
+  lifting [8, 6]
+*positive effects:
+  in [6, 1]
+  available [8]
+*negative (not) effects:
+  lifting [8, 6]
+------------------------------------------------------------
+
+Action_id =  67 UnLoad  params=  [8, 6, 1, 0]
+*preconditions:
+  at [8, 0]
+  at [1, 0]
+  available [8]
+  in [6, 1]
+*positive effects:
+  lifting [8, 6]
+*negative (not) effects:
+  in [6, 1]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  68 Load  params=  [8, 6, 1, 1]
+*preconditions:
+  at [8, 1]
+  at [1, 1]
+  lifting [8, 6]
+*positive effects:
+  in [6, 1]
+  available [8]
+*negative (not) effects:
+  lifting [8, 6]
+------------------------------------------------------------
+
+Action_id =  69 UnLoad  params=  [8, 6, 1, 1]
+*preconditions:
+  at [8, 1]
+  at [1, 1]
+  available [8]
+  in [6, 1]
+*positive effects:
+  lifting [8, 6]
+*negative (not) effects:
+  in [6, 1]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  70 Load  params=  [8, 6, 1, 2]
+*preconditions:
+  at [8, 2]
+  at [1, 2]
+  lifting [8, 6]
+*positive effects:
+  in [6, 1]
+  available [8]
+*negative (not) effects:
+  lifting [8, 6]
+------------------------------------------------------------
+
+Action_id =  71 UnLoad  params=  [8, 6, 1, 2]
+*preconditions:
+  at [8, 2]
+  at [1, 2]
+  available [8]
+  in [6, 1]
+*positive effects:
+  lifting [8, 6]
+*negative (not) effects:
+  in [6, 1]
+  available [8]
+------------------------------------------------------------
+
+Action_id =  72 Lift  params=  [9, 7, 3, 0]
+*preconditions:
+  at [9, 0]
+  available [9]
+  at [7, 0]
+  on [7, 3]
+  clear [7, 3]
+*positive effects:
+  lifting [9, 7]
+  clear [3]
+*negative (not) effects:
+  at [7, 0]
+  clear [3]
+  available [9]
+  on [7, 3]
+------------------------------------------------------------
+
+Action_id =  73 Drop  params=  [9, 7, 3, 0]
+*preconditions:
+  at [9, 0]
+  at [3, 0]
+  clear [3]
+  lifting [9, 7]
+*positive effects:
+  available [9]
+  at [7, 3]
+  clear [7]
+  on [7, 3]
+*negative (not) effects:
+  lifting [9, 7]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  74 Lift  params=  [9, 7, 3, 1]
+*preconditions:
+  at [9, 1]
+  available [9]
+  at [7, 1]
+  on [7, 3]
+  clear [7, 3]
+*positive effects:
+  lifting [9, 7]
+  clear [3]
+*negative (not) effects:
+  at [7, 1]
+  clear [3]
+  available [9]
+  on [7, 3]
+------------------------------------------------------------
+
+Action_id =  75 Drop  params=  [9, 7, 3, 1]
+*preconditions:
+  at [9, 1]
+  at [3, 1]
+  clear [3]
+  lifting [9, 7]
+*positive effects:
+  available [9]
+  at [7, 3]
+  clear [7]
+  on [7, 3]
+*negative (not) effects:
+  lifting [9, 7]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  76 Lift  params=  [9, 7, 3, 2]
+*preconditions:
+  at [9, 2]
+  available [9]
+  at [7, 2]
+  on [7, 3]
+  clear [7, 3]
+*positive effects:
+  lifting [9, 7]
+  clear [3]
+*negative (not) effects:
+  at [7, 2]
+  clear [3]
+  available [9]
+  on [7, 3]
+------------------------------------------------------------
+
+Action_id =  77 Drop  params=  [9, 7, 3, 2]
+*preconditions:
+  at [9, 2]
+  at [3, 2]
+  clear [3]
+  lifting [9, 7]
+*positive effects:
+  available [9]
+  at [7, 3]
+  clear [7]
+  on [7, 3]
+*negative (not) effects:
+  lifting [9, 7]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  78 Lift  params=  [9, 7, 5, 0]
+*preconditions:
+  at [9, 0]
+  available [9]
+  at [7, 0]
+  on [7, 5]
+  clear [7, 5]
+*positive effects:
+  lifting [9, 7]
+  clear [5]
+*negative (not) effects:
+  at [7, 0]
+  clear [5]
+  available [9]
+  on [7, 5]
+------------------------------------------------------------
+
+Action_id =  79 Drop  params=  [9, 7, 5, 0]
+*preconditions:
+  at [9, 0]
+  at [5, 0]
+  clear [5]
+  lifting [9, 7]
+*positive effects:
+  available [9]
+  at [7, 5]
+  clear [7]
+  on [7, 5]
+*negative (not) effects:
+  lifting [9, 7]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  80 Lift  params=  [9, 7, 5, 1]
+*preconditions:
+  at [9, 1]
+  available [9]
+  at [7, 1]
+  on [7, 5]
+  clear [7, 5]
+*positive effects:
+  lifting [9, 7]
+  clear [5]
+*negative (not) effects:
+  at [7, 1]
+  clear [5]
+  available [9]
+  on [7, 5]
+------------------------------------------------------------
+
+Action_id =  81 Drop  params=  [9, 7, 5, 1]
+*preconditions:
+  at [9, 1]
+  at [5, 1]
+  clear [5]
+  lifting [9, 7]
+*positive effects:
+  available [9]
+  at [7, 5]
+  clear [7]
+  on [7, 5]
+*negative (not) effects:
+  lifting [9, 7]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  82 Lift  params=  [9, 7, 5, 2]
+*preconditions:
+  at [9, 2]
+  available [9]
+  at [7, 2]
+  on [7, 5]
+  clear [7, 5]
+*positive effects:
+  lifting [9, 7]
+  clear [5]
+*negative (not) effects:
+  at [7, 2]
+  clear [5]
+  available [9]
+  on [7, 5]
+------------------------------------------------------------
+
+Action_id =  83 Drop  params=  [9, 7, 5, 2]
+*preconditions:
+  at [9, 2]
+  at [5, 2]
+  clear [5]
+  lifting [9, 7]
+*positive effects:
+  available [9]
+  at [7, 5]
+  clear [7]
+  on [7, 5]
+*negative (not) effects:
+  lifting [9, 7]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  84 Lift  params=  [9, 7, 4, 0]
+*preconditions:
+  at [9, 0]
+  available [9]
+  at [7, 0]
+  on [7, 4]
+  clear [7, 4]
+*positive effects:
+  lifting [9, 7]
+  clear [4]
+*negative (not) effects:
+  at [7, 0]
+  clear [4]
+  available [9]
+  on [7, 4]
+------------------------------------------------------------
+
+Action_id =  85 Drop  params=  [9, 7, 4, 0]
+*preconditions:
+  at [9, 0]
+  at [4, 0]
+  clear [4]
+  lifting [9, 7]
+*positive effects:
+  available [9]
+  at [7, 4]
+  clear [7]
+  on [7, 4]
+*negative (not) effects:
+  lifting [9, 7]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  86 Lift  params=  [9, 7, 4, 1]
+*preconditions:
+  at [9, 1]
+  available [9]
+  at [7, 1]
+  on [7, 4]
+  clear [7, 4]
+*positive effects:
+  lifting [9, 7]
+  clear [4]
+*negative (not) effects:
+  at [7, 1]
+  clear [4]
+  available [9]
+  on [7, 4]
+------------------------------------------------------------
+
+Action_id =  87 Drop  params=  [9, 7, 4, 1]
+*preconditions:
+  at [9, 1]
+  at [4, 1]
+  clear [4]
+  lifting [9, 7]
+*positive effects:
+  available [9]
+  at [7, 4]
+  clear [7]
+  on [7, 4]
+*negative (not) effects:
+  lifting [9, 7]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  88 Lift  params=  [9, 7, 4, 2]
+*preconditions:
+  at [9, 2]
+  available [9]
+  at [7, 2]
+  on [7, 4]
+  clear [7, 4]
+*positive effects:
+  lifting [9, 7]
+  clear [4]
+*negative (not) effects:
+  at [7, 2]
+  clear [4]
+  available [9]
+  on [7, 4]
+------------------------------------------------------------
+
+Action_id =  89 Drop  params=  [9, 7, 4, 2]
+*preconditions:
+  at [9, 2]
+  at [4, 2]
+  clear [4]
+  lifting [9, 7]
+*positive effects:
+  available [9]
+  at [7, 4]
+  clear [7]
+  on [7, 4]
+*negative (not) effects:
+  lifting [9, 7]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  90 Load  params=  [9, 7, 2, 0]
+*preconditions:
+  at [9, 0]
+  at [2, 0]
+  lifting [9, 7]
+*positive effects:
+  in [7, 2]
+  available [9]
+*negative (not) effects:
+  lifting [9, 7]
+------------------------------------------------------------
+
+Action_id =  91 UnLoad  params=  [9, 7, 2, 0]
+*preconditions:
+  at [9, 0]
+  at [2, 0]
+  available [9]
+  in [7, 2]
+*positive effects:
+  lifting [9, 7]
+*negative (not) effects:
+  in [7, 2]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  92 Load  params=  [9, 7, 2, 1]
+*preconditions:
+  at [9, 1]
+  at [2, 1]
+  lifting [9, 7]
+*positive effects:
+  in [7, 2]
+  available [9]
+*negative (not) effects:
+  lifting [9, 7]
+------------------------------------------------------------
+
+Action_id =  93 UnLoad  params=  [9, 7, 2, 1]
+*preconditions:
+  at [9, 1]
+  at [2, 1]
+  available [9]
+  in [7, 2]
+*positive effects:
+  lifting [9, 7]
+*negative (not) effects:
+  in [7, 2]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  94 Load  params=  [9, 7, 2, 2]
+*preconditions:
+  at [9, 2]
+  at [2, 2]
+  lifting [9, 7]
+*positive effects:
+  in [7, 2]
+  available [9]
+*negative (not) effects:
+  lifting [9, 7]
+------------------------------------------------------------
+
+Action_id =  95 UnLoad  params=  [9, 7, 2, 2]
+*preconditions:
+  at [9, 2]
+  at [2, 2]
+  available [9]
+  in [7, 2]
+*positive effects:
+  lifting [9, 7]
+*negative (not) effects:
+  in [7, 2]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  96 Load  params=  [9, 7, 1, 0]
+*preconditions:
+  at [9, 0]
+  at [1, 0]
+  lifting [9, 7]
+*positive effects:
+  in [7, 1]
+  available [9]
+*negative (not) effects:
+  lifting [9, 7]
+------------------------------------------------------------
+
+Action_id =  97 UnLoad  params=  [9, 7, 1, 0]
+*preconditions:
+  at [9, 0]
+  at [1, 0]
+  available [9]
+  in [7, 1]
+*positive effects:
+  lifting [9, 7]
+*negative (not) effects:
+  in [7, 1]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  98 Load  params=  [9, 7, 1, 1]
+*preconditions:
+  at [9, 1]
+  at [1, 1]
+  lifting [9, 7]
+*positive effects:
+  in [7, 1]
+  available [9]
+*negative (not) effects:
+  lifting [9, 7]
+------------------------------------------------------------
+
+Action_id =  99 UnLoad  params=  [9, 7, 1, 1]
+*preconditions:
+  at [9, 1]
+  at [1, 1]
+  available [9]
+  in [7, 1]
+*positive effects:
+  lifting [9, 7]
+*negative (not) effects:
+  in [7, 1]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  100 Load  params=  [9, 7, 1, 2]
+*preconditions:
+  at [9, 2]
+  at [1, 2]
+  lifting [9, 7]
+*positive effects:
+  in [7, 1]
+  available [9]
+*negative (not) effects:
+  lifting [9, 7]
+------------------------------------------------------------
+
+Action_id =  101 UnLoad  params=  [9, 7, 1, 2]
+*preconditions:
+  at [9, 2]
+  at [1, 2]
+  available [9]
+  in [7, 1]
+*positive effects:
+  lifting [9, 7]
+*negative (not) effects:
+  in [7, 1]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  102 Lift  params=  [9, 6, 3, 0]
+*preconditions:
+  at [9, 0]
+  available [9]
+  at [6, 0]
+  on [6, 3]
+  clear [6, 3]
+*positive effects:
+  lifting [9, 6]
+  clear [3]
+*negative (not) effects:
+  at [6, 0]
+  clear [3]
+  available [9]
+  on [6, 3]
+------------------------------------------------------------
+
+Action_id =  103 Drop  params=  [9, 6, 3, 0]
+*preconditions:
+  at [9, 0]
+  at [3, 0]
+  clear [3]
+  lifting [9, 6]
+*positive effects:
+  available [9]
+  at [6, 3]
+  clear [6]
+  on [6, 3]
+*negative (not) effects:
+  lifting [9, 6]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  104 Lift  params=  [9, 6, 3, 1]
+*preconditions:
+  at [9, 1]
+  available [9]
+  at [6, 1]
+  on [6, 3]
+  clear [6, 3]
+*positive effects:
+  lifting [9, 6]
+  clear [3]
+*negative (not) effects:
+  at [6, 1]
+  clear [3]
+  available [9]
+  on [6, 3]
+------------------------------------------------------------
+
+Action_id =  105 Drop  params=  [9, 6, 3, 1]
+*preconditions:
+  at [9, 1]
+  at [3, 1]
+  clear [3]
+  lifting [9, 6]
+*positive effects:
+  available [9]
+  at [6, 3]
+  clear [6]
+  on [6, 3]
+*negative (not) effects:
+  lifting [9, 6]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  106 Lift  params=  [9, 6, 3, 2]
+*preconditions:
+  at [9, 2]
+  available [9]
+  at [6, 2]
+  on [6, 3]
+  clear [6, 3]
+*positive effects:
+  lifting [9, 6]
+  clear [3]
+*negative (not) effects:
+  at [6, 2]
+  clear [3]
+  available [9]
+  on [6, 3]
+------------------------------------------------------------
+
+Action_id =  107 Drop  params=  [9, 6, 3, 2]
+*preconditions:
+  at [9, 2]
+  at [3, 2]
+  clear [3]
+  lifting [9, 6]
+*positive effects:
+  available [9]
+  at [6, 3]
+  clear [6]
+  on [6, 3]
+*negative (not) effects:
+  lifting [9, 6]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  108 Lift  params=  [9, 6, 5, 0]
+*preconditions:
+  at [9, 0]
+  available [9]
+  at [6, 0]
+  on [6, 5]
+  clear [6, 5]
+*positive effects:
+  lifting [9, 6]
+  clear [5]
+*negative (not) effects:
+  at [6, 0]
+  clear [5]
+  available [9]
+  on [6, 5]
+------------------------------------------------------------
+
+Action_id =  109 Drop  params=  [9, 6, 5, 0]
+*preconditions:
+  at [9, 0]
+  at [5, 0]
+  clear [5]
+  lifting [9, 6]
+*positive effects:
+  available [9]
+  at [6, 5]
+  clear [6]
+  on [6, 5]
+*negative (not) effects:
+  lifting [9, 6]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  110 Lift  params=  [9, 6, 5, 1]
+*preconditions:
+  at [9, 1]
+  available [9]
+  at [6, 1]
+  on [6, 5]
+  clear [6, 5]
+*positive effects:
+  lifting [9, 6]
+  clear [5]
+*negative (not) effects:
+  at [6, 1]
+  clear [5]
+  available [9]
+  on [6, 5]
+------------------------------------------------------------
+
+Action_id =  111 Drop  params=  [9, 6, 5, 1]
+*preconditions:
+  at [9, 1]
+  at [5, 1]
+  clear [5]
+  lifting [9, 6]
+*positive effects:
+  available [9]
+  at [6, 5]
+  clear [6]
+  on [6, 5]
+*negative (not) effects:
+  lifting [9, 6]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  112 Lift  params=  [9, 6, 5, 2]
+*preconditions:
+  at [9, 2]
+  available [9]
+  at [6, 2]
+  on [6, 5]
+  clear [6, 5]
+*positive effects:
+  lifting [9, 6]
+  clear [5]
+*negative (not) effects:
+  at [6, 2]
+  clear [5]
+  available [9]
+  on [6, 5]
+------------------------------------------------------------
+
+Action_id =  113 Drop  params=  [9, 6, 5, 2]
+*preconditions:
+  at [9, 2]
+  at [5, 2]
+  clear [5]
+  lifting [9, 6]
+*positive effects:
+  available [9]
+  at [6, 5]
+  clear [6]
+  on [6, 5]
+*negative (not) effects:
+  lifting [9, 6]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  114 Lift  params=  [9, 6, 4, 0]
+*preconditions:
+  at [9, 0]
+  available [9]
+  at [6, 0]
+  on [6, 4]
+  clear [6, 4]
+*positive effects:
+  lifting [9, 6]
+  clear [4]
+*negative (not) effects:
+  at [6, 0]
+  clear [4]
+  available [9]
+  on [6, 4]
+------------------------------------------------------------
+
+Action_id =  115 Drop  params=  [9, 6, 4, 0]
+*preconditions:
+  at [9, 0]
+  at [4, 0]
+  clear [4]
+  lifting [9, 6]
+*positive effects:
+  available [9]
+  at [6, 4]
+  clear [6]
+  on [6, 4]
+*negative (not) effects:
+  lifting [9, 6]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  116 Lift  params=  [9, 6, 4, 1]
+*preconditions:
+  at [9, 1]
+  available [9]
+  at [6, 1]
+  on [6, 4]
+  clear [6, 4]
+*positive effects:
+  lifting [9, 6]
+  clear [4]
+*negative (not) effects:
+  at [6, 1]
+  clear [4]
+  available [9]
+  on [6, 4]
+------------------------------------------------------------
+
+Action_id =  117 Drop  params=  [9, 6, 4, 1]
+*preconditions:
+  at [9, 1]
+  at [4, 1]
+  clear [4]
+  lifting [9, 6]
+*positive effects:
+  available [9]
+  at [6, 4]
+  clear [6]
+  on [6, 4]
+*negative (not) effects:
+  lifting [9, 6]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  118 Lift  params=  [9, 6, 4, 2]
+*preconditions:
+  at [9, 2]
+  available [9]
+  at [6, 2]
+  on [6, 4]
+  clear [6, 4]
+*positive effects:
+  lifting [9, 6]
+  clear [4]
+*negative (not) effects:
+  at [6, 2]
+  clear [4]
+  available [9]
+  on [6, 4]
+------------------------------------------------------------
+
+Action_id =  119 Drop  params=  [9, 6, 4, 2]
+*preconditions:
+  at [9, 2]
+  at [4, 2]
+  clear [4]
+  lifting [9, 6]
+*positive effects:
+  available [9]
+  at [6, 4]
+  clear [6]
+  on [6, 4]
+*negative (not) effects:
+  lifting [9, 6]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  120 Load  params=  [9, 6, 2, 0]
+*preconditions:
+  at [9, 0]
+  at [2, 0]
+  lifting [9, 6]
+*positive effects:
+  in [6, 2]
+  available [9]
+*negative (not) effects:
+  lifting [9, 6]
+------------------------------------------------------------
+
+Action_id =  121 UnLoad  params=  [9, 6, 2, 0]
+*preconditions:
+  at [9, 0]
+  at [2, 0]
+  available [9]
+  in [6, 2]
+*positive effects:
+  lifting [9, 6]
+*negative (not) effects:
+  in [6, 2]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  122 Load  params=  [9, 6, 2, 1]
+*preconditions:
+  at [9, 1]
+  at [2, 1]
+  lifting [9, 6]
+*positive effects:
+  in [6, 2]
+  available [9]
+*negative (not) effects:
+  lifting [9, 6]
+------------------------------------------------------------
+
+Action_id =  123 UnLoad  params=  [9, 6, 2, 1]
+*preconditions:
+  at [9, 1]
+  at [2, 1]
+  available [9]
+  in [6, 2]
+*positive effects:
+  lifting [9, 6]
+*negative (not) effects:
+  in [6, 2]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  124 Load  params=  [9, 6, 2, 2]
+*preconditions:
+  at [9, 2]
+  at [2, 2]
+  lifting [9, 6]
+*positive effects:
+  in [6, 2]
+  available [9]
+*negative (not) effects:
+  lifting [9, 6]
+------------------------------------------------------------
+
+Action_id =  125 UnLoad  params=  [9, 6, 2, 2]
+*preconditions:
+  at [9, 2]
+  at [2, 2]
+  available [9]
+  in [6, 2]
+*positive effects:
+  lifting [9, 6]
+*negative (not) effects:
+  in [6, 2]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  126 Load  params=  [9, 6, 1, 0]
+*preconditions:
+  at [9, 0]
+  at [1, 0]
+  lifting [9, 6]
+*positive effects:
+  in [6, 1]
+  available [9]
+*negative (not) effects:
+  lifting [9, 6]
+------------------------------------------------------------
+
+Action_id =  127 UnLoad  params=  [9, 6, 1, 0]
+*preconditions:
+  at [9, 0]
+  at [1, 0]
+  available [9]
+  in [6, 1]
+*positive effects:
+  lifting [9, 6]
+*negative (not) effects:
+  in [6, 1]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  128 Load  params=  [9, 6, 1, 1]
+*preconditions:
+  at [9, 1]
+  at [1, 1]
+  lifting [9, 6]
+*positive effects:
+  in [6, 1]
+  available [9]
+*negative (not) effects:
+  lifting [9, 6]
+------------------------------------------------------------
+
+Action_id =  129 UnLoad  params=  [9, 6, 1, 1]
+*preconditions:
+  at [9, 1]
+  at [1, 1]
+  available [9]
+  in [6, 1]
+*positive effects:
+  lifting [9, 6]
+*negative (not) effects:
+  in [6, 1]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  130 Load  params=  [9, 6, 1, 2]
+*preconditions:
+  at [9, 2]
+  at [1, 2]
+  lifting [9, 6]
+*positive effects:
+  in [6, 1]
+  available [9]
+*negative (not) effects:
+  lifting [9, 6]
+------------------------------------------------------------
+
+Action_id =  131 UnLoad  params=  [9, 6, 1, 2]
+*preconditions:
+  at [9, 2]
+  at [1, 2]
+  available [9]
+  in [6, 1]
+*positive effects:
+  lifting [9, 6]
+*negative (not) effects:
+  in [6, 1]
+  available [9]
+------------------------------------------------------------
+
+Action_id =  132 Lift  params=  [10, 7, 3, 0]
+*preconditions:
+  at [10, 0]
+  available [10]
+  at [7, 0]
+  on [7, 3]
+  clear [7, 3]
+*positive effects:
+  lifting [10, 7]
+  clear [3]
+*negative (not) effects:
+  at [7, 0]
+  clear [3]
+  available [10]
+  on [7, 3]
+------------------------------------------------------------
+
+Action_id =  133 Drop  params=  [10, 7, 3, 0]
+*preconditions:
+  at [10, 0]
+  at [3, 0]
+  clear [3]
+  lifting [10, 7]
+*positive effects:
+  available [10]
+  at [7, 3]
+  clear [7]
+  on [7, 3]
+*negative (not) effects:
+  lifting [10, 7]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  134 Lift  params=  [10, 7, 3, 1]
+*preconditions:
+  at [10, 1]
+  available [10]
+  at [7, 1]
+  on [7, 3]
+  clear [7, 3]
+*positive effects:
+  lifting [10, 7]
+  clear [3]
+*negative (not) effects:
+  at [7, 1]
+  clear [3]
+  available [10]
+  on [7, 3]
+------------------------------------------------------------
+
+Action_id =  135 Drop  params=  [10, 7, 3, 1]
+*preconditions:
+  at [10, 1]
+  at [3, 1]
+  clear [3]
+  lifting [10, 7]
+*positive effects:
+  available [10]
+  at [7, 3]
+  clear [7]
+  on [7, 3]
+*negative (not) effects:
+  lifting [10, 7]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  136 Lift  params=  [10, 7, 3, 2]
+*preconditions:
+  at [10, 2]
+  available [10]
+  at [7, 2]
+  on [7, 3]
+  clear [7, 3]
+*positive effects:
+  lifting [10, 7]
+  clear [3]
+*negative (not) effects:
+  at [7, 2]
+  clear [3]
+  available [10]
+  on [7, 3]
+------------------------------------------------------------
+
+Action_id =  137 Drop  params=  [10, 7, 3, 2]
+*preconditions:
+  at [10, 2]
+  at [3, 2]
+  clear [3]
+  lifting [10, 7]
+*positive effects:
+  available [10]
+  at [7, 3]
+  clear [7]
+  on [7, 3]
+*negative (not) effects:
+  lifting [10, 7]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  138 Lift  params=  [10, 7, 5, 0]
+*preconditions:
+  at [10, 0]
+  available [10]
+  at [7, 0]
+  on [7, 5]
+  clear [7, 5]
+*positive effects:
+  lifting [10, 7]
+  clear [5]
+*negative (not) effects:
+  at [7, 0]
+  clear [5]
+  available [10]
+  on [7, 5]
+------------------------------------------------------------
+
+Action_id =  139 Drop  params=  [10, 7, 5, 0]
+*preconditions:
+  at [10, 0]
+  at [5, 0]
+  clear [5]
+  lifting [10, 7]
+*positive effects:
+  available [10]
+  at [7, 5]
+  clear [7]
+  on [7, 5]
+*negative (not) effects:
+  lifting [10, 7]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  140 Lift  params=  [10, 7, 5, 1]
+*preconditions:
+  at [10, 1]
+  available [10]
+  at [7, 1]
+  on [7, 5]
+  clear [7, 5]
+*positive effects:
+  lifting [10, 7]
+  clear [5]
+*negative (not) effects:
+  at [7, 1]
+  clear [5]
+  available [10]
+  on [7, 5]
+------------------------------------------------------------
+
+Action_id =  141 Drop  params=  [10, 7, 5, 1]
+*preconditions:
+  at [10, 1]
+  at [5, 1]
+  clear [5]
+  lifting [10, 7]
+*positive effects:
+  available [10]
+  at [7, 5]
+  clear [7]
+  on [7, 5]
+*negative (not) effects:
+  lifting [10, 7]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  142 Lift  params=  [10, 7, 5, 2]
+*preconditions:
+  at [10, 2]
+  available [10]
+  at [7, 2]
+  on [7, 5]
+  clear [7, 5]
+*positive effects:
+  lifting [10, 7]
+  clear [5]
+*negative (not) effects:
+  at [7, 2]
+  clear [5]
+  available [10]
+  on [7, 5]
+------------------------------------------------------------
+
+Action_id =  143 Drop  params=  [10, 7, 5, 2]
+*preconditions:
+  at [10, 2]
+  at [5, 2]
+  clear [5]
+  lifting [10, 7]
+*positive effects:
+  available [10]
+  at [7, 5]
+  clear [7]
+  on [7, 5]
+*negative (not) effects:
+  lifting [10, 7]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  144 Lift  params=  [10, 7, 4, 0]
+*preconditions:
+  at [10, 0]
+  available [10]
+  at [7, 0]
+  on [7, 4]
+  clear [7, 4]
+*positive effects:
+  lifting [10, 7]
+  clear [4]
+*negative (not) effects:
+  at [7, 0]
+  clear [4]
+  available [10]
+  on [7, 4]
+------------------------------------------------------------
+
+Action_id =  145 Drop  params=  [10, 7, 4, 0]
+*preconditions:
+  at [10, 0]
+  at [4, 0]
+  clear [4]
+  lifting [10, 7]
+*positive effects:
+  available [10]
+  at [7, 4]
+  clear [7]
+  on [7, 4]
+*negative (not) effects:
+  lifting [10, 7]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  146 Lift  params=  [10, 7, 4, 1]
+*preconditions:
+  at [10, 1]
+  available [10]
+  at [7, 1]
+  on [7, 4]
+  clear [7, 4]
+*positive effects:
+  lifting [10, 7]
+  clear [4]
+*negative (not) effects:
+  at [7, 1]
+  clear [4]
+  available [10]
+  on [7, 4]
+------------------------------------------------------------
+
+Action_id =  147 Drop  params=  [10, 7, 4, 1]
+*preconditions:
+  at [10, 1]
+  at [4, 1]
+  clear [4]
+  lifting [10, 7]
+*positive effects:
+  available [10]
+  at [7, 4]
+  clear [7]
+  on [7, 4]
+*negative (not) effects:
+  lifting [10, 7]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  148 Lift  params=  [10, 7, 4, 2]
+*preconditions:
+  at [10, 2]
+  available [10]
+  at [7, 2]
+  on [7, 4]
+  clear [7, 4]
+*positive effects:
+  lifting [10, 7]
+  clear [4]
+*negative (not) effects:
+  at [7, 2]
+  clear [4]
+  available [10]
+  on [7, 4]
+------------------------------------------------------------
+
+Action_id =  149 Drop  params=  [10, 7, 4, 2]
+*preconditions:
+  at [10, 2]
+  at [4, 2]
+  clear [4]
+  lifting [10, 7]
+*positive effects:
+  available [10]
+  at [7, 4]
+  clear [7]
+  on [7, 4]
+*negative (not) effects:
+  lifting [10, 7]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  150 Load  params=  [10, 7, 2, 0]
+*preconditions:
+  at [10, 0]
+  at [2, 0]
+  lifting [10, 7]
+*positive effects:
+  in [7, 2]
+  available [10]
+*negative (not) effects:
+  lifting [10, 7]
+------------------------------------------------------------
+
+Action_id =  151 UnLoad  params=  [10, 7, 2, 0]
+*preconditions:
+  at [10, 0]
+  at [2, 0]
+  available [10]
+  in [7, 2]
+*positive effects:
+  lifting [10, 7]
+*negative (not) effects:
+  in [7, 2]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  152 Load  params=  [10, 7, 2, 1]
+*preconditions:
+  at [10, 1]
+  at [2, 1]
+  lifting [10, 7]
+*positive effects:
+  in [7, 2]
+  available [10]
+*negative (not) effects:
+  lifting [10, 7]
+------------------------------------------------------------
+
+Action_id =  153 UnLoad  params=  [10, 7, 2, 1]
+*preconditions:
+  at [10, 1]
+  at [2, 1]
+  available [10]
+  in [7, 2]
+*positive effects:
+  lifting [10, 7]
+*negative (not) effects:
+  in [7, 2]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  154 Load  params=  [10, 7, 2, 2]
+*preconditions:
+  at [10, 2]
+  at [2, 2]
+  lifting [10, 7]
+*positive effects:
+  in [7, 2]
+  available [10]
+*negative (not) effects:
+  lifting [10, 7]
+------------------------------------------------------------
+
+Action_id =  155 UnLoad  params=  [10, 7, 2, 2]
+*preconditions:
+  at [10, 2]
+  at [2, 2]
+  available [10]
+  in [7, 2]
+*positive effects:
+  lifting [10, 7]
+*negative (not) effects:
+  in [7, 2]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  156 Load  params=  [10, 7, 1, 0]
+*preconditions:
+  at [10, 0]
+  at [1, 0]
+  lifting [10, 7]
+*positive effects:
+  in [7, 1]
+  available [10]
+*negative (not) effects:
+  lifting [10, 7]
+------------------------------------------------------------
+
+Action_id =  157 UnLoad  params=  [10, 7, 1, 0]
+*preconditions:
+  at [10, 0]
+  at [1, 0]
+  available [10]
+  in [7, 1]
+*positive effects:
+  lifting [10, 7]
+*negative (not) effects:
+  in [7, 1]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  158 Load  params=  [10, 7, 1, 1]
+*preconditions:
+  at [10, 1]
+  at [1, 1]
+  lifting [10, 7]
+*positive effects:
+  in [7, 1]
+  available [10]
+*negative (not) effects:
+  lifting [10, 7]
+------------------------------------------------------------
+
+Action_id =  159 UnLoad  params=  [10, 7, 1, 1]
+*preconditions:
+  at [10, 1]
+  at [1, 1]
+  available [10]
+  in [7, 1]
+*positive effects:
+  lifting [10, 7]
+*negative (not) effects:
+  in [7, 1]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  160 Load  params=  [10, 7, 1, 2]
+*preconditions:
+  at [10, 2]
+  at [1, 2]
+  lifting [10, 7]
+*positive effects:
+  in [7, 1]
+  available [10]
+*negative (not) effects:
+  lifting [10, 7]
+------------------------------------------------------------
+
+Action_id =  161 UnLoad  params=  [10, 7, 1, 2]
+*preconditions:
+  at [10, 2]
+  at [1, 2]
+  available [10]
+  in [7, 1]
+*positive effects:
+  lifting [10, 7]
+*negative (not) effects:
+  in [7, 1]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  162 Lift  params=  [10, 6, 3, 0]
+*preconditions:
+  at [10, 0]
+  available [10]
+  at [6, 0]
+  on [6, 3]
+  clear [6, 3]
+*positive effects:
+  lifting [10, 6]
+  clear [3]
+*negative (not) effects:
+  at [6, 0]
+  clear [3]
+  available [10]
+  on [6, 3]
+------------------------------------------------------------
+
+Action_id =  163 Drop  params=  [10, 6, 3, 0]
+*preconditions:
+  at [10, 0]
+  at [3, 0]
+  clear [3]
+  lifting [10, 6]
+*positive effects:
+  available [10]
+  at [6, 3]
+  clear [6]
+  on [6, 3]
+*negative (not) effects:
+  lifting [10, 6]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  164 Lift  params=  [10, 6, 3, 1]
+*preconditions:
+  at [10, 1]
+  available [10]
+  at [6, 1]
+  on [6, 3]
+  clear [6, 3]
+*positive effects:
+  lifting [10, 6]
+  clear [3]
+*negative (not) effects:
+  at [6, 1]
+  clear [3]
+  available [10]
+  on [6, 3]
+------------------------------------------------------------
+
+Action_id =  165 Drop  params=  [10, 6, 3, 1]
+*preconditions:
+  at [10, 1]
+  at [3, 1]
+  clear [3]
+  lifting [10, 6]
+*positive effects:
+  available [10]
+  at [6, 3]
+  clear [6]
+  on [6, 3]
+*negative (not) effects:
+  lifting [10, 6]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  166 Lift  params=  [10, 6, 3, 2]
+*preconditions:
+  at [10, 2]
+  available [10]
+  at [6, 2]
+  on [6, 3]
+  clear [6, 3]
+*positive effects:
+  lifting [10, 6]
+  clear [3]
+*negative (not) effects:
+  at [6, 2]
+  clear [3]
+  available [10]
+  on [6, 3]
+------------------------------------------------------------
+
+Action_id =  167 Drop  params=  [10, 6, 3, 2]
+*preconditions:
+  at [10, 2]
+  at [3, 2]
+  clear [3]
+  lifting [10, 6]
+*positive effects:
+  available [10]
+  at [6, 3]
+  clear [6]
+  on [6, 3]
+*negative (not) effects:
+  lifting [10, 6]
+  clear [3]
+------------------------------------------------------------
+
+Action_id =  168 Lift  params=  [10, 6, 5, 0]
+*preconditions:
+  at [10, 0]
+  available [10]
+  at [6, 0]
+  on [6, 5]
+  clear [6, 5]
+*positive effects:
+  lifting [10, 6]
+  clear [5]
+*negative (not) effects:
+  at [6, 0]
+  clear [5]
+  available [10]
+  on [6, 5]
+------------------------------------------------------------
+
+Action_id =  169 Drop  params=  [10, 6, 5, 0]
+*preconditions:
+  at [10, 0]
+  at [5, 0]
+  clear [5]
+  lifting [10, 6]
+*positive effects:
+  available [10]
+  at [6, 5]
+  clear [6]
+  on [6, 5]
+*negative (not) effects:
+  lifting [10, 6]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  170 Lift  params=  [10, 6, 5, 1]
+*preconditions:
+  at [10, 1]
+  available [10]
+  at [6, 1]
+  on [6, 5]
+  clear [6, 5]
+*positive effects:
+  lifting [10, 6]
+  clear [5]
+*negative (not) effects:
+  at [6, 1]
+  clear [5]
+  available [10]
+  on [6, 5]
+------------------------------------------------------------
+
+Action_id =  171 Drop  params=  [10, 6, 5, 1]
+*preconditions:
+  at [10, 1]
+  at [5, 1]
+  clear [5]
+  lifting [10, 6]
+*positive effects:
+  available [10]
+  at [6, 5]
+  clear [6]
+  on [6, 5]
+*negative (not) effects:
+  lifting [10, 6]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  172 Lift  params=  [10, 6, 5, 2]
+*preconditions:
+  at [10, 2]
+  available [10]
+  at [6, 2]
+  on [6, 5]
+  clear [6, 5]
+*positive effects:
+  lifting [10, 6]
+  clear [5]
+*negative (not) effects:
+  at [6, 2]
+  clear [5]
+  available [10]
+  on [6, 5]
+------------------------------------------------------------
+
+Action_id =  173 Drop  params=  [10, 6, 5, 2]
+*preconditions:
+  at [10, 2]
+  at [5, 2]
+  clear [5]
+  lifting [10, 6]
+*positive effects:
+  available [10]
+  at [6, 5]
+  clear [6]
+  on [6, 5]
+*negative (not) effects:
+  lifting [10, 6]
+  clear [5]
+------------------------------------------------------------
+
+Action_id =  174 Lift  params=  [10, 6, 4, 0]
+*preconditions:
+  at [10, 0]
+  available [10]
+  at [6, 0]
+  on [6, 4]
+  clear [6, 4]
+*positive effects:
+  lifting [10, 6]
+  clear [4]
+*negative (not) effects:
+  at [6, 0]
+  clear [4]
+  available [10]
+  on [6, 4]
+------------------------------------------------------------
+
+Action_id =  175 Drop  params=  [10, 6, 4, 0]
+*preconditions:
+  at [10, 0]
+  at [4, 0]
+  clear [4]
+  lifting [10, 6]
+*positive effects:
+  available [10]
+  at [6, 4]
+  clear [6]
+  on [6, 4]
+*negative (not) effects:
+  lifting [10, 6]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  176 Lift  params=  [10, 6, 4, 1]
+*preconditions:
+  at [10, 1]
+  available [10]
+  at [6, 1]
+  on [6, 4]
+  clear [6, 4]
+*positive effects:
+  lifting [10, 6]
+  clear [4]
+*negative (not) effects:
+  at [6, 1]
+  clear [4]
+  available [10]
+  on [6, 4]
+------------------------------------------------------------
+
+Action_id =  177 Drop  params=  [10, 6, 4, 1]
+*preconditions:
+  at [10, 1]
+  at [4, 1]
+  clear [4]
+  lifting [10, 6]
+*positive effects:
+  available [10]
+  at [6, 4]
+  clear [6]
+  on [6, 4]
+*negative (not) effects:
+  lifting [10, 6]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  178 Lift  params=  [10, 6, 4, 2]
+*preconditions:
+  at [10, 2]
+  available [10]
+  at [6, 2]
+  on [6, 4]
+  clear [6, 4]
+*positive effects:
+  lifting [10, 6]
+  clear [4]
+*negative (not) effects:
+  at [6, 2]
+  clear [4]
+  available [10]
+  on [6, 4]
+------------------------------------------------------------
+
+Action_id =  179 Drop  params=  [10, 6, 4, 2]
+*preconditions:
+  at [10, 2]
+  at [4, 2]
+  clear [4]
+  lifting [10, 6]
+*positive effects:
+  available [10]
+  at [6, 4]
+  clear [6]
+  on [6, 4]
+*negative (not) effects:
+  lifting [10, 6]
+  clear [4]
+------------------------------------------------------------
+
+Action_id =  180 Load  params=  [10, 6, 2, 0]
+*preconditions:
+  at [10, 0]
+  at [2, 0]
+  lifting [10, 6]
+*positive effects:
+  in [6, 2]
+  available [10]
+*negative (not) effects:
+  lifting [10, 6]
+------------------------------------------------------------
+
+Action_id =  181 UnLoad  params=  [10, 6, 2, 0]
+*preconditions:
+  at [10, 0]
+  at [2, 0]
+  available [10]
+  in [6, 2]
+*positive effects:
+  lifting [10, 6]
+*negative (not) effects:
+  in [6, 2]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  182 Load  params=  [10, 6, 2, 1]
+*preconditions:
+  at [10, 1]
+  at [2, 1]
+  lifting [10, 6]
+*positive effects:
+  in [6, 2]
+  available [10]
+*negative (not) effects:
+  lifting [10, 6]
+------------------------------------------------------------
+
+Action_id =  183 UnLoad  params=  [10, 6, 2, 1]
+*preconditions:
+  at [10, 1]
+  at [2, 1]
+  available [10]
+  in [6, 2]
+*positive effects:
+  lifting [10, 6]
+*negative (not) effects:
+  in [6, 2]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  184 Load  params=  [10, 6, 2, 2]
+*preconditions:
+  at [10, 2]
+  at [2, 2]
+  lifting [10, 6]
+*positive effects:
+  in [6, 2]
+  available [10]
+*negative (not) effects:
+  lifting [10, 6]
+------------------------------------------------------------
+
+Action_id =  185 UnLoad  params=  [10, 6, 2, 2]
+*preconditions:
+  at [10, 2]
+  at [2, 2]
+  available [10]
+  in [6, 2]
+*positive effects:
+  lifting [10, 6]
+*negative (not) effects:
+  in [6, 2]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  186 Load  params=  [10, 6, 1, 0]
+*preconditions:
+  at [10, 0]
+  at [1, 0]
+  lifting [10, 6]
+*positive effects:
+  in [6, 1]
+  available [10]
+*negative (not) effects:
+  lifting [10, 6]
+------------------------------------------------------------
+
+Action_id =  187 UnLoad  params=  [10, 6, 1, 0]
+*preconditions:
+  at [10, 0]
+  at [1, 0]
+  available [10]
+  in [6, 1]
+*positive effects:
+  lifting [10, 6]
+*negative (not) effects:
+  in [6, 1]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  188 Load  params=  [10, 6, 1, 1]
+*preconditions:
+  at [10, 1]
+  at [1, 1]
+  lifting [10, 6]
+*positive effects:
+  in [6, 1]
+  available [10]
+*negative (not) effects:
+  lifting [10, 6]
+------------------------------------------------------------
+
+Action_id =  189 UnLoad  params=  [10, 6, 1, 1]
+*preconditions:
+  at [10, 1]
+  at [1, 1]
+  available [10]
+  in [6, 1]
+*positive effects:
+  lifting [10, 6]
+*negative (not) effects:
+  in [6, 1]
+  available [10]
+------------------------------------------------------------
+
+Action_id =  190 Load  params=  [10, 6, 1, 2]
+*preconditions:
+  at [10, 2]
+  at [1, 2]
+  lifting [10, 6]
+*positive effects:
+  in [6, 1]
+  available [10]
+*negative (not) effects:
+  lifting [10, 6]
+------------------------------------------------------------
+
+Action_id =  191 UnLoad  params=  [10, 6, 1, 2]
+*preconditions:
+  at [10, 2]
+  at [1, 2]
+  available [10]
+  in [6, 1]
+*positive effects:
+  lifting [10, 6]
+*negative (not) effects:
+  in [6, 1]
+  available [10]
+------------------------------------------------------------
