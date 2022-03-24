@@ -6,5 +6,5 @@ MSc. Artificial Intelligence and Data Analytics, UOM projects/courses
 
 
 
-## 'Cuase sharing is caring! Peace Out!
+## 'Cause sharing is caring! Peace Out!
 
